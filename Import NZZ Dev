@@ -1,0 +1,2517 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Living Docs Universal Import</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+<link href="http://content.nzz.ch/base.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="page">
+<div id="version">19-07-18-11-37</div>
+<script runat=server language=javascript>
+Platform.Load("core", "1");
+/*
+
+URL für manuellen Import:
+
+manueller NL: http://content.nzz.ch/importnzzdev?documentId=3171473
+Automatischer NL: http://content.nzz.ch/importnzzdev?type=per
+
+*/
+
+var newsletterTemplate = {
+ 'another-view' : 'dab',
+ 'wirtschaft' : 'wir',
+ 'zuerich' : 'zur',
+ 'morning' : 'nam',
+ 'evening' : 'naa',
+ 'nzzas' : 'nas',
+ 'folio' : 'fol',
+ 'global-risk' : 'glo',
+ 'bellevue' : 'bel',
+ 'schweiz': 'swi', 
+ 'nzz-persoenlich': 'pes'
+  
+}
+
+var newsletterConfig = {
+
+// Living Docs Import
+
+  'dab' : {
+  'name' : 'Der andere Blick',
+  'layout' : 'another-view',
+  'attributes' : [ 'nled', 123, '' ],
+  'folder' : {
+   'dev' : 139314,
+   'stag' : 139314,
+   'prod' : 129456
+  },
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6451369/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc=',
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6451368/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#13175f',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'heroUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/51b3107d-930b-45fb-9979-d6382a38b977.png',
+   'heroWidth' : 100,
+   'heroHeight' : 100,
+   'title' : 'Der andere Blick von Eric Gujer,<div style="margin: 5px 0 0; font-size: 18px; font-weight: normal; line-height: 19px; color: #000000;">Chefredaktor der &laquo;Neuen Zürcher Zeitung&raquo;</div>',
+   'text-deputy' : 125310
+  },
+  'nps' : {
+   'title' : '&laquo;Der andere Blick&raquo;',
+   'code' : '2f6ff7c'
+  },
+  'footer' : {
+   'nlId' : 'NZZ-Deutschland-Paid'
+  },
+  'assets' : {
+   'logo' : 125314,
+   'greeting' : 97360
+  }
+ },
+
+ 'wir' : {
+  'name' : 'Wirtschaft',
+  'layout' : 'wirtschaft',
+  'attributes' : [ 'nled', 105, 'nl105' ],
+  'folder' : {
+   'dev' : 139314,
+   'stag' : 139314,
+   'prod' : 129455
+  },
+  'refresh' : [ {
+   'name' : 'IDMS Feed',
+   'url' : 'http://content.nzz.ch/idmsimport?type=go'
+  } ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/4827865/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc=',
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/4827866/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#13175f',
+   'link' : 'https://www.nzz.ch/wirtschaft/',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'heroUrl' : 'http://placehold.it/500x250',
+   'heroWidth' : 500,
+   'heroHeight' : 250,
+   'title' : 'NZZ Wirtschaft'
+  },
+  'nps' : {
+   'title' : '&laquo;NZZ Wirtschaft&raquo;',
+   'code' : 'wirtschaft'
+  },
+  'footer' : {
+   'nlId' : 'Wirtschaft'
+  },
+  'assets' : {
+   'logo' : 97728,
+   'feed-idms' : 97979
+  }
+ },
+
+ 'zur' : {
+  'name' : 'Zürich',
+  'layout' : 'zuerich',
+  'attributes' : [ 'nled', 108, 'nl108' ],
+  'folder' : {
+   'dev' : 139314,
+   'stag' : 139314,
+   'prod' : 139315
+  },
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6279629/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc=',
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6279630/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#13175f',
+   'link' : 'https://www.nzz.ch/zuerich/',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'heroUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/27ad83d8-3943-4411-9052-0cef9a6b11b3.png',
+   'heroWidth' : 500,
+   'heroHeight' : 67,
+   'title' : 'NZZ Zürich'
+  },
+  'nps' : {
+   'title' : '&laquo;NZZ Zürich&raquo;',
+   'code' : 'zuerich'
+  },
+  'footer' : {
+   'nlId' : 'NZZ Zuerich'
+  },
+  'assets' : {
+   'logo' : 97727
+  }
+ },
+
+ 'nam' : {
+  'name' : 'NZZ am Morgen',
+  'layout' : 'morning',
+  'attributes' : [ 'nled', 107, 'nl107' ],
+  'folder' : {
+   'dev' : 139314,
+   'stag' : 139314,
+   'prod' : 129453
+  },
+  'refresh' : [ {
+   'name' : 'Briefing Feed',
+   'url' : 'http://content.nzz.ch/feedimport?type=nam-briefing' 
+  }, {
+   'name' : 'Most Read Feed',
+   'url' : 'http://content.nzz.ch/feedimport?type=nam-mostread' 
+  }, {
+   'name' : 'IDMS Feed',
+   'url' : 'http://content.nzz.ch/idmsimport?type=go'
+  } ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/4137256/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc=',
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/4158734/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#13175f',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'heroUrl' : 'http://placehold.it/500x250',
+   'heroWidth' : 500,
+   'heroHeight' : 250,
+   'title' : 'NZZ am Morgen'
+  },
+  'nps' : {
+   'title' : '&laquo;NZZ am Morgen&raquo;',
+   'code' : 'morgen'
+  },
+  'footer' : {
+   'nlId' : 'Top-News am Morgen'
+  },
+  'assets' : {
+   'logo' : 97728,
+   'feed-briefing' : 97983,
+   'feed-mostread' : 97984,
+   'feed-idms' : 97979
+  }
+ },
+
+ 'naa' : {
+  'name' : 'NZZ am Abend',
+  'layout' : 'evening',
+  'attributes' : [ 'nled', 106, '' ],
+  'folder' : {
+   'dev' : 139314,
+   'stag' : 139314,
+   'prod' : 129454
+  },
+  'refresh' : [ {
+   'name' : 'Briefing Feed',
+   'url' : 'http://content.nzz.ch/feedimport?type=naa-briefing' 
+  }, {
+   'name' : 'IDMS Feed',
+   'url' : 'http://content.nzz.ch/idmsimport?type=go' 
+  } ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6451359/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc=',
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6451358/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#13175f',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'heroUrl' : 'http://placehold.it/500x250',
+   'heroWidth' : 500,
+   'heroHeight' : 250,
+   'title' : 'NZZ am Abend'
+  },
+  'nps' : {
+   'title' : '&laquo;NZZ am Abend&raquo;',
+   'code' : 'abend'
+  },
+  'footer' : {
+   'nlId' : 'Top-News am Abend'
+  },
+  'assets' : {
+   'logo' : 97728,
+   'feed-briefing' : 97982,
+   'feed-idms' : 97979
+  }
+ },
+
+ 'nas' : {
+  'name' : 'NZZ am Sonntag',
+  'layout' : 'nzzas',
+  'attributes' : [ 'nled', 118, 'nl118' ],
+  'folder' : {
+   'dev' : 139314,
+   'stag' : 139314,
+   'prod' : 129462
+  },
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6392271/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc=',
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6392272/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#7bc8cc',
+   'link' : 'http://nzzas.nzz.ch/',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d7a04cf4-aa55-4d9b-b153-cc98a56d6b7c.png',
+   'logoWidth' : 250,
+   'logoHeight' : 55,
+   'heroUrl' : 'http://placehold.it/500x250',
+   'heroWidth' : 500,
+   'heroHeight' : 250,
+   'title' : 'NZZ am Sonntag'
+  },
+  'nps' : {
+   'title' : '&laquo;NZZ am Sonntag&raquo;',
+   'code' : 'nzzas'
+  },
+  'footer' : {
+   'nlId' : 'NZZ-am-Sonntag'
+  },
+  'assets' : {
+   'footer-links' : 97382
+  }
+ },
+
+ 'fol' : {
+  'name' : 'Folio',
+  'layout' : 'folio',
+  'attributes' : [ 'nled', 115,'nl115' ],
+  'folder' : {
+   'dev' : 139314,
+   'stag' : 139314,
+   'prod' : 129459
+  },
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6451398/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc=',
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6451399/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#e74e4b',
+   'link' : 'http://folio.nzz.ch/',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d07f550f-05a9-4461-8e30-f3308691350c.png',
+   'logoWidth' : 176,
+   'logoHeight' : 31,
+   'heroUrl' : 'http://placehold.it/500x250',
+   'heroWidth' : 500,
+   'heroHeight' : 250,
+   'title' : 'NZZ Folio'
+  },
+  'nps' : {
+   'title' : '&laquo;NZZ Folio&raquo;',
+   'code' : 'folio'
+  },
+  'footer' : {
+   'nlId' : 'NZZ-Folio'
+  },
+  'assets' : {
+   'footer-links' : 97381
+  }  
+ },
+
+ 'glo' : {
+  'name' : 'Global Risk',
+  'layout' : 'global-risk',
+  'attributes' : [ 'nled', 121, '' ],
+  'folder' : {
+   'dev' : 139314,
+   'stag' : 139314,
+   'prod' : 129457
+  },
+  'header' : {
+   'color' : '#13175f',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'heroUrl' : 'http://placehold.it/500x250',
+   'heroWidth' : 500,
+   'heroHeight' : 250,
+   'title' : 'NZZ Global Risk'
+  },
+  'nps' : {
+   'title' : '&laquo;NZZ Global Risk&raquo;',
+   'code' : '0221d7f'
+  },
+  'footer' : {
+   'nlId' : 'NZZ-Global-Risk'
+  },
+  'assets' : {
+   'image-caption-logo' : 97740
+  }
+ },
+
+ 
+ 'bel' : {
+  'name' : 'NZZ Bellevue Postkarte',
+  'layout' : 'bellevue',
+  'attributes' : [ 'nled', 113, 'nl113' ],
+  'folder' : {
+   'dev' : 139314,
+   'stag' : 139314,
+   'prod' : 129461
+  },
+  'adurl' : [
+    'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6312746/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc=',
+    'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6313670/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#d5dbd4',
+   'link' : 'http://bellevue.nzz.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/51e215f1-08ad-4333-ad52-ca1645922800.png',
+   'logoWidth' : 242,
+   'logoHeight' : 70,
+   'heroUrl' : 'http://placehold.it/500x250',
+   'heroWidth' : 500,
+   'heroHeight' : 250,
+   'title' : 'NZZ Bellevue'
+  },
+  'nps' : {
+   'title' : '&laquo;NZZ Bellevue&raquo;',
+   'code' : 'nzzbellevue'
+  },
+  'footer' : {
+   'nlId' : 'NZZ Bellevue'
+  },
+  'assets' : {
+   'social' : 97744,
+   'image-cluster' : 97737,
+   'footer-links-bellevue' : 97380
+  }
+ },
+  
+ 
+  'swi' : {
+  'name' : 'Schweiz Wochenrückblick',
+  'layout' : 'schweiz',
+  'attributes' : [ 'nled', 152, '' ],
+  'folder' : {
+   'dev' : 139314,
+   'stag' : 139314,
+   'prod' : 156777
+  },
+  'header' : {
+   'color' : '#13175f',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'heroUrl' : 'http://placehold.it/500x250',
+   'heroWidth' : 500,
+   'heroHeight' : 250,
+   'title' : 'Die Schweiz-Woche im Rückblick'
+  },
+  'nps' : {
+   'title' : '&laquo;Die Schweiz-Woche im Rückblick&raquo;',
+   'code' : 'wochenrueckblick'
+  },
+  'footer' : {
+   'nlId' : 'Schweiz-Wochenrückblick'
+  },
+  'assets' : {
+   'logo-schweiz' : 161114,
+   'footer-links-schweiz' : 161115
+  }
+ },
+  
+ 
+  'pes' : {
+  'name' : 'NZZ Persönlich',
+  'layout' : 'nzz-persoenlich',
+  'attributes' : [ 'nled', 154, 'nl154' ],
+  'folder' : {
+   'dev' : 139314,
+   'stag' : 139314,
+   'prod' : 163581
+  },
+    'adurl' : [
+'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6654713/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+],
+    
+  'header' : {
+   'color' : '#13175f',
+   'link' : 'https://www.nzz.ch/',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'heroUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/a45e7d54-c40f-4a20-b46b-01dadad1a5b7.png',
+   'heroWidth' : 600,
+   'heroHeight' : 287,
+   'title' : 'NZZ Persönlich'
+  },
+  'nps' : {
+   'title' : '&laquo;NZZ persönlich&raquo;',
+   'code' : '81765ad'
+  },
+  'footer' : {
+   'nlId' : 'Week'
+  },
+  'assets' : {
+   'logo-jenni-thier' : 176535,
+   'logo-birgit-schmid' : 176536, 
+   'logo-christina-neuhaus' : 176537,  
+   'logo-claudia-maeder' : 176538,
+   'footer-links' : 176539
+  }
+ },
+ 
+
+// Automatische Newsletter
+  
+  'test' : {
+  'name' : 'Test',
+  'structure' : {
+   'items': [
+    {
+     'assetId': 'advertising-block'
+    },
+    {
+     'assetId': 'advertising-block'
+    },
+    {
+     'assetId': 'advertising-block'
+    }
+   ]
+  },
+  'attributes' : [ '', '', '' ],
+  'folder' : 0,
+  'asset' : 0,
+  'adurl' : [
+   'http://ad.dc2.adtech.de/?adrawdata/3.0/1135.1/4137256/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc=',
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/4137256/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc=',
+   'http://adserver.adtechus.com/?adrawdata/3.0/1135.1/4137256/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc='
+  ]
+ },
+  
+  'buc' : {
+  'name' : 'Bücher',
+  'structure' : {
+   'items': [
+    {
+     'assetId': 'logo'
+    },
+    {
+     'assetId': 'greeting'
+    },
+    {
+     'assetId': 'text',
+     'html' : 'Hier ist eine Zusammenstellung der meistgelesenen Buchrezensionen dieser Woche.'
+    },
+    {
+     'assetId': 'divider'
+    },
+     {
+     'assetId': 'subtitle',
+     'html': 'Unsere Empfehlungen'
+    },
+    {
+     'assetId': 'feed-teaser'
+    },
+    {
+     'assetId': 'divider'
+    },
+          {
+     'assetId': 'subtitle',
+     'html': 'Die drei meistgelesenen Artikel aus dem Feuilleton'
+    },
+    {
+     'assetId': 'feed-mostread'
+    },
+    {
+     'assetId': 'divider'
+    },     
+     
+    {
+     'assetId': 'text',
+     'html': 'Wir danken Ihnen für Ihre Aufmerksamkeit und hoffen, dass wir Ihnen mit diesen Buchbesprechungen vielfältige Anregungen geben konnten. <br> <br> Im <a href="https://www.nzz.ch/feuilleton/" style="color: #272ca9; text-decoration: underline;">Ressort Feuilleton</a> finden Sie weitere Artikel zu Zeitfragen und allen Kunstsparten.'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'footer-links'
+    }
+   ]
+  },
+  'attributes' : [ 'nled',  127, 'nl127' ],
+  'folder' :  139317,
+  'asset' : 98006,
+  'refresh' : [ {
+   'name' : 'Bücher Teaser',
+   'url' : 'http://content.nzz.ch/feedimport?type=buc-teaser'
+  }, 
+   {
+   'name' : 'Bücher Most Read',
+   'url' : 'http://content.nzz.ch/feedimport?type=buc-mostread'
+  } ],
+  
+  'header' : {
+   'color' : '#13175f',
+   'link' : 'https://www.nzz.ch/feuilleton/buecher/',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'title' : 'NZZ Bücher'
+  },
+  'footer' : {
+   'nlId' : 'NZZ-Buecher'
+  },
+  'assets' : {
+   'logo' : 97728,
+   'feed-teaser' : 97975,
+   'feed-mostread' : 97974
+  }
+ },
+  
+  'dig' : {
+  'name' : 'Digital',
+  'structure' : {
+   'items': [
+    {
+     'assetId': 'logo'
+    },
+    {
+     'assetId': 'greeting'
+    },
+    {
+     'assetId': 'text',
+     'html' : 'Hier sind die drei beliebtesten Artikel aus dem Ressort Digital.'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'subtitle',
+     'html': 'Ihre Top 3'
+    },
+    {
+     'assetId': 'feed-teaser'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'text',
+     'html': '<b>Mehr entdecken:</b> Zum <a href="https://www.nzz.ch/Digital/" style="color: #272ca9; text-decoration: underline;">Ressort Digital</a> wechseln.'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'advertising-block'
+    },
+    {
+     'assetId': 'footer-links'
+    }
+   ]
+  },
+  'attributes' : [ 'nled', 101, 'nl101' ],
+  'folder' :  139318,
+  'asset' : 97998,
+  'refresh' : [ {
+   'name' : 'Digital Teaser',
+   'url' : 'http://content.nzz.ch/feedimport?type=dig-teaser'
+  } ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6451382/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc=',
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6451383/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#13175f',
+   'link' : 'https://www.nzz.ch/digital/',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'title' : 'NZZ Digital'
+  },
+  'footer' : {
+   'nlId' : 'Digital'
+  },
+  'assets' : {
+   'logo' : 97728,
+   'feed-teaser' : 97978
+  }
+ },
+
+ 'int' : {
+  'name' : 'International',
+  'structure' : {
+   'items': [
+    {
+     'assetId': 'logo'
+    },
+    {
+     'assetId': 'greeting'
+    },
+    {
+     'assetId': 'text',
+     'html' : 'Hier sind die neuesten und beliebtesten Artikel aus dem Ressort International für Sie.'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'subtitle',
+     'html': 'Unsere Empfehlungen'
+    },
+    {
+     'assetId': 'feed-teaser'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'advertising-block'
+    },
+    {
+     'assetId': 'footer-links'
+    }
+   ]
+  },
+  'attributes' : [ 'nled', 101, '' ],
+  'folder' :  139319,
+  'asset' : 98000,
+  'refresh' : [ {
+   'name' : 'International Teaser',
+   'url' : 'http://content.nzz.ch/feedimport?type=int-teaser'
+  } ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6451374/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc=',
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6451375/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#13175f',
+   'link' : 'https://www.nzz.ch/international/',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'title' : 'NZZ International'
+  },
+  'footer' : {
+   'nlId' : 'International'
+  },
+  'assets' : {
+   'logo' : 97728,
+   'feed-teaser' : 97981
+  }
+ },
+
+ 'per' : {
+  'name' : 'Perspektive',
+  'structure' : {
+   'items': [
+    {
+     'assetId': 'logo'
+    },
+    {
+     'assetId': 'greeting'
+    },
+    {
+     'assetId': 'text',
+     'html' : 'Hier sind die Artikel, die bei Leserinnen und Lesern in Deutschland gerade besonders gerne gelesen werden.'
+    },
+    {
+     'assetId': 'feed-teaser'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'footer-links'
+    }
+   ]
+  },
+  'attributes' : [ 'nled', 124, 'nma' ],
+  'folder' :  139321,
+  'asset' : 98002,
+  'assetCB' : xxx,
+  'subject' : 'Heute meistgelesen: Die beliebtesten Analysen und Kommentare der «Neuen Zürcher Zeitung»',
+  'refresh' : [ {
+   'name' : 'Perspektive Teaser',
+   'url' : 'http://content.nzz.ch/feedimport?type=per-teaser'
+  } ],
+  'header' : {
+   'color' : '#13175f',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'title' : 'Heute meistgelesen'
+  },
+  'footer' : {
+   'nlId' : 'NZZ-Deutschland-Paid2'
+  },
+  'assets' : {
+   'logo' : 97728,
+   'feed-teaser' : 97986
+  }
+ },
+
+ 'per2' : {
+  'name' : 'Perspektive (strict order)',
+  'structure' : {
+   'items': [
+    {
+     'assetId': 'logo'
+    },
+    {
+     'assetId': 'greeting'
+    },
+    {
+     'assetId': 'text',
+     'html' : 'Hier sind die Artikel, die bei Leserinnen und Lesern in Deutschland gerade besonders gerne gelesen werden.'
+    },
+    {
+     'assetId': 'feed-teaser'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'footer-links'
+    }
+   ]
+  },
+  'attributes' : [ 'nled', 124, 'nma' ],
+  'folder' :  139321,
+  'asset' : 98014,
+  'assetCB' : xxx,
+  'subject' : 'Heute meistgelesen: Die beliebtesten Analysen und Kommentare der «Neuen Zürcher Zeitung»',
+  'refresh' : [ {
+   'name' : 'Perspektive Teaser (strict order)',
+   'url' : 'http://content.nzz.ch/feedimport?type=per-teaser2'
+  } ],
+  'header' : {
+   'color' : '#13175f',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'title' : 'Heute meistgelesen'
+  },
+  'footer' : {
+   'nlId' : 'NZZ-Deutschland-Paid2'
+  },
+  'assets' : {
+   'logo' : 97728,
+   'feed-teaser' : 97988
+  }
+ },
+
+ 'per3' : {
+  'name' : 'Perspektive (dynamic subject)',
+  'structure' : {
+   'items': [
+    {
+     'assetId': 'logo'
+    },
+    {
+     'assetId': 'greeting'
+    },
+    {
+     'assetId': 'text',
+     'html' : 'Hier sind die Artikel, die bei Leserinnen und Lesern in Deutschland gerade besonders gerne gelesen werden.'
+    },
+    {
+     'assetId': 'feed-teaser'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'footer-links'
+    }
+   ]
+  },
+  'attributes' : [ 'nled', 124, 'nma' ],
+  'folder' :  139321,
+  'asset' : 98012,
+  'subject' : '%%=ContentBlockbyId("718894")=%%',
+  'refresh' : [ {
+   'name' : 'Perspektive Teaser',
+   'url' : 'http://content.nzz.ch/feedimport?type=per-teaser'
+  } ],
+  'header' : {
+   'color' : '#13175f',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'title' : 'Heute meistgelesen'
+  },
+  'footer' : {
+   'nlId' : 'NZZ-Deutschland-Paid2'
+  },
+  'assets' : {
+   'logo' : 97728,
+   'feed-teaser' : 97986
+  }
+ },
+
+ 'spo' : {
+  'name' : 'Sport',
+  'structure' : {
+   'items': [
+    {
+     'assetId': 'logo'
+    },
+    {
+     'assetId': 'greeting'
+    },
+    {
+     'assetId': 'text',
+     'html' : 'Hier sind die neuesten und beliebtesten Artikel aus dem Ressort Sport für Sie.'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'subtitle',
+     'html': 'Unsere Empfehlungen'
+    },
+    {
+     'assetId': 'feed-teaser'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'advertising-block'
+    },
+    {
+     'assetId': 'footer-links'
+    }
+   ]
+  },
+  'attributes' : [ 'nled', 103, 'nl103' ],
+  'folder' :  139323,
+  'asset' : 97996,
+  'subject' : 97990,
+  'refresh' : [ {
+   'name' : 'Sport Teaser',
+   'url' : 'http://content.nzz.ch/feedimport?type=spo-teaser'
+  } ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6451380/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc=',
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6451381/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#13175f',
+   'link' : 'https://www.nzz.ch/sport/',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'title' : 'NZZ Sport'
+  },
+  'footer' : {
+   'nlId' : 'Sport'
+  },
+  'assets' : {
+   'logo' : 97728,
+   'feed-teaser' : 97991
+  }
+ },
+
+ 'wei' : {
+  'name' : 'Weinkeller',
+  'structure' : {
+   'items': [
+    {
+     'assetId': 'logo'
+    },
+    {
+     'assetId': 'greeting'
+    },
+    {
+     'assetId': 'text',
+     'html' : 'Lesen Sie, was wir für Sie rund um das Thema Wein und Genuss entdeckt haben. Wir wünschen genussvolle Lektüre.'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'feed-teaser'
+    },
+              {
+     'assetId': 'advertising-block'
+    },
+         {
+     'assetId': 'image-cluster'
+    },
+    {
+     'assetId': 'footer-links'
+    }
+   ]
+  },
+  'attributes' : [ 'nled', 104, 'nl104' ],
+  'folder' :  139324,
+  'asset' : 98008,
+  'refresh' : [ {
+   'name' : 'Weinkeller Teaser',
+   'url' : 'http://content.nzz.ch/feedimport?type=wei-teaser'
+  } ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6313670/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#d5dbd4',
+   'link' : 'https://bellevue.nzz.ch/kochen-geniessen/weinkeller-ld.110445',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/51e215f1-08ad-4333-ad52-ca1645922800.png',
+   'logoWidth' : 242,
+   'logoHeight' : 70,
+   'title' : 'NZZ Weinkeller'
+  },
+  'footer' : {
+   'nlId' : 'Wein-Keller'
+  },
+  'assets' : {
+   'logo' : 97728,
+   'feed-teaser' : 97993,
+   'image-cluster' : 97737,
+   'footer-links' : 97380
+  }
+ },
+
+ 'kul' : {
+  'name' : 'Kulinarik',
+  'structure' : {
+   'items': [
+    {
+     'assetId': 'logo'
+    },
+    {
+     'assetId': 'greeting'
+    },
+    {
+     'assetId': 'text',
+     'html' : 'Wir grüssen Sie! Hier sind unsere besten Geschichten für eine genussvolle Woche.'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'feed'
+    },
+    {
+     'assetId': 'advertising-block'
+    },
+    {
+     'assetId': 'image-cluster'
+    },
+    {
+     'assetId': 'footer-links'
+    }
+   ]
+  },
+  'attributes' : [ 'nled', 126, 'nl126' ],
+  'folder' :  139320,
+  'asset' : 98004,
+  'refresh' : [ {
+   'name' : 'Kulinarik Feed',
+   'url' : 'http://content.nzz.ch/feedimport?type=kul-feed'
+  } ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6313670/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#4a4d3b',
+   'link' : 'https://bellevue.nzz.ch/kochen-geniessen/',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/51e215f1-08ad-4333-ad52-ca1645922800.png',
+   'logoWidth' : 242,
+   'logoHeight' : 70,
+   'title' : 'Kochen & Geniessen'
+  },
+  'footer' : {
+   'nlId' : 'NZZ-Kulinarik'
+  },
+  'assets' : {
+   'logo' : 97728,
+   'feed' : 97972,
+   'image-cluster' : 97737,
+   'footer-links' : 97380
+  }
+ },
+  
+  'rei' : {
+  'name' : 'Reisen & Entdecken',
+  'structure' : {
+   'items': [
+    {
+     'assetId': 'logo'
+    },
+    {
+     'assetId': 'greeting'
+    },
+    {
+     'assetId': 'text',
+     'html' : 'Wir grüssen Sie! Hier sind unsere besten Geschichten rund ums Reisen und Entdecken.'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'feed'
+    },
+    {
+     'assetId': 'advertising-block'
+    },
+    {
+     'assetId': 'image-cluster'
+    },
+    {
+     'assetId': 'footer-links'
+    }
+   ]
+  },
+  'attributes' : [ 'nled', 145, 'nl145' ],
+  'folder' :  139322,
+  'asset' : 98010,
+  'refresh' : [ {
+   'name' : 'Reisen und Entdecken  - Feed',
+   'url' : 'http://content.nzz.ch/feedimport?type=rei-feed'
+  } ],
+    
+   'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6313670/0/5492/header=yes;noperf=1;cookie=no;adct=204;misc='
+  ],  
+  
+  'header' : {
+   'color' : '#d5dbd4',
+   'link' : 'https://bellevue.nzz.ch/reisen-entdecken/',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/51e215f1-08ad-4333-ad52-ca1645922800.png',
+   'logoWidth' : 242,
+   'logoHeight' : 70,
+   'title' : 'Reisen & Entdecken'
+  },
+  'footer' : {
+   'nlId' : 'Reis'
+  },
+  'assets' : {
+   'logo' : 97728,
+   'feed' : 97989,
+   'image-cluster' : 97737,
+   'footer-links' : 97380
+  }
+    },
+  
+  'suk' : {
+  'name' : 'Studium und Karriere',
+  'structure' : {
+   'items': [
+    {
+     'assetId': 'logo'
+    },  
+     
+             {
+     'assetId':'nps-survey'
+    },
+     
+     {
+     'assetId': 'greeting'
+    },
+   
+    {
+     'assetId': 'text',
+     'html' : 'Diese Artikel sind bei Studierenden wie Ihnen gerade besonders beliebt.'
+    },
+     
+     {
+     'assetId': 'subtitle',
+     'html': 'Sieben Analysen und Kommentare, die Sie diese Woche nicht verpassen sollten.'
+    },
+     
+    {
+     'assetId': 'feed-teaser'
+    },
+          {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'text',
+     'html': '<b> Wie gefällt Ihnen diese Auswahl? </b> Schreiben Sie uns eine Antwort auf diese E-Mail. Und finden Sie jederzeit persönlich für Sie ausgewählte Empfehlungen in Ihrem <a href="https://www.nzz.ch/meine-nzz/#/briefing" style="color: #272ca9; text-decoration: underline;">«Meine NZZ»-Bereich.</a> <br> <br> Bis nächste Woche!'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+   'assetId': 'advertising-block'
+   },
+    {
+     'assetId': 'footer-links'
+    }
+   ]
+  },
+  'attributes' : [ 'nled',  120, 'nl120' ],
+  'folder' : 144242,
+  'asset' : 101502,
+  'refresh' : [ {
+   'name' : 'Studium und Karriere - Feed',
+   'url' : 'http://content.nzz.ch/feedimport?type=suk-feed'
+  }  ],
+    
+     'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6451389/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],  
+    
+  
+  'header' : {
+   'color' : '#13175f',
+   'link' : 'https://www.nzz.ch/karriere/',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'title' : 'Populär bei Studierenden wie Ihnen'
+  },
+    
+          'nps' : {
+   'title' : '&laquo;NZZ Studium und Karriere&raquo;',
+   'code' : 'sk'
+  },
+    
+  'footer' : {
+   'nlId' : 'NZZ-Studenten'
+  },
+  'assets' : {
+   'logo' : 97728,
+   'feed-teaser' : 101651,
+   'footer-links' : 97383,
+   'greeting': 97357
+  }
+ },
+  
+   'quz' : {
+  'name' : 'Quiz',
+  'structure' : {
+   'items': [
+    {
+     'assetId': 'logo'
+    },
+                  {
+     'assetId':'nps-survey'
+    },
+    {
+     'assetId': 'greeting'
+    },
+    {
+     'assetId': 'text',
+     'html' : 'Hier sind die populärsten Quiz der Woche.'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'feed-teaser'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'text',
+     'html': '<b> Freunde herausfordern: </b> Laden Sie Ihre Freunde zum Quiz-Newsletter ein. <a href="mailto:?subject=Teste dein Wissen&body=Die «Neue Zürcher Zeitung» hat einen neuen Quiz-Newsletter.   Hier kostenlos abonnieren: http://bit.ly/NZZQuiz" style="color: #272ca9; text-decoration: underline;">Hier klicken für eine vorgefertigte Nachricht.</a>'
+    },
+    {
+     'assetId': 'divider'
+    },
+    {
+     'assetId': 'footer-links'
+    }
+   ]
+  },
+  'attributes' : [ 'nled',  125, 'nl125' ],
+  'folder' : 152502 ,
+  'asset' : 125033,
+  'refresh' : [ {
+   'name' : 'Quiz Teaser',
+   'url' : 'http://content.nzz.ch/feedimport?type=quz-teaser'
+  } ],
+  
+  'header' : {
+   'color' : '#13175f',
+   'link' : 'https://www.nzz.ch/spiele/quiz/',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'title' : 'NZZ-Quiz'
+  },
+                'nps' : {
+   'title' : '&laquo;NZZ-Quiz&raquo;',
+   'code' : 'nzzquiz'
+  },
+  'footer' : {
+   'nlId' : 'NZZ-Quiz'
+  },
+  'assets' : {
+   'logo' : 97728,
+   'feed-teaser' : 125024
+  }
+ },
+  
+     'nasa' : {
+  'name' : 'NZZ am Sonntag Aktuell',
+  'structure' : {
+   'items': [
+    {
+     'assetId': 'logo'
+    },
+    {
+     'assetId': 'greeting'
+    },
+         {
+     'assetId': 'text',
+     'html' : 'Diese Lesestücke aus der aktuellen Ausgabe haben unsere Leserinnen und Leser am meisten interessiert. Wir wünschen Ihnen einen schönen Sonntagabend und einen guten Start in die Woche.'
+    },
+         {
+     'assetId': 'divider'
+    }, 
+    {
+     'assetId': 'feed-teaser'
+    },
+    {
+     'assetId': 'footer-links'
+    }
+   ]
+  },
+  'attributes' : [ 'nled', 149, 'nl149' ],
+  'folder' :  152516,
+  'asset' : 125038,
+  'refresh' : [ {
+   'name' : 'NZZaS Aktuell Teaser',
+   'url' : 'http://content.nzz.ch/feedimport?type=nasa-teaser'
+  } ],
+  
+  'header' : {
+   'color' : '#7bc8cc',
+   'link' : 'http://nzzas.nzz.ch/',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d7a04cf4-aa55-4d9b-b153-cc98a56d6b7c.png',
+   'logoWidth' : 250,
+   'logoHeight' : 55,
+   'heroUrl' : 'http://placehold.it/500x250',
+   'heroWidth' : 500,
+   'heroHeight' : 250,
+   'title' : '<div style="color: #4a4d3b;">Das Beste aus der aktuellen Ausgabe</div>'
+  },
+      
+  'footer' : {
+   'nlId' : 'NZZaS-Aktuell'
+  },
+  'assets' : {
+   'logo' : 97728,
+   'footer-links' : 97382,
+   'feed-teaser' : 125039
+  }
+ },
+
+// Defaults  
+
+ 'default' : {
+  'assets' : {
+   'template' : 97747,
+   'logo' : 97726,
+   'greeting' : 97359,
+   'subtitle' : 97746,
+   'author-byline' : 97362,
+   'author-byline-small' : 97364,
+   'image-linked' : 97731,
+   'image-only-linked' : 97730,
+   'image' : 97729,
+   'image-only' : 97732,
+   'image-portrait-linked' : 97735,
+   'image-portrait-only-linked' : 97734,
+   'image-portrait' : 97733,
+   'image-portrait-only' : 97736,
+   'text' : 97748,
+   'text-deputy' : 125310,
+   'divider' : 97361,
+   'unordered-list' : 97739,
+   'ordered-list' : 97738,
+   'nps-survey' : 97741,
+   'scenario' : 97743,
+   'footer-links' : 97379, 
+    'newsletter-suggestion-Top-NewsamAbend': 198994,
+   'newsletter-suggestion-week': 198996,
+   'newsletter-suggestion-NZZaS-Aktuell': 198997,
+   'newsletter-suggestion-NZZ-Buecher': 198999,
+   'newsletter-suggestion-Swiss': 198992,
+   'newsletter-suggestion-Reis': 199000,
+   'newsletter-suggestion-NZZ-Kulinarik': 199001,
+   'newsletter-suggestion-NZZ-am-Sonntag': 198998,
+   'newsletter-suggestion-NZZ-Quiz': 199003,
+   'newsletter-suggestion-Wirtschaft': 199004,
+   'newsletter-suggestion-International': 199005,
+   'newsletter-suggestion-Sport': 199008,
+   'newsletter-suggestion-Digital': 199009,
+   'newsletter-suggestion-Bellevue': 199011,
+   'newsletter-suggestion-Wein-Keller': 199010,
+   'newsletter-suggestion-Zuerich': 199006
+  }
+ }
+
+}
+
+var authorConfig = {
+
+ 'asü.' : {
+  'linkUrl'  : 'https://www.nzz.ch/impressum/andreas-schuerer-ld.1086093',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/e4c013cf-a070-45db-b8ae-254414b4358e.png',
+  'name'     : 'Andreas Schürer',
+  'role'     : 'Tagesleiter Newsroom'
+ },
+
+'bem.' : {
+
+'linkUrl' : 'https://www.nzz.ch/impressum/benno-mattli-ld.1287979',
+'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/5ae9ddc0-7648-4959-bb6c-ac7f8de9dbcb.png',
+'name' : 'Benno Mattli',
+'role' : 'Tagesleiter Newsroom'
+},
+
+ 'jvr.' : {
+  'linkUrl'  : 'https://bellevue.nzz.ch/impressum/',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/883077be-01d4-4839-9e36-d6a58f8764ec.png',
+  'name'     : 'Jeroen van Rooijen',
+  'role'     : ''
+ },
+
+  
+   'dlw.' : {
+  'linkUrl'  : 'http://folio.nzz.ch/daniel-weber',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/2e0ec9f8-7df8-4b39-980e-dca6b4bd54d4.png',
+  'name'     : 'Daniel Weber',
+  'role'     : 'Chefredaktor NZZ-Folio'
+ },
+  
+   'awa' : {
+  'linkUrl'  : 'http://folio.nzz.ch/',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/3e2ccd16-61f2-4268-a563-d29550a9f721.png',
+  'name'     : 'Aline Wanner',
+  'role'     : 'Redaktorin NZZ-Folio'
+ },
+  
+     'bak' : {
+  'linkUrl'  : 'http://folio.nzz.ch/',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/eefaa170-1588-4b5f-8b55-8089e360eb8e.png',
+  'name'     : 'Barbara Klingbacher',
+  'role'     : 'Redaktorin NZZ-Folio'
+ },
+  
+       'pam' : {
+  'linkUrl'  : 'http://folio.nzz.ch/',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/82ac7af0-ed4b-4d6f-bd7d-aff51b822d81.png',
+  'name'     : 'Patric Marino',
+  'role'     : 'Redaktor NZZ-Folio'
+ },
+
+         'res' : {
+  'linkUrl'  : 'http://folio.nzz.ch/',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/6268ec29-118f-42a0-bcc1-514574efacc6.png',
+  'name'     : 'Reto U. Schneider',
+  'role'     : 'Redaktor NZZ-Folio'
+ },
+ 
+
+ 'fbi.' : {
+  'linkUrl'  : 'https://www.nzz.ch/fabian-baumgartner-ld.1086094',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/4d3c7ab6-ca80-41ed-b1c2-0d752d6150c8.png',
+  'name'     : 'Fabian Baumgartner',
+  'role'     : 'Redaktor Ressort Zürich'
+ },
+
+ 'tox.1' : {
+  'linkUrl'  : 'https://www.nzz.ch/irene-troxler-loeliger-ld.1086079',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/6aaec0db-b4fb-4b87-96d8-97a193e1b28c.png',
+  'name'     : 'Irène Troxler',
+  'role'     : 'Redaktionsleiterin Ressort Zürich'
+ },
+
+ 'rib.' : {
+  'linkUrl'  : 'https://www.nzz.ch/thomas-ribi-ld.1086067',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/764e8a31-55e2-491b-9783-18e818c5bc7b.png',
+  'name'     : 'Thomas Ribi',
+  'role'     : 'Redaktor'
+ },
+
+ 'rib.1' : {
+  'linkUrl'  : 'https://www.nzz.ch/thomas-ribi-ld.1086067',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/764e8a31-55e2-491b-9783-18e818c5bc7b.png',
+  'name'     : 'Auge und Ohr',
+  'role'     : 'Thomas Ribi'
+ },
+
+ 'urs.' : {
+  'linkUrl'  : 'https://www.nzz.ch/urs-buehler-ld.1086080',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/decf29ad-573c-44f5-9854-1a059804080d.png',
+  'name'     : 'Urs Bühler',
+  'role'     : 'Redaktor Zürich'
+ },
+
+ 'urs.1' : {
+  'linkUrl'  : 'https://www.nzz.ch/urs-buehler-ld.1086080',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/decf29ad-573c-44f5-9854-1a059804080d.png',
+  'name'     : 'Leib & Kehle',
+  'role'     : 'Urs Bühler'
+ },
+
+ 'urs.2' : {
+  'linkUrl'  : 'https://www.nzz.ch/urs-buehler-ld.1086080',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/decf29ad-573c-44f5-9854-1a059804080d.png',
+  'name'     : 'Gereimtheiten',
+  'role'     : 'Urs Bühler'
+ },
+  
+  'pbo.' : {
+  'linkUrl'  : 'https://www.nzz.ch/',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/368aef62-a69e-4397-a7cf-0a7663bc9444.png',
+  'name'     : 'Patrick Boehler',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+
+ 'cts.' : {
+  'linkUrl'  : 'https://www.nzz.ch/christian-steiner-ld.1287499',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/cebbc9d7-ebc1-4e6d-b5b9-cf5166160c96.png',
+  'name'     : 'Christian Steiner',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+
+ 'sev.' : {
+  'linkUrl'  : 'https://www.nzz.ch/christin-severin-ld.1085423',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/b03448bd-292d-4d7f-b27c-5e0b9b17f01d.png',
+  'name'     : 'Christin Severin',
+  'role'     : 'Redaktorin NZZ Wirtschaft'
+ },
+
+ 'tsf.' : {
+  'linkUrl'  : 'https://www.nzz.ch/thomas-schuerpf-ld.1085438',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/96e4a2c5-da13-4a15-806d-a528cdd662d5.png',
+  'name'     : 'Thomas Schürpf',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+
+ 'nrü.' : {
+  'linkUrl'  : 'https://www.nzz.ch/nicole-ruetti-ruzicic-ld.1085425',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/9bc80e5d-554d-461d-bff9-35bf4c6387be.png',
+  'name'     : 'Nicole Rütti Ruzicic',
+  'role'     : 'Redaktorin NZZ Wirtschaft'
+ },
+
+ 'lpa.' : {
+  'linkUrl'  : 'https://www.nzz.ch/lucie-paska-ld.1085432',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/43165207-667b-4598-9d36-1cf1ce7b307f.png',
+  'name'     : 'Lucie Paska',
+  'role'     : 'Redaktorin NZZ Wirtschaft'
+ },
+
+ 'am.' : {
+  'linkUrl'  : 'https://www.nzz.ch/andrea-martel-fus-ld.1085427',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/3a3c6a93-c19d-4ee5-ab35-1ac5a14e3ff2.png',
+  'name'     : 'Andrea Martel Fus',
+  'role'     : 'Redaktorin NZZ Wirtschaft'
+ },
+
+ 'cri.' : {
+  'linkUrl'  : 'https://www.nzz.ch/christof-leisinger-ld.1085445',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/97e7153c-8799-4afb-bfe6-d61a4dc02ef3.png',
+  'name'     : 'Christof Leisinger',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+
+ 'imr.' : {
+  'linkUrl'  : 'https://www.nzz.ch/daniel-imwinkelried-ld.1085444',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/83715e70-fdcc-4144-b5ae-779e1f3b2660.png',
+  'name'     : 'Daniel Imwinkelried',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+
+ 'ng.' : {
+  'linkUrl'  : 'https://www.nzz.ch/natalie-gratwohl-ld.1085441',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/7b3be729-a234-4095-8c08-73f4e5f5546d.png',
+  'name'     : 'Natalie Gratwohl',
+  'role'     : 'Redaktorin NZZ Wirtschaft'
+ },
+
+ 'ti.' : {
+  'linkUrl'  : 'https://www.nzz.ch/ermes-gallarotti-ld.1085421',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/5234f9b9-c0a9-48ce-8116-55155419537a.png',
+  'name'     : 'Ermes Gallarotti',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+
+ 'feb.' : {
+  'linkUrl'  : 'https://www.nzz.ch/michael-ferber-ld.1085430',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/a10b1824-4e32-47e6-9916-d6b01a54575f.png',
+  'name'     : 'Michael Ferber',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+
+ 'df.' : {
+  'linkUrl'  : 'https://www.nzz.ch/dominik-feldges-ld.1287502',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/5e9c9eb3-a082-493c-93a1-fafd1fc2ccb5.png',
+  'name'     : 'Dominik Feldges',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+
+ 'dba.' : {
+  'linkUrl'  : 'https://www.nzz.ch/dieter-bachmann-ld.1085454',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/b837e100-3735-4b16-98f1-8bf5bc763159.png',
+  'name'     : 'Dieter Bachmann',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+
+ 'z.b.' : {
+  'linkUrl'  : 'https://www.nzz.ch/zoe-baches-ld.1085439',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/05e53ea0-9d2e-44ec-9803-d82b65d986ce.png',
+  'name'     : 'Zoé Baches',
+  'role'     : 'Redaktorin NZZ Wirtschaft'
+ },
+
+ 'ai.' : {
+  'linkUrl'  : 'https://www.nzz.ch/sergio-aiolfi-ld.1085422',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/ef1b7fd8-f1da-4d98-8e9b-cd26f9bfaeb0.png',
+  'name'     : 'Sergio Aiolfi',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+
+ 'msf.' : {
+  'linkUrl'  : 'https://www.nzz.ch/michael-schaefer-ld.1085451',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/bb4dad24-38b2-410f-87ac-589e8032b494.png',
+  'name'     : 'Michael Schäfer',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+
+ 'gru.' : {
+  'linkUrl'  : 'https://www.nzz.ch/werner-grundlehner-ld.1085442',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/01b08d33-c349-4f1e-8e91-ba96976d56eb.png',
+  'name'     : 'Werner Grundlehner',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+
+ 'syc.' : {
+  'linkUrl'  : 'https://www.nzz.ch/impressum/sylviane-chassot-ld.1287970',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/99f3a2f7-68a9-4b77-b995-e24061828ae8.png',
+  'name'     : 'Sylviane Chassot',
+  'role'     : 'Redaktorin NZZ Wirtschaft'
+ },
+
+ 'abl.' : {
+  'linkUrl'  : 'https://www.nzz.ch/impressum/anne-barbara-luft-ld.1085446',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/f4ff4724-85f0-4fac-9346-244b71096c20.png',
+  'name'     : 'Anne-Barbara Luft',
+  'role'     : 'Redaktorin NZZ Wirtschaft'
+ },
+
+ 'gvm.' : {
+  'linkUrl'  : 'https://www.nzz.ch/impressum/giorgio-v-mueller-ld.1085429',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/c5028d8d-bf9c-405b-a52b-e84c32a7cacb.png',
+  'name'     : 'Giorgio V. Müller',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+
+ 'nz.' : {
+  'linkUrl'  : 'https://www.nzz.ch/impressum/werner-enz-ld.1085420',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/4a281159-0234-4389-8849-97ddf06be907.png',
+  'name'     : 'Werner Enz',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+
+ 'tf.' : {
+  'linkUrl'  : 'https://www.nzz.ch/impressum/thomas-fuster-ld.1085443',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/eccc617f-58b6-4cc6-8185-1261c3c1e3f9.png',
+  'name'     : 'Thomas Fuster',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+
+ 'jmu.' : {
+  'linkUrl'  : 'https://www.nzz.ch/impressum/juerg-mueller-ld.1085453',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d2a2564a-1aef-4ba1-9aa0-464e81737552.png',
+  'name'     : 'Jürg Müller',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+  
+  'awy.' : {
+  'linkUrl'  : 'https://www.nzz.ch/impressum/andres-wysling-ld.155171',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/af82fb60-d8f9-416d-b2f3-42b65922ce81.png',
+  'name'     : 'Andres Wysling',
+  'role'     : 'Redaktor'
+ },
+  
+   'gho.' : {
+  'linkUrl'  : 'https://www.nzz.ch/gerald-hosp-ld.154654',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/4073eaae-dee9-46e4-bbe6-0fa5b742d0ba.png',
+  'name'     : 'Gerald Hosp',
+  'role'     : 'Redaktor'
+ },
+
+ 'bu.' : {
+  'linkUrl'  : 'https://www.nzz.ch/alexander-busch-ld.153756',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/a835f67b-f6ff-4cfb-9bed-1631a338fa03.png',
+  'name'     : 'Alexander Busch',
+  'role'     : 'NZZ-Korrespondent in Salvador/Bahia'
+ },
+
+ 'mhf.' : {
+  'linkUrl'  : 'https://www.nzz.ch/markus-m-haefliger-ld.154667',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/a30c4b99-5cb1-46ed-99ef-675cb1f59854.png',
+  'name'     : 'Markus M. Häfliger',
+  'role'     : 'NZZ-Korrespondent in London'
+ },
+
+ 'aku.' : {
+  'linkUrl'  : 'https://www.nzz.ch/andrea-kucera-ld.1288132',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/481f5806-ea7a-496c-96b2-49a12de9ec89.png',
+  'name'     : 'Andrea Kucera',
+  'role'     : 'NZZ-Korrespondentin in Französische Schweiz'
+ },
+
+
+ 'cei.' : {
+  'linkUrl'  : 'https://www.nzz.ch/christoph-eisenring-ld.154644',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d414f74a-a635-4f07-b72c-cb10a0abdbee.png',
+  'name'     : 'Christoph Eisenring',
+  'role'     : 'NZZ-Korrespondent in Berlin'
+ },
+
+ 'tz.' : {
+  'linkUrl'  : 'https://www.nzz.ch/nikos-tzermias-ld.154668',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/3dff11fe-185d-4078-8000-316394a90a65.png',
+  'name'     : 'Nikos Tzermias',
+  'role'     : 'NZZ-Korrespondent in Paris'
+ },
+
+ 'mac.' : {
+  'linkUrl'  : 'https://www.nzz.ch/markus-ackeret-ld.154653',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/7ec8d30c-89d6-476a-a2c9-f2d21d8671b8.png',
+  'name'     : 'Markus Ackeret',
+  'role'     : 'NZZ-Korrespondent in Moskau'
+ },
+
+ 'ra.' : {
+  'linkUrl'  : 'https://www.nzz.ch/michael-rasch-ld.154642',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/1a678e2b-b973-400b-b21e-077322816962.png',
+  'name'     : 'Michael Rasch',
+  'role'     : 'NZZ-Korrespondent in Frankfurt'
+ },
+
+ 'slz.' : {
+  'linkUrl'  : 'https://www.nzz.ch/stephanie-lahrtz-ld.154640',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/2c8362ba-2c8d-419f-bd51-fd94d33508a7.png',
+  'name'     : 'Stephanie Lahrtz',
+  'role'     : 'NZZ-Korrespondentin in München'
+ },
+
+ 'mbe.' : {
+  'linkUrl'  : 'https://www.nzz.ch/matthias-benz-ld.154637',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/565c00c2-fd6d-4859-9c58-099ac5d4f49c.png',
+  'name'     : 'Matthias Benz',
+  'role'     : 'NZZ-Korrespondent in Wien'
+ },
+
+ 'bam.' : {
+  'linkUrl'  : 'https://www.nzz.ch/meret-baumann-ld.154638',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/764ec221-afe6-4dc7-87fc-0daeead6d252.png',
+  'name'     : 'Meret Baumann',
+  'role'     : 'NZZ-Korrespondentin in Wien'
+ },
+
+ 'ruh.' : {
+  'linkUrl'  : 'https://www.nzz.ch/rudolf-hermann-ld.154635',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/9c1a524e-8018-40e3-a1c7-f8a706de4480.png',
+  'name'     : 'Rudolf Hermann',
+  'role'     : 'NZZ-Korrespondent in Stockholm'
+ },
+
+ 'spl.' : {
+  'linkUrl'  : 'https://www.nzz.ch/andrea-spalinger-ld.154639',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/a0e08806-7f53-46d9-a234-353ae03ed1bb.png',
+  'name'     : 'Andrea Spalinger',
+  'role'     : 'NZZ-Korrespondentin in Rom'
+ },
+
+ 'bet.' : {
+  'linkUrl'  : 'https://www.nzz.ch/benjamin-triebe-ld.154630',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/cfc1caa2-2aa1-4d82-ac8c-9afd97c90b4b.png',
+  'name'     : 'Benjamin Triebe',
+  'role'     : 'NZZ-Korrespondent in London'
+ },
+
+ 'kam.' : {
+  'linkUrl'  : 'https://www.nzz.ch/marco-kauffmann-bossart-ld.154623',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/60f7a5b1-bfa3-4e37-9a86-37d5ed0782e4.png',
+  'name'     : 'Marco Kauffmann Bossart',
+  'role'     : 'NZZ-Korrespondent in Istanbul'
+ },
+
+ 'ahn.' : {
+  'linkUrl'  : 'https://www.nzz.ch/andreas-ernst-ld.154625',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/bc075f3d-d6bb-46a2-bd01-7c48c59967ea.png',
+  'name'     : 'Andreas Ernst',
+  'role'     : 'NZZ-Korrespondent in Belgrad'
+ },
+
+ 'nn.' : {
+  'linkUrl'  : 'https://www.nzz.ch/niklaus-nuspliger-ld.154631',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/2dd2e27a-6c42-4f50-bfb5-a6fa7145145a.png',
+  'name'     : 'Niklaus Nuspliger',
+  'role'     : 'NZZ-Korrespondent in Brüssel'
+ },
+
+ 'ht.' : {
+  'linkUrl'  : 'https://www.nzz.ch/rene-hoeltschi-ld.154633',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/43df9a77-287d-4811-a53f-697bbba364b9.png',
+  'name'     : 'René Höltschi',
+  'role'     : 'NZZ-Korrespondent in Brüssel'
+ },
+
+ 'jro.' : {
+  'linkUrl'  : 'https://www.nzz.ch/inga-rogg-ld.150237',
+  'imageUrl' : 'https://placehold.it/160x160',
+  'name'     : 'Inga Rogg',
+  'role'     : 'NZZ-Korrespondentin in Istanbul'
+ },
+
+ 'dai.' : {
+  'linkUrl'  : 'https://www.nzz.ch/david-signer-ld.154628',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/acd47ac8-6b7d-40b8-b6cf-c1deead0585e.png',
+  'name'     : 'David Signer',
+  'role'     : 'NZZ-Korrespondent in Dakar'
+ },
+
+ 'bol.' : {
+  'linkUrl'  : 'https://www.nzz.ch/monika-bolliger-ld.154620',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/9703f63b-2853-4e2c-81d0-42fe8bac54a1.png',
+  'name'     : 'Monika Bolliger',
+  'role'     : 'NZZ-Korrespondentin in Beirut'
+ },
+
+ 'ter.' : {
+  'linkUrl'  : 'https://www.nzz.ch/thomas-fischer-ld.154626',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/39446a6a-c7bb-4695-a54b-3b11dda09200.png',
+  'name'     : 'Thomas Fischer',
+  'role'     : 'NZZ-Korrespondent in Lissabon'
+ },
+
+ 'u.sd.' : {
+  'linkUrl'  : 'https://www.nzz.ch/ulrich-schmid-ld.154618',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/c686146e-80f7-4a68-af2f-e68ea5f1d0e4.png',
+  'name'     : 'Ulrich Schmid',
+  'role'     : 'NZZ-Korrespondent in Jerusalem'
+ },
+
+ 'rt.' : {
+  'linkUrl'  : 'https://www.nzz.ch/manfred-rist-ld.153803',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/bd57ff44-a18a-4a84-9d7f-3aef8d3456ce.png',
+  'name'     : 'Manfred Rist',
+  'role'     : 'NZZ-Korrespondent in Singapur'
+ },
+
+ 'paz.' : {
+  'linkUrl'  : 'https://www.nzz.ch/patrick-zoll-ld.153793',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/b5eccd5b-4368-47e3-b7bf-913548716cc3.png',
+  'name'     : 'Patrick Zoll',
+  'role'     : 'NZZ-Korrespondent in Sydney'
+ },
+
+ 'mue.' : {
+  'linkUrl'  : 'https://www.nzz.ch/matthias-mueller-ld.153801',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/31c421e0-7852-4f7f-b93c-7703e8d6efa8.png',
+  'name'     : 'Matthias Müller',
+  'role'     : 'NZZ-Korrespondent in Peking'
+ },
+
+ 'pab.' : {
+  'linkUrl'  : 'https://www.nzz.ch/volker-pabst-ld.154617',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/bf37c65b-b320-41d5-925f-12fd08aed702.png',
+  'name'     : 'Volker Pabst',
+  'role'     : 'NZZ-Korrespondent in Delhi'
+ },
+
+ 'win.' : {
+  'linkUrl'  : 'https://www.nzz.ch/peter-winkler-ld.153790',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/c33644af-5c3f-4032-9ce5-b715f0c62559.png',
+  'name'     : 'Peter Winkler',
+  'role'     : 'NZZ-Korrespondent in Washington'
+ },
+
+ 'mla.' : {
+  'linkUrl'  : 'https://www.nzz.ch/martin-lanz-ld.153783',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/fe44ce02-fbb4-4e47-8fff-5ba79b836d02.png',
+  'name'     : 'Martin Lanz',
+  'role'     : 'NZZ-Korrespondent in Washington'
+ },
+
+ 'pgp.' : {
+  'linkUrl'  : 'https://www.nzz.ch/peter-gaupp-ld.153742',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/8e1274de-708c-45b9-848f-85e4a13f971d.png',
+  'name'     : 'Peter Gaupp',
+  'role'     : 'NZZ-Korrespondent in San José de Costa Rica'
+ },
+
+ 'fdr.' : {
+  'linkUrl'  : 'https://www.nzz.ch/karl-felder-ld.153774',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/ec8df55e-fe50-48e8-8387-12fb8b576121.png',
+  'name'     : 'Karl Felder',
+  'role'     : 'NZZ-Korrespondent in Vancouver'
+ },
+
+ 'tjb.' : {
+  'linkUrl'  : 'https://www.nzz.ch/tjerk-bruehwiller-ld.153770',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/367de399-c810-4a0f-bc06-8a2162dc11a9.png',
+  'name'     : 'Tjerk Brühwiller',
+  'role'     : 'NZZ-Korrespondent in São Paulo'
+ },
+
+ 'c.h.' : {
+  'linkUrl'  : 'https://www.nzz.ch/christiane-hanna-henkel-ld.153776',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/08c75e02-a851-4c0e-938a-f2d45412972b.png',
+  'name'     : 'Christiane Hanna Henkel',
+  'role'     : 'NZZ-Korrespondentin in New York'
+ },
+
+ 'cf.' : {
+  'linkUrl'  : 'https://www.nzz.ch/christoph-fisch-ld.155112',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/7cc11f2b-c4ae-4ce5-b296-41a12eb99925.png',
+  'name'     : 'Christoph Fisch',
+  'role'     : 'Tagesleiter / Ressortleiter Produktion'
+ },
+
+ 'pfi.' : {
+  'linkUrl'  : 'https://www.nzz.ch/peter-fischer-ld.1085419',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/801b16fd-c557-4c8a-9e4b-aa2f922fd3d0.png',
+  'name'     : 'Peter Fischer',
+  'role'     : 'Ressortleiter Wirtschaft'
+ },
+
+ 'c.g.' : {
+  'linkUrl'  : 'https://www.nzz.ch/colette-gradwohl-ld.155103',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/655b258e-3c33-46d0-82cd-1fa7b2154f94.png',
+  'name'     : 'Colette Gradwohl',
+  'role'     : 'Stellvertretende Chefredaktorin'
+ },
+
+ 'pra.' : {
+  'linkUrl'  : 'https://www.nzz.ch/peter-rasonyi-ld.155166',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/0777e156-c73c-4444-8530-f5a85fd6cdef.png',
+  'name'     : 'Peter Rasonyi',
+  'role'     : 'Ressortleiter International'
+ },
+
+ 'rs.' : {
+  'linkUrl'  : 'https://www.nzz.ch/rene-scheu-ld.1086040',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/420aa2ec-eb6b-469a-98e9-40d19e29be9f.png',
+  'name'     : 'René Scheu',
+  'role'     : 'Ressortleiter Feuilleton'
+ },
+
+ 'se.' : {
+  'linkUrl'  : 'https://www.nzz.ch/martin-senti-ld.1160451',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/00086cfa-b04d-4628-a40d-27b11ed87dfa.png',
+  'name'     : 'Martin Senti',
+  'role'     : 'Ressortleiter Meinung & Debatte'
+ },
+
+ 'spe.' : {
+  'linkUrl'  : 'https://www.nzz.ch/christian-speicher-ld.1287474',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/144edf54-93e1-4862-893e-808c82383255.png',
+  'name'     : 'Christian Speicher',
+  'role'     : 'Ressortleiter Wissenschaft'
+ },
+
+ 'tst.' : {
+  'linkUrl'  : 'https://www.nzz.ch/thomas-stamm-ld.155104',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/18d7541a-11de-4083-ac7f-bc4d2f62dc0d.png',
+  'name'     : 'Thomas Stamm',
+  'role'     : 'Stellvertretender Chefredaktor'
+ },
+
+ 'daw.' : {
+  'linkUrl'  : 'https://www.nzz.ch/daniel-wechlin-ld.155107',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/ce72dc24-9e2c-4cf7-92ae-5b25e2e6f3ba.png',
+  'name'     : 'Daniel Wechlin',
+  'role'     : 'Stellvertretender Chefredaktor'
+ },
+
+ 'tox.' : {
+  'linkUrl'  : 'https://www.nzz.ch/impressum/irene-troxler-loeliger-ld.1086079',
+  'imageUrl' : 'http://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/ab5655fc-2a08-41eb-9b22-26920c2482e0.png',
+  'name'     : 'Irène Troxler',
+  'role'     : 'Ressortleiterin Zürich'
+  },
+
+ 'msc.' : {
+  'linkUrl'  : 'https://www.nzz.ch/impressum/michael-schoenenberger-ld.665520',
+  'imageUrl' : 'http://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/dd4079ca-1ffc-42d3-b40d-7a14f9b010fb.png',
+  'name'     : 'Michael Schönenberger',
+  'role'     : 'Ressortleiter Inland'
+  },
+  
+   'luks.' : {
+  'linkUrl'  : 'https://www.nzz.ch/',
+  'imageUrl' : 'http://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/913cae9f-057c-4a3f-9766-7d44ea728562.png',
+  'name'     : 'Lukas Sustala',
+  'role'     : '«NZZ Global Risk»-Journalist'
+  },
+
+ 'hus.' : {
+  'linkUrl'  : 'https://www.nzz.ch/impressum/hansueli-schoechli-ld.1085436',
+  'imageUrl' : 'http://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/6f73448d-557c-4f23-82ae-748972b0459c.png',
+  'name'     : 'Hansueli Schöchli',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+  },
+
+ 'sco.' : {
+  'linkUrl'  : 'https://www.nzz.ch/impressum/christoph-g-schmutz-ld.1085450',
+  'imageUrl' : 'http://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/f4e81c21-7f1c-4806-a787-69fe41a1d321.png',
+  'name'     : 'Christoph G. Schmutz',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+  }
+
+}
+
+var risklevelUrl = [
+ 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/2bf82c2f-97b7-493f-9362-4408fbb654c0.png',
+ 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/8c061801-ee77-4d07-a992-e53006021059.png',
+ 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/ed8a22c6-4014-4583-b773-37e6403ea24e.png'
+];
+
+var response, feedData, html = '';
+
+// Utility Functions
+
+function debug(text) {
+ Write(text + "<br/>\n");
+}
+
+String.prototype.replaceAll = function(search, replace) {
+ if (!replace) replace = '';
+ return this.split(search).join(replace);
+}
+
+// Get and validate HTTP parameters
+
+var documentId = Request.GetQueryStringParameter("documentId");
+
+var type = Request.GetQueryStringParameter("type");
+/*
+var mode = Request.GetQueryStringParameter("mode");
+var allowedModes = [ 'dev', 'stag', 'prod' ];
+*/
+
+debug('CloudPage: ' + Platform.Request.RequestURL);
+
+var mode = Platform.Request.RequestURL.substring(31,35);
+if (mode == 'dev?') mode = 'dev';
+
+debug('Mode detected: ' + mode);
+
+// Get JSON Feed from Living Docs
+
+if (documentId) {
+
+  switch (mode) {
+   case 'prod': var feedURL = 'https://delivery-livingdocs.nzz-tech.ch'; break;
+   case 'stag': var feedURL = 'https://delivery-livingdocs-staging.nzz-tech.ch'; break;
+   case 'dev': var feedURL = 'https://delivery-livingdocs-test.nzz-tech.ch'; break;
+  }
+
+  feedURL += '/nzz/api/v1/documents/' + documentId + '/latestPublication/renditions?rendition_name=newsletter-content-builder';
+
+//  debug('GETing JSON from: ' + feedURL);
+
+  try {
+   response = HTTP.Get(feedURL,["authorization"],["Basic ZmFjdG9yeTQyOkhQNXE3N3lSNlMxZDRDYmI5WDk4"]);
+//   debug("Response:<br/><br/>" + response.Content);
+   feedData = Platform.Function.ParseJSON(response.Content);
+   feedData = feedData.channels["newsletter-content-builder"].content;
+//   debug("Received JSON data");
+//   debug("JSON Feed: " + Stringify(feedData));
+  } catch(error) {
+   debug("Error GETing JSON Feed:<br/><br/>" + error.description);
+  }
+
+  var type = newsletterTemplate[feedData.template];
+
+  debug('Type detected: ' + type);
+
+//} else if (newsletterConfig[type] && (newsletterConfig[type].structure || (newsletterConfig[type].layout && allowedModes.join().indexOf(mode) !== -1))) {
+} else if (newsletterConfig[type] && (newsletterConfig[type].structure || newsletterConfig[type].layout)) {
+
+ if (newsletterConfig[type].layout) {
+
+  switch (mode) {
+   case 'prod': var feedURL = 'https://delivery-livingdocs.nzz-tech.ch'; break;
+   case 'stag': var feedURL = 'https://delivery-livingdocs-staging.nzz-tech.ch'; break;
+   case 'dev':  var feedURL = 'https://delivery-livingdocs-dev.nzz-tech.ch'; break;
+  }
+
+  feedURL += '/nzz/api/v1/documentByLayout/latestPublication';
+  feedURL += '?channel_id=5&rendition_name=newsletter-content-builder&layout=' + newsletterConfig[type].layout;
+
+  try {
+   response = HTTP.Get(feedURL,["authorization"],["Basic ZmFjdG9yeTQyOkhQNXE3N3lSNlMxZDRDYmI5WDk4"]);
+//   debug("Response: " + Stringify(response));
+   feedData = Platform.Function.ParseJSON(response.Content);
+   feedData = feedData.channels["newsletter-content-builder"].content;
+//   debug("JSON Feed: " + Stringify(feedData));
+//   debug("Received JSON data");
+  } catch(error) {
+   debug("Error GETing JSON Feed:<br/><br/>" + error.description + "<br/>" );
+  }
+
+ } else if (newsletterConfig[type].structure) {
+
+  feedData = newsletterConfig[type].structure;
+
+ }
+
+}
+
+if (feedData) {
+
+ Write("<center><h1>Universal Living Docs Import</h1><h2>" + newsletterConfig[type].name + "</h2></center>");
+ debug("Execution started at " + DateTime.SystemDateToLocalDate(Now()) + "<br/>");
+
+// Refresh Feeds
+
+ if (newsletterConfig[type].refresh) {
+  for (var i in newsletterConfig[type].refresh) {
+
+   try {
+    response = HTTP.Get(newsletterConfig[type].refresh[i].url);
+    debug(newsletterConfig[type].refresh[i].name + " refreshed");
+   } catch(error) {
+    debug("Error while refreshing Feed (" + newsletterConfig[type].refresh[i].url + ") :<br/><br/>" + error.description + "<br/>" );
+   }
+
+  }
+  debug("");
+ }
+
+
+// Process Feed
+
+  debug("Processing JSON data");
+
+  var content = '';
+  var temp;
+  var ad = 0;
+
+  for (var i in feedData.items) {
+   var item = feedData.items[i];
+   var assetId = item.assetId;
+
+   debug("Processing item " + i + ": " + assetId);
+
+   if (assetId == 'image' || assetId == 'image-linked') {
+    if (item.html) {
+     if (item.link) {
+      assetId = 'image-linked';
+     } else {
+      assetId = 'image';     
+     }
+    } else {
+     if (item.link) {
+      assetId = 'image-only-linked';
+     } else { 
+      assetId = 'image-only';     
+     }
+    }
+   }
+
+   if (assetId == 'image-portrait') {
+    if (item.html) {
+     if (item.link) {
+      assetId = 'image-portrait-linked';
+     } else {
+      assetId = 'image-portrait';     
+     }
+    } else {
+     if (item.link) {
+      assetId = 'image-portrait-only-linked';
+     } else { 
+      assetId = 'image-portrait-only';     
+     }
+    }
+   }
+
+   if (assetId == 'advertising-block') {
+
+    if (newsletterConfig[type].adurl[ad]) {
+
+     try {
+      var url = newsletterConfig[type].adurl[ad] + (new Date()).getTime();
+      response = HTTP.Get(url);
+      temp = response.Content;
+//      debug("URL: " + url);
+//      debug("Response: " + Stringify(response));
+     } catch(error) {
+      debug("Error GETing HTML from AdServer:<br/><br/>" + error.description );
+      temp = '';
+     }
+     ad++;
+
+    } else {
+     debug("Error: no URL for advertising-block " + ad + " defined");
+     temp = '';
+    }
+
+   } else {
+
+    try {
+     var caId = newsletterConfig[type].assets[assetId];
+     if (!caId) caId = newsletterConfig['default'].assets[assetId];
+     temp = Platform.Function.ContentBlockByID(caId);
+    } catch(error) {
+     debug("Error: unable to resolve assetId " + assetId);
+//     debug("ERROR:<br/>" + error.description);
+     temp = '';
+    }
+
+   }
+
+   if (temp.indexOf('%%item_loop%%') != -1) {
+
+    var parts = temp.split('%%item_loop%%');
+    var list = '';
+    for (var i in item.items) {
+     temp = parts[1];
+     temp = temp.replaceAll("%%number%%", Number(i)+1);   // obsolete
+     temp = temp.replaceAll("%%html%%", item.items[i].html);
+     list += temp;
+    }
+    temp = parts[0] + list + parts[2];
+
+   } else {
+    if (assetId == 'logo' || assetId == 'logo-schweiz'|| assetId == 'logo-jenni-thier'|| assetId == 'logo-birgit-schmid'|| assetId == 'logo-christina-neuhaus'|| assetId == 'logo-claudia-maeder') {
+
+     temp = temp.replaceAll("%%color%%", newsletterConfig[type].header.color);
+     temp = temp.replaceAll("%%logoUrl%%", newsletterConfig[type].header.logoUrl);
+     temp = temp.replaceAll("%%logoWidth%%", newsletterConfig[type].header.logoWidth);
+     temp = temp.replaceAll("%%logoHeight%%", newsletterConfig[type].header.logoHeight);
+     temp = temp.replaceAll("%%heroUrl%%", newsletterConfig[type].header.heroUrl);
+     temp = temp.replaceAll("%%heroWidth%%", newsletterConfig[type].header.heroWidth);
+     temp = temp.replaceAll("%%heroHeight%%", newsletterConfig[type].header.heroHeight);
+     temp = temp.replaceAll("%%title%%", newsletterConfig[type].header.title);
+
+     if (newsletterConfig[type].header.link) {
+      temp = temp.replaceAll("%%link%%", newsletterConfig[type].header.link);
+     } else {
+      temp = temp.replaceAll("%%link%%", 'https://www.nzz.ch');
+     }
+
+
+    } else if (assetId == 'nps-survey') {
+
+     temp = temp.replaceAll("%%code%%", newsletterConfig[type].nps.code);
+     temp = temp.replaceAll("%%title%%", newsletterConfig[type].nps.title);
+           
+
+    } else if (assetId == 'footer-links' || assetId == 'footer-links-bellevue' || assetId == 'footer-links-schweiz') {
+
+     temp = temp.replaceAll("%%nlId%%", newsletterConfig[type].footer.nlId);
+
+    } else if (assetId == 'author-byline' || assetId == 'author-byline-small') {
+
+     var name = item.name.toLowerCase().replaceAll(' ','');
+     if (authorConfig[name]) {
+      temp = temp.replaceAll("%%linkUrl%%", authorConfig[name].linkUrl);
+      temp = temp.replaceAll("%%imageUrl%%", authorConfig[name].imageUrl);
+      temp = temp.replaceAll("%%name%%", authorConfig[name].name);
+      temp = temp.replaceAll("%%role%%", authorConfig[name].role);
+     } else {
+      temp = '';
+     }
+
+    } else if (assetId == 'risklevel' || assetId == 'scenario') {
+
+     temp = temp.replaceAll("%%title%%", item.title);
+     temp = temp.replaceAll("%%imageUrl%%", risklevelUrl[Number(item.probability)-1]);
+
+    } else {
+
+     temp = temp.replaceAll("%%title%%", item.title);
+     temp = temp.replaceAll("%%name%%", item.name);
+     temp = temp.replaceAll("%%html%%", item.html);
+     temp = temp.replaceAll("%%url%%", item.url);
+     temp = temp.replaceAll("%%link%%", item.link);
+
+    }
+   }
+
+   temp = temp.replaceAll("#0000ee;", "#272ca9;");
+   temp = temp.replaceAll("%!%", "%%");
+   content += temp + "\n\n";
+  }
+
+  debug("All items processed");
+
+// Load template and build final HTML
+
+  try {
+
+   var caId = newsletterConfig[type].assets.template;
+   if (!caId) caId = newsletterConfig['default'].assets.template;
+   html = Platform.Function.ContentBlockByID(caId);
+
+   html = html.replaceAll("%%content%%", content + '<custom name="opencounter" type="tracking">');
+
+   debug("Final HTML built<br/>");
+//   debug("<br/>" + html + "<br/>");
+
+  } catch(error) {
+   debug("Unable to build final HTML<br/>ERROR:<br/><br/>" + error.description);
+  }
+
+ if (html) {
+
+  var assetName = 'JSON Import ' + (new Date()).getTime();
+  var subject = '';
+  var preheader = '';
+
+  var attr1 = newsletterConfig[type].attributes[0];
+  var attr2 = newsletterConfig[type].attributes[1];
+  var attr3 = newsletterConfig[type].attributes[2];
+
+  var now = DateTime.SystemDateToLocalDate(Now());
+  var nowDate = (now.getDate()<10?'0':'') + now.getDate() + (now.getMonth()<9?'.0':'.') + (now.getMonth()+1) + '.' + now.getFullYear();
+  var nowTime = (now.getHours()<10?'0':'') + now.getHours() + (now.getMinutes()<10?'.0':'.') + now.getMinutes();
+  var nowDateattr2 = (now.getDate()<10?'':'') + now.getFullYear() + '-' + (now.getMonth()<9?'0':'-') + (now.getMonth()+1) + '-' + (now.getDate()<10?'0':'') + now.getDate();  
+
+// Get API AccessToken
+
+  var request = new Script.Util.HttpRequest('https://auth.exacttargetapis.com/v1/requestToken');
+  request.method = "POST";
+  request.contentType = 'application/json';
+//  request.postData = '{ "clientId": "khqgejjeilg6zxyh0za5yk0l", "clientSecret": "WXHEksaqdo4xx05gWEcVISuK" }'; // MC Org: NZZ BU: Redaktion
+  request.postData = '{ "clientId": "94dloe3nsiedthjvdvn58dj8", "clientSecret": "RkSw8H95vYkTGMh8PpKMekTr" }'; // MC Org: NZZ BU: Sandbox
+
+  try {
+      response = request.send();
+//   debug("Response:<br/>" + Stringify(response.content));
+  } catch(error) {
+   debug("ERROR:<br/><br/>" + error.description);
+  }
+
+  var json = Platform.Function.ParseJSON(''+response.content);
+//  debug("JSON: " + Stringify(json));
+
+  if (!json.accessToken) {
+
+   debug("No AccessToken");
+
+  } else {
+
+   var accessToken = json.accessToken;
+
+   debug("Received AccessToken");
+
+   html = html.replaceAll(String.fromCharCode(92),String.fromCharCode(92,92));
+
+   html = html.replaceAll('"','\\"');
+   html = html.replaceAll('\r\n','\\n');
+   html = html.replaceAll('\n','\\n');
+   html = html.replaceAll('\t','\\t');
+
+   content = content.replaceAll(String.fromCharCode(92),String.fromCharCode(92,92));
+
+   content = content.replaceAll('"','\\"');
+   content = content.replaceAll('\r\n','\\n');
+   content = content.replaceAll('\n','\\n');
+   content = content.replaceAll('\t','\\t');
+
+   if (newsletterConfig[type].layout) {
+
+// Newsletter imported from Living Docs
+
+    if (feedData.name) assetName = newsletterConfig[type].name + ' - ' + nowDate + ' ' + nowTime + ' - ' + feedData.name;
+    if (mode == 'dev') assetName = assetName + ' - DEV'
+    if (mode == 'stag') assetName = assetName + ' - STAG'
+
+    if (feedData.subject) subject = feedData.subject;
+    if (feedData.preheader) preheader = feedData.preheader;
+
+    subject = subject.replaceAll('"','\\"');
+    preheader = preheader.replaceAll('"','\\"');
+
+// Check if eMail containing LD "name" already exists
+
+    json = false;
+
+    if (feedData.name) {
+
+     var data = '{ "query": { "property": "name", "simpleOperator": "contains", "value": "' + feedData.name + '" }, "page": { "page": 1, "pageSize": 100 }, "fields": [ "id", "name" ] }';
+
+        var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/query?access_token=' + accessToken);
+        request.method = "POST";
+        request.contentType = 'application/json; charset=utf-8';
+     request.postData = data;
+
+     try {
+         response = request.send();
+      json = Platform.Function.ParseJSON(''+response.content);
+//      debug("JSON: " + Stringify(json));
+     } catch(error) {
+      debug("ERROR:<br/><br/>" + error.description);
+      debug("DATA:<br/><br/>" + data);
+     }
+
+    }
+
+    if (json && json.count) {
+
+// Update existing HTML Paste eMail if it does
+
+     var assetId = json.items[0].id;
+
+     var jsonPayload = '{ "name": "' + assetName + '", "views": { "subjectline": { "content": "' + subject + '" }, "preheader": { "content": "' + preheader + '" },  "html": { "content": "' + html + '" } } }';
+
+        var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId + '?access_token=' + accessToken);
+        request.method = "PATCH";
+        request.contentType = 'application/json; charset=utf-8';
+     request.postData = jsonPayload;
+
+     try {
+         response = request.send();
+//      var json = Platform.Function.ParseJSON(''+response.content);
+//      debug("Response:<br/><br/>" + Stringify(json) + "<br/>");
+      debug("Updated HTML eMail with id " + assetId + " / name '" + assetName + "'");
+     } catch(error) {
+      debug("ERROR:<br/><br/>" + error.description);
+      debug("JSON:<br/><br/>" + jsonPayload);
+     }
+
+    } else {
+
+// Create new HTML Paste eMail if not
+
+     var categoryId = newsletterConfig[type].folder[mode];
+
+     var jsonPayload = '{ "name": "' + assetName + '", "channels": { "email": true, "web": false }, "assetType": { "id": 208 }, "category": { "id": ' + categoryId + ' }, "views": { "subjectline": { "content": "' + subject + '" }, "preheader": { "content": "' + preheader + '" }, "html": { "content": "' + html + '" } }, "data": { "email": { "options" : { "characterEncoding" : "utf-8", "generateFrom" : null }, "attributes": [ { "name": "__AdditionalEmailAttribute1", "value": "' + attr1 + '", "order": 1, "channel": "email", "attributeType": "AdditionalEmailAttribute" }, { "name": "__AdditionalEmailAttribute2", "value": "' + attr2 + '_' + nowDateattr2  +'", "order": 2, "channel": "email", "attributeType": "AdditionalEmailAttribute" }, { "name": "__AdditionalEmailAttribute3", "value": "' + attr3 + '", "order": 3, "channel": "email", "attributeType": "AdditionalEmailAttribute" } ] } } }';
+
+        var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets?access_token=' + accessToken);
+        request.method = "POST";
+        request.contentType = 'application/json; charset=utf-8';
+     request.postData = jsonPayload;
+
+     try {
+         response = request.send();
+//      var json = Platform.Function.ParseJSON(''+response.content);
+//      debug("Response:<br/><br/>" + Stringify(json) + "<br/>");
+      debug("Created HTML eMail in folder " + categoryId + " / name '" + assetName + "'");
+     } catch(error) {
+      debug("ERROR:<br/><br/>" + error.description);
+      debug("JSON:<br/><br/>" + jsonPayload);
+     }
+     
+    }
+
+   } else {
+
+// Automatic newsletter
+
+    assetName = newsletterConfig[type].name + ' - ' + nowDate + ' ' + nowTime;
+    assetCBName = newsletterConfig[type].name + ' - ' + nowDate + ' ' + nowTime + ' (content only)';
+
+    if (newsletterConfig[type].subject) {
+     if (typeof newsletterConfig[type].subject === 'number') {
+      try {
+       subject = Platform.Function.ContentBlockByID(newsletterConfig[type].subject);
+      } catch(error) {
+       debug("Error loading subject from CA:<br/><br/>" + error.description);
+      }
+     }  else {
+      subject = newsletterConfig[type].subject.replaceAll('"','\\"');
+     }
+    } 
+
+// Update existing HTML Paste eMail if asset provided
+
+    if (newsletterConfig[type].asset) {
+
+     var assetId = newsletterConfig[type].asset;
+
+     var jsonPayload = '{ "name": "' + assetName + '", "views": { "subjectline": { "content": "' + subject + '" }, "preheader": { "content": "' + preheader + '" },  "html": { "content": "' + html + '" } } }';
+
+     var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId + '?access_token=' + accessToken);
+     request.method = "PATCH";
+     request.contentType = 'application/json; charset=utf-8';
+     request.postData = jsonPayload;
+
+     try {
+      response = request.send();
+//      var json = Platform.Function.ParseJSON(''+response.content);
+//      debug("Response:<br/><br/>" + Stringify(json) + "<br/>");
+      debug("Updated HTML eMail with id " + assetId);
+     } catch(error) {
+      debug("ERROR:<br/><br/>" + error.description);
+      debug("JSON:<br/><br/>" + jsonPayload);
+     }
+
+    }
+
+// Update existing Content Block if assetId provided
+
+    if (newsletterConfig[type].assetCB) {
+
+     var assetId = newsletterConfig[type].assetCB;
+
+     var jsonPayload = '{ "name": "' + assetCBName + '", "content": "' + content + '" }';
+
+     var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId + '?access_token=' + accessToken);
+     request.method = "PATCH";
+     request.contentType = 'application/json; charset=utf-8';
+     request.postData = jsonPayload;
+
+     try {
+      response = request.send();
+//      var json = Platform.Function.ParseJSON(''+response.content);
+//      debug("Response:<br/><br/>" + Stringify(json) + "<br/>");
+      debug("Updated Content Block with id " + assetId);
+     } catch(error) {
+      debug("ERROR:<br/><br/>" + error.description);
+      debug("JSON:<br/><br/>" + jsonPayload);
+     }
+
+    }
+
+// Create new HTML Paste eMail if folder provided
+
+    if (newsletterConfig[type].folder) {
+
+     var categoryId = newsletterConfig[type].folder;
+
+     var jsonPayload = '{ "name": "' + assetName + '", "channels": { "email": true, "web": false }, "assetType": { "id": 208 }, "category": { "id": ' + categoryId + ' }, "views": { "subjectline": { "content": "' + subject + '" }, "preheader": { "content": "' + preheader + '" }, "html": { "content": "' + html + '" } }, "data": { "email": { "options" : { "characterEncoding" : "utf-8", "generateFrom" : null }, "attributes": [ { "name": "__AdditionalEmailAttribute1", "value": "' + attr1 + '", "order": 1, "channel": "email", "attributeType": "AdditionalEmailAttribute" }, { "name": "__AdditionalEmailAttribute2", "value": "' + attr2 +  '_' + nowDateattr2  +'", "order": 2, "channel": "email", "attributeType": "AdditionalEmailAttribute" }, { "name": "__AdditionalEmailAttribute3", "value": "' + attr3 + '", "order": 3, "channel": "email", "attributeType": "AdditionalEmailAttribute" } ] } } }';
+
+     var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets?access_token=' + accessToken);
+     request.method = "POST";
+     request.contentType = 'application/json; charset=utf-8';
+     request.postData = jsonPayload;
+
+     try {
+      response = request.send();
+//      var json = Platform.Function.ParseJSON(''+response.content);
+//      debug("Response:<br/><br/>" + Stringify(json) + "<br/>");
+      debug("Created HTML eMail in folder " + categoryId + " / name '" + assetName + "'");
+     } catch(error) {
+      debug("ERROR:<br/><br/>" + error.description);
+      debug("JSON:<br/><br/>" + jsonPayload);
+     }
+     
+    }
+
+   }
+
+  }
+
+ }
+
+ debug("<br/>\nExecution finished at " + DateTime.SystemDateToLocalDate(Now()));
+
+} else {
+ Write("<center><h1>Bad Request</h1></center>");
+}
+</script>
+</div>
+</body>
+</html>
