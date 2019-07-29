@@ -1,0 +1,2020 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Living Docs Universal Import Regionale Newsletter</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+<link href="http://content.nzz.ch/base.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="page">
+<div id="version">19-07-18-13-53</div>
+<script runat=server language=javascript>
+Platform.Load("core", "1");
+/*
+
+URL für manuellen Import:
+
+http://content.nzz.ch/import-regio-dev?documentId=3171473
+http://content.nzz.ch/import-regio-stag?documentId=138961
+
+*/
+
+var newsletterTemplate = {
+ 'evening-stgallen' : 'OS01',
+ 'evening-thurgau' : 'OS02',
+ 'evening-appenzellerland' : 'OS03',
+ 'evening-wil' : 'OS04',
+ 'evening-toggenburg' : 'OS05',
+ 'evening-werdenberg' : 'OS06',
+ 'evening-rheintal' : 'OS07',
+ 'sunday-eastswitzerland' : 'OS08',
+ 'tagblatt-wirtschaftswoche' : 'OS09',
+ 'morning-eastswitzerland' : 'OS10',
+ 'evening-luzern' : 'ZS01',
+ 'evening-zug' : 'ZS02',
+ 'evening-uri' : 'ZS03',
+ 'evening-nidwalden' : 'ZS04',
+ 'evening-obwalden' : 'ZS05',
+ 'sunday-centralswitzerland' : 'ZS06',
+ 'luzern-wirtschaftswoche' : 'ZS07',
+ 'evening-schwyz' : 'ZS08',
+ 'fc-luzern' : 'ZS09',
+ 'ev-zug' : 'ZS10', 
+ 'morning-centralswitzerland' : 'ZS11'
+  
+  
+}
+
+var newsletterConfig = {
+
+// Tagblatt
+  
+   
+ 'OS01' : {
+  'name' : 'St. Gallen am Abend',
+  'layout' : 'evening-stgallen',
+  'attributes' : [ 'nled', 129 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 132152
+  },
+  'refresh' : [ {
+    'name' : 'St Gallen am Abend - mostread - new',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-OS01-mostread-regio-new'
+  }, {
+   'name' : 'St Gallen am Abend - manuell - new',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-manuell-tbm-new'
+  }, {
+   'name' : 'St Gallen am Abend - manuell 2 - new',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-manuell-tbm-new-2'
+  }  ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570904/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://tagblatt.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/8f749223-8369-4252-baa1-263b43173522.png',
+   'logoWidth' : 181,
+   'logoHeight' : 28,
+   'title' : 'St. Gallen am Abend'
+  },
+  'nps' : {
+   'title' : '&laquo;St. Gallen am Abend&raquo;',
+   'code' : 'newsletter-sgaa'
+  },
+  'footer' : {
+   'nlId' : 21
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-OS01-mostread-regio-new' : 994641,
+   'feed-manuell-tbm-new' : 994640,
+   'feed-manuell-tbm-new-2' : 994639,
+   'footer-links' : 740990
+  }
+ },
+  
+ 'OS02' : {
+  'name' : 'Thurgau am Abend',
+  'layout' : 'evening-thurgau',
+  'attributes' : [ 'nled', 130 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 132153
+  },
+  'refresh' : [ {
+    'name' : 'Most Read Feed Regio FRA',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=OS02-mostread-fra-regio'
+  }, 
+       {
+    'name' : 'Most Read Feed Regio ARB',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=OS02-mostread-arb-regio'
+  },        
+      {
+   'name' : 'Most Read Feed Top STG',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=mostread-stg-top'
+  },
+      {
+   'name' : 'Artikelliste manuell TBM',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=manuell-tbm'
+  }         
+  ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570904/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://tagblatt.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/8f749223-8369-4252-baa1-263b43173522.png',
+   'logoWidth' : 181,
+   'logoHeight' : 28,
+   'title' : 'Thurgau am Abend'
+  },
+  'nps' : {
+   'title' : '&laquo;Thurgau am Abend&raquo;',
+   'code' : 'xxx'
+  },
+  'footer' : {
+   'nlId' : 22
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-mostread-fra-regio' : 747764,
+   'feed-mostread-arb-regio' : 747765,
+   'feed-mostread-stg-top' : 747797,
+   'feed-manuell-tbm' : 749606,
+   'footer-links' : 740990
+  }
+ },
+  
+ 'OS03' : {
+  'name' : 'Appenzellerland am Abend',
+  'layout' : 'evening-appenzellerland',
+  'attributes' : [ 'nled', 131 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 132154
+  },
+  'refresh' : [ {
+    'name' : 'Most Read Feed Regio APP',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=OS03-mostread-app-regio'
+  }, {
+   'name' : 'Most Read Feed Top STG',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=mostread-stg-top'
+  },
+    {
+   'name' : 'Artikelliste manuell TBM',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=manuell-tbm'
+  } ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570904/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://tagblatt.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/8f749223-8369-4252-baa1-263b43173522.png',
+   'logoWidth' : 181,
+   'logoHeight' : 28,
+   'title' : 'Appenzellerland am Abend'
+  },
+  'nps' : {
+   'title' : '&laquo;Appenzellerland am Abend&raquo;',
+   'code' : 'xxx'
+  },
+  'footer' : {
+   'nlId' : 23
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-mostread-app-regio' : 747796,
+   'feed-mostread-stg-top' : 747797,
+   'feed-manuell-tbm' : 749606,
+   'footer-links' : 740990
+  }
+ },
+  
+ 'OS04' : {
+  'name' : 'Wil am Abend',
+  'layout' : 'evening-wil',
+  'attributes' : [ 'nled', 132 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 132155
+  },
+  'refresh' : [ {
+    'name' : 'Most Read Feed Regio WIL',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=OS04-mostread-wil-regio'
+  }, {
+   'name' : 'Most Read Feed Top STG',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=mostread-stg-top'
+  },
+    {
+   'name' : 'Artikelliste manuell TBM',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=manuell-tbm'
+  }            
+   ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570904/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://tagblatt.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/8f749223-8369-4252-baa1-263b43173522.png',
+   'logoWidth' : 181,
+   'logoHeight' : 28,
+   'title' : 'Wil am Abend'
+  },
+  'nps' : {
+   'title' : '&laquo;Wil am Abend&raquo;',
+   'code' : 'xxx'
+  },
+  'footer' : {
+   'nlId' : 24
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-mostread-wil-regio' : 749742,
+   'feed-mostread-stg-top' : 747797,
+   'feed-manuell-tbm' : 749606,
+   'footer-links' : 740990
+  }
+ },
+  
+ 'OS05' : {
+  'name' : 'Toggenburg am Abend',
+  'layout' : 'evening-toggenburg',
+  'attributes' : [ 'nled', 133 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 132156
+  },
+  'refresh' : [ {
+    'name' : 'Most Read Feed Regio Tog',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=OS05-mostread-tog-regio'
+  }, {
+   'name' : 'Most Read Feed Top STG',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=mostread-stg-top'
+  },
+    {
+   'name' : 'Artikelliste manuell TBM',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=manuell-tbm'
+  }            
+   ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570904/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://tagblatt.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/8f749223-8369-4252-baa1-263b43173522.png',
+   'logoWidth' : 181,
+   'logoHeight' : 28,
+   'title' : 'Toggenburg am Abend'
+  },
+  'nps' : {
+   'title' : '&laquo;Toggenburg am Abend&raquo;',
+   'code' : 'xxx'
+  },
+  'footer' : {
+   'nlId' : 25
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-mostread-tog-regio' : 749817,
+   'feed-mostread-stg-top' : 747797,
+   'feed-manuell-tbm' : 749606,
+   'footer-links' : 740990
+  }
+ },
+  
+ 'OS06' : {
+  'name' : 'Werdenberg & Obertoggenburg am Abend',
+  'layout' : 'evening-werdenberg',
+  'attributes' : [ 'nled', 134 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 132157
+  },
+  'refresh' : [ {
+    'name' : 'Most Read Feed Regio WER',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=OS06-mostread-wer-regio'
+  }, {
+   'name' : 'Most Read Feed Top STG',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=mostread-stg-top'
+  },
+    {
+   'name' : 'Artikelliste manuell TBM',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=manuell-tbm'
+  }            
+   ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570904/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://tagblatt.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/8f749223-8369-4252-baa1-263b43173522.png',
+   'logoWidth' : 181,
+   'logoHeight' : 28,
+   'title' : 'Werdenberg & Obertoggenburg am Abend'
+  },
+  'nps' : {
+   'title' : '&laquo;Werdenberg & Obertoggenburg am Abend&raquo;',
+   'code' : 'xxx'
+  },
+  'footer' : {
+   'nlId' : 26
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-mostread-wer-regio' : 749940,
+   'feed-mostread-stg-top' : 747797,
+   'feed-manuell-tbm' : 749606,
+   'footer-links' : 740990
+  }
+ },
+  
+ 'OS07' : {
+  'name' : 'Rheintal am Abend',
+  'layout' : 'evening-rheintal',
+  'attributes' : [ 'nled', 135 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 132158
+  },
+  'refresh' : [ {
+    'name' : 'Most Read Feed Regio RHE',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=OS07-mostread-rhe-regio'
+  }, {
+   'name' : 'Most Read Feed Top STG',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=mostread-stg-top'
+  },
+    {
+   'name' : 'Artikelliste manuell TBM',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=manuell-tbm'
+  }            
+   ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570904/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://tagblatt.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/8f749223-8369-4252-baa1-263b43173522.png',
+   'logoWidth' : 181,
+   'logoHeight' : 28,
+   'title' : 'Rheintal am Abend'
+  },
+  'nps' : {
+   'title' : '&laquo;Rheintal am Abend&raquo;',
+   'code' : 'xxx'
+  },
+  'footer' : {
+   'nlId' : 27
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-mostread-rhe-regio' : 749959,
+   'feed-mostread-stg-top' : 747797,
+   'feed-manuell-tbm' : 749606,
+   'footer-links' : 740990
+  }
+ },
+  
+ 'OS08' : {
+  'name' : 'Ostschweiz am Wochenende',
+  'layout' : 'sunday-eastswitzerland',
+  'attributes' : [ 'nled', 141 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 132164
+  },
+  'refresh' : [ {
+   'name' : 'Ostschweiz am Wochenende - Liste 1 new',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-tbm-weekend1list-new'
+  },
+    {
+   'name' : 'Ostschweiz am Wochenende - Liste 2 new',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-tbm-weekend2list-new'
+  },
+      {
+   'name' : 'Ostschweiz am Wochenende - Manuell new',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-lzm-manuellweekend-new-2'
+  }  
+   ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570905/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://tagblatt.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/8f749223-8369-4252-baa1-263b43173522.png',
+   'logoWidth' : 181,
+   'logoHeight' : 28,
+   'title' : 'Ostschweiz am Wochenende'
+  },
+  'nps' : {
+   'title' : '&laquo;Ostschweiz am Wochenende&raquo;',
+   'code' : 'newsletter-oaw'
+  },
+  'footer' : {
+   'nlId' : 33
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-tbm-weekend1list-new' : 994644,
+   'feed-tbm-weekend2list-new' : 994643,
+   'feed-lzm-manuellweekend-new' : 994642,
+   'footer-links' : 740990
+  }
+ },
+  
+   'OS09' : {
+  'name' : 'Wirtschaft Ostschweiz',
+  'layout' : 'tagblatt-wirtschaftswoche',
+  'attributes' : [ 'nled', 159 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 175256
+  },
+  'refresh' : [ {
+   'name' : 'Ostschweizer Wirtschaftswoche - mostread',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-OS09-mostread-regio-new'
+  }
+   ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570903/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc=' 
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://tagblatt.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/8f749223-8369-4252-baa1-263b43173522.png',
+   'logoWidth' : 181,
+   'logoHeight' : 28,
+   'title' : 'Die Ostschweizer Wirtschaftswoche'
+  },
+  'nps' : {
+   'title' : '&laquo;Die Ostschweizer Wirtschaftswoche&raquo;',
+   'code' : 'newsletter-sgww'
+  },
+  'footer' : {
+   'nlId' : 52
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-OS09-mostread-regio-new' : 994632,
+   'footer-links' : 740990
+  }
+ },
+  
+  'OS10' : {
+  'name' : 'Ostschweiz am Morgen',
+  'layout' : 'morning-eastswitzerland',
+  'attributes' : [ 'nled', 160 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 175259
+  },
+  'refresh' : [ {
+   'name' : 'Ostschweiz am Morgen - Liste 1',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-OS10-mostread-regio-new'
+  },
+    {
+   'name' : 'Ostschweiz am Morgen - Liste 2',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-OS10-2-mostread-regio-new'
+  },  
+      {
+   'name' : 'Ostschweiz am Morgen - Manuell',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-OS10-manuell-new'
+  }             
+   ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6647515/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc=' 
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://tagblatt.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/8f749223-8369-4252-baa1-263b43173522.png',
+   'logoWidth' : 181,
+   'logoHeight' : 28,
+   'title' : 'Ostschweiz am Morgen'
+  },
+  'nps' : {
+   'title' : '&laquo;Ostschweiz am Morgen&raquo;',
+   'code' : 'newsletter-oam'
+  },
+  'footer' : {
+   'nlId' : 53
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-OS10-mostread-regio-new' : 996033,
+   'feed-OS10-2-mostread-regio-new' : 994630,
+   'feed-OS10-manuell-new' : 994631,
+   'footer-links' : 740990
+  }
+ },
+  
+// Luzern
+ 
+ 'ZS01' : {
+  'name' : 'Luzern am Abend',
+  'layout' : 'evening-luzern',
+  'attributes' : [ 'nled', 136 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 132159
+  },
+  'refresh' : [ {
+    'name' : 'Luzern am Abend - mostread - new',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-ZS01-mostread-regio-new'
+  }, {
+   'name' : 'Luzern am Abend - manuell- new',
+   'url' : ' http://content.nzz.ch/importfeedregio?type=feed-manuell-lzm-new'
+  }, {
+   'name' : 'Luzern am Abend - manuell- 2 - new',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-manuell-lzm-new-2 '
+  }
+  ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570901/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://luzernerzeitung.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/7edb5273-1db9-449f-b1fb-6a890d154dd3.png',
+   'logoWidth' : 138,
+   'logoHeight' : 60,
+   'title' : 'Luzern am Abend'
+  },
+  'nps' : {
+   'title' : '&laquo;Luzern am Abend&raquo;',
+   'code' : 'newsletter-lzaa'
+  },
+  'footer' : {
+   'nlId' : 28
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-ZS01-mostread-regio-new' :  994635,
+   'feed-manuell-lzm-new' : 994634,
+   'feed-manuell-lzm-new-2' : 994633,
+   'footer-links' : 741006
+  }
+ },
+  
+ 'ZS02' : {
+  'name' : 'Zug am Abend',
+  'layout' : 'evening-zug',
+  'attributes' : [ 'nled', 137 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 132160
+  },
+  'refresh' : [ {
+    'name' : 'Most Read Feed Regio ZUG',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=ZS02-mostread-zug-regio'
+  }, {
+   'name' : 'Most Read Feed Top LUZ',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=mostread-lzm-top'
+  }, {
+   'name' : 'Artikelliste manuell LZM',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=manuell-lzm'
+  }
+  ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570901/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://luzernerzeitung.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/7edb5273-1db9-449f-b1fb-6a890d154dd3.png',
+   'logoWidth' : 138,
+   'logoHeight' : 60,
+   'title' : 'Zug am Abend'
+  },
+  'nps' : {
+   'title' : '&laquo;Zug am Abend&raquo;',
+   'code' : 'xxx'
+  },
+  'footer' : {
+   'nlId' : 29
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-mostread-zug-regio' : 754725,
+   'feed-mostread-luz-top' : 742119,
+   'feed-manuell-lzm' : 749657,
+   'footer-links' : 741006
+  }
+ },
+  
+ 'ZS03' : {
+  'name' : 'Uri am Abend',
+  'layout' : 'evening-uri',
+  'attributes' : [ 'nled', 138 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 132161
+  },
+  'refresh' : [ {
+    'name' : 'Most Read Feed Regio URI',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=ZS03-mostread-uri-regio'
+  }, {
+   'name' : 'Most Read Feed Top LUZ',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=mostread-lzm-top'
+  }, {
+   'name' : 'Artikelliste manuell LZM',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=manuell-lzm'
+  }
+  ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570901/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://luzernerzeitung.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/7edb5273-1db9-449f-b1fb-6a890d154dd3.png',
+   'logoWidth' : 138,
+   'logoHeight' : 60,
+   'title' : 'Uri am Abend'
+  },
+  'nps' : {
+   'title' : '&laquo;Uri am Abend&raquo;',
+   'code' : 'xxx'
+  },
+  'footer' : {
+   'nlId' : 30
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-mostread-uri-regio' : 755022,
+   'feed-mostread-luz-top' : 742120,
+   'feed-manuell-lzm' : 749657,
+   'footer-links' : 741006
+  }
+ },
+  
+ 'ZS04' : {
+  'name' : 'Nidwalden am Abend',
+  'layout' : 'evening-nidwalden',
+  'attributes' : [ 'nled', 139 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 132162
+  },
+  'refresh' : [ {
+    'name' : 'Most Read Feed Regio NID',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=ZS04-mostread-nid-regio'
+  }, {
+   'name' : 'Most Read Feed Top LUZ',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=mostread-lzm-top'
+  }, {
+   'name' : 'Artikelliste manuell LZM',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=manuell-lzm'
+  }
+  ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570901/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://luzernerzeitung.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/7edb5273-1db9-449f-b1fb-6a890d154dd3.png',
+   'logoWidth' : 138,
+   'logoHeight' : 60,
+   'title' : 'Nidwalden am Abend'
+  },
+  'nps' : {
+   'title' : '&laquo;Nidwalden am Abend&raquo;',
+   'code' : 'xxx'
+  },
+  'footer' : {
+   'nlId' : 31
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-mostread-nid-regio' : 756955,
+   'feed-mostread-luz-top' : 742120,
+   'feed-manuell-lzm' : 749657,
+   'footer-links' : 741006
+  }
+ },
+  
+ 'ZS05' : {
+  'name' : 'Obwalden am Abend',
+  'layout' : 'evening-obwalden',
+  'attributes' : [ 'nled', 140 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 132163
+  },
+  'refresh' : [ {
+    'name' : 'Most Read Feed Regio OBW',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=ZS05-mostread-obw-regio'
+  }, {
+   'name' : 'Most Read Feed Top LUZ',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=mostread-lzm-top'
+  }, {
+   'name' : 'Artikelliste manuell LZM',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=manuell-lzm'
+  }
+  ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570901/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://luzernerzeitung.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/7edb5273-1db9-449f-b1fb-6a890d154dd3.png',
+   'logoWidth' : 138,
+   'logoHeight' : 60,
+   'title' : 'Obwalden am Abend'
+  },
+  'nps' : {
+   'title' : '&laquo;Obwalden am Abend&raquo;',
+   'code' : 'xxx'
+  },
+  'footer' : {
+   'nlId' : 32
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-mostread-obw-regio' : 756988,
+   'feed-mostread-luz-top' : 742120,
+   'feed-manuell-lzm' : 749657,
+   'footer-links' : 741006
+  }
+ },
+  
+ 'ZS06' : {
+  'name' : 'Zentralschweiz am Wochenende',
+  'layout' : 'sunday-centralswitzerland',
+  'attributes' : [ 'nled', 142 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 132165
+  },
+  'refresh' : [ {
+   'name' : 'Zentralschweiz am Wochenende - Liste 1 new',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-lzm-weekend1list-new'
+  },
+               {
+   'name' : 'Zentralschweiz am Wochenende - Liste 2 new',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-lzm-weekend2list-new'
+  },
+                         {
+   'name' : 'Zentralschweiz am Wochenende - Manuell new',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-lzm-manuellweekend-new'
+  }     
+               
+  ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570902/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://luzernerzeitung.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/7edb5273-1db9-449f-b1fb-6a890d154dd3.png',
+   'logoWidth' : 138,
+   'logoHeight' : 60,
+   'title' : 'Zentralschweiz am Wochenende'
+  },
+  'nps' : {
+   'title' : '&laquo;Zentralschweiz am Wochenende&raquo;',
+   'code' : 'newsletter-zsaw'
+  },
+  'footer' : {
+   'nlId' : 34
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-lzm-weekend1list-new' : 994638,
+   'feed-lzm-weekend2list-new' : 994637,
+   'feed-lzm-manuellweekend-new' : 994636,
+   'footer-links' : 741006
+  }
+ },
+  
+ 'ZS07' : {
+  'name' : 'LZ-Wirtschaftswoche',
+  'layout' : 'luzern-wirtschaftswoche',
+  'attributes' : [ 'nled', 143 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 132166
+  },
+  'refresh' : [ {
+    'name' : 'Most Read Feed Wirtschaft',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=ZS07-mostread-wirtschaft'
+  } ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570903/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://luzernerzeitung.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/7edb5273-1db9-449f-b1fb-6a890d154dd3.png',
+   'logoWidth' : 138,
+   'logoHeight' : 60,
+   'title' : 'Wirtschaft am Freitag'
+  },
+  'nps' : {
+   'title' : '&laquo;Wirtschaft am Freitag&raquo;',
+   'code' : 'newsletter-lzww'
+  },
+  'footer' : {
+   'nlId' : 35
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-mostread-luz-wirtschaft' : 747829,
+   'footer-links' : 741006
+  }
+ },
+  
+ 'ZS08' : {
+  'name' : 'Schwyz am Abend',
+  'layout' : 'evening-schwyz',
+  'attributes' : [ 'nled', 144 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 132167
+  },
+  'refresh' : [ {
+   'name' : 'Most Read Feed Regio SCH',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=ZS08-mostread-sch-regio'
+  }, {
+   'name' : 'Most Read Feed Top LUZ',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=mostread-lzm-top'
+  }, {
+   'name' : 'Artikelliste manuell LZM',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=manuell-lzm'
+  }
+  ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6570901/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://luzernerzeitung.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/7edb5273-1db9-449f-b1fb-6a890d154dd3.png',
+   'logoWidth' : 138,
+   'logoHeight' : 60,
+   'title' : 'Schwyz am Abend'
+  },
+  'nps' : {
+   'title' : '&laquo;Schwyz am Abend&raquo;',
+   'code' : 'xxx'
+  },
+  'footer' : {
+   'nlId' : 36
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-mostread-sch-regio' : 757078,
+   'feed-mostread-luz-top' : 742120,
+   'feed-manuell-lzm' : 749657,
+   'footer-links' : 741006
+  }
+ },
+  
+   'ZS09' : {
+  'name' : 'FC Luzern',
+  'layout' : 'fc-luzern',
+  'attributes' : [ 'nled', 147 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 147730
+  },
+  'refresh' : [ {
+    'name' : 'FC Luzern manuell Feed',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=ZS09-feed-manuell-fcl'
+  }, {
+   'name' : 'FC Luzern manuell Feed 2',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-manuell-fcl-2'
+  }
+  ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6662236/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://luzernerzeitung.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/7edb5273-1db9-449f-b1fb-6a890d154dd3.png',
+   'logoWidth' : 138,
+   'logoHeight' : 60,
+   'title' : 'FC Luzern'
+  },
+  'nps' : {
+   'title' : '&laquo;FC Luzern&raquo;',
+   'code' : 'xxx'
+  },
+  'footer' : {
+   'nlId' : 39
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-manuell-fcl' :  875678,
+    'feed-manuell-fcl-2' : 875679,
+   'footer-links' : 741006
+  }
+ },
+  
+     'ZS10' : {
+  'name' : 'EV Zug',
+  'layout' : 'ev-zug',
+  'attributes' : [ 'nled', 148 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 150356
+  },
+  'refresh' : [ {
+    'name' : 'EV Zug manuell Feed',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=ZS10-feed-manuell-evz'
+  }, {
+   'name' : 'EV Zug manuell Feed 2',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-manuell-evz-2'
+  }
+  ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6604824/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://luzernerzeitung.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/7edb5273-1db9-449f-b1fb-6a890d154dd3.png',
+   'logoWidth' : 138,
+   'logoHeight' : 60,
+   'title' : 'EV Zug'
+  },
+  'nps' : {
+   'title' : '&laquo;EV Zug&raquo;',
+   'code' : 'xxx'
+  },
+  'footer' : {
+   'nlId' : 40
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-manuell-evz' :  890282,
+   'feed-manuell-evz-2' : 890283,
+   'footer-links' : 741006
+  }
+ },
+  
+   'ZS11' : {
+  'name' : 'Zentralschweiz am Morgen',
+  'layout' : 'morning-centralswitzerland',
+  'attributes' : [ 'nled', 161 ],
+  'folder' : {
+   'dev' : 132356,
+   'stag' : 132356,
+   'prod' : 175252
+  },
+  'refresh' : [ {
+    'name' : 'Zentralschweiz am Morgen - Liste 1',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-ZS11-mostread-regio-new'
+  }, {
+   'name' : 'Zentralschweiz am Morgen - Liste 2',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-ZS11-2-mostread-regio-new'
+  }, {
+   'name' : 'Zentralschweiz am Morgen - Manuell',
+   'url' : 'http://content.nzz.ch/importfeedregio?type=feed-ZS11-manuell-new'
+  }
+               
+  ],
+  'adurl' : [
+   'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6647514/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
+  ],
+  'header' : {
+   'color' : '#0074ad',
+   'link' : 'http://luzernerzeitung.ch',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/7edb5273-1db9-449f-b1fb-6a890d154dd3.png',
+   'logoWidth' : 138,
+   'logoHeight' : 60,
+   'title' : 'Zentralschweiz am Morgen'
+  },
+  'nps' : {
+   'title' : '&laquo;Zentralschweiz am Morgen&raquo;',
+   'code' : 'newsletter-zsam'
+  },
+  'footer' : {
+   'nlId' : 54
+  },
+  'assets' : {
+   'logo' : 603383,
+   'feed-ZS11-mostread-regio-new' :  994626,
+   'feed-ZS11-2-mostread-regio-new' : 994627,
+   'feed-ZS11-manuell-new' : 994628,
+   'footer-links' : 741006
+  }
+ },
+
+ 'default' : {
+  'assets' : {
+   'template' : 603381,
+   'logo' : 603382,
+   'greeting' : 603386,
+   'subtitle' : 603387,
+   'author-byline' : 603390,
+   'author-byline-small' : 634063,
+   'image-linked' : 603391,
+   'image-only-linked' : 603392,
+   'image' : 603393,
+   'image-only' : 603394,
+   'image-portrait-linked' : 720005,
+   'image-portrait-only-linked' : 720006,
+   'image-portrait' : 720007,
+   'image-portrait-only' : 720008,
+   'text' : 603403,
+   'divider' : 603404,
+   'unordered-list' : 603405,
+   'ordered-list' : 603406,
+   'nps-survey' : 994624,
+   'scenario' : 604181,
+   'footer-links' : 603623
+  }
+ }
+
+}
+
+var authorConfig = {
+  
+   'jem' : {
+  'linkUrl'  : 'mailto:jerome.martinu@luzernerzeitung.ch?subject=Newsletter Wirtschaft am Freitag',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/7c351c31-12f7-49fb-bef4-1faa8ca367fb.png',
+  'name'     : 'Jérôme Martinu',
+  'role'     : 'Chefredaktor Luzerner Zeitung'
+ },
+  
+     'cpm' : {
+  'linkUrl'  : 'mailto:christian.meier@luzernerzeitung.ch?subject=Newsletter Wirtschaft am Freitag',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/1e4c5ba4-7f74-42aa-87c7-d6dad68ff55d.png', 
+  'name'     : 'Christian Peter Meier',
+  'role'     : 'stv. Chefredaktor und Leiter regionale Ressorts'
+ },
+  
+       'flu' : {
+  'linkUrl'  : 'mailto:flurina.valsecchi@luzernerzeitung.ch?subject=Newsletter Wirtschaft am Freitag',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/bcf8e412-b418-4ef2-a012-68b0d45193a3.png', 
+  'name'     : 'Flurina Valsecchi',
+  'role'     : 'stv. Chefredaktorin und Leiterin Online'
+ },
+  
+   'mim' : {
+  'linkUrl'  : 'mailto:maurizio.minetti@luzernerzeitung.ch?subject=Newsletter Wirtschaft am Freitag',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/3606cd8e-0a3a-4004-b2b6-8e0dafd93e18.png',
+  'name'     : 'Maurizio Minetti',
+  'role'     : 'Ressortleiter Wirtschaft'
+ },
+  
+     'rom' : {
+  'linkUrl'  : 'mailto:roman.schenkel@luzernerzeitung.ch?subject=Newsletter Wirtschaft am Freitag',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/3fabc0b6-48ad-4a26-8a79-50048a4dbf46.png',
+  'name'     : 'Roman Schenkel',
+  'role'     : 'stv. Chefredaktor'
+ },
+  
+       'rem' : {
+  'linkUrl'  : 'mailto:rene.meier@luzernerzeitung.ch?subject=Newsletter Wirtschaft am Freitag',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/363a65ac-478f-4a50-8cef-53142d9a31a7.png',
+  'name'     : 'René Meier',
+  'role'     : 'stv. Leiter Online' 
+ },
+  
+         'jvf' : {
+  'linkUrl'  : 'mailto:jonas.vonfluee@luzernerzeitung.ch?subject=Newsletter Wirtschaft am Freitag',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/73a714d2-040b-4d78-a153-b891d14dd97f.png',
+  'name'     : 'Jonas von Flüe',
+  'role'     : 'stv. Leiter Online' 
+ },
+  
+           'bac' : {
+  'linkUrl'  : 'mailto:robert.bachmann@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/dbd10d2f-f7e1-4b75-9da4-06c08246d8f0.png',
+  'name'     : 'Robert Bachmann',
+  'role'     : 'Leiter Redaktionsentwicklung Digital' 
+ },
+  
+       'rab' : {
+  'linkUrl'  : 'mailto:raphael.buehlmann@luzernerzeitung.ch?subject=Newsletter Wirtschaft am Freitag',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/f76a0b8d-9014-4be0-9c7e-783cc99f66da.png',
+  'name'     : 'Raphael Bühlmann',
+  'role'     : 'Wirtschaftsredaktor'
+ },
+  
+         'rr' : {
+  'linkUrl'  : 'mailto:rainer.rickenbach@luzernerzeitung.ch?subject=Newsletter Wirtschaft am Freitag',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/3add1838-4d22-499c-8d43-a4a96a2250db.png',
+  'name'     : 'Rainer Rickenbach',
+  'role'     : 'Wirtschaftsredaktor'
+ },
+  
+           'lb' : {
+  'linkUrl'  : 'mailto:livio.brandenberg@luzernerzeitung.ch?subject=Newsletter Wirtschaft am Freitag',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/680fa3f5-a72e-4458-9874-2a2640bc4179.png',
+  'name'     : 'Livio Brandenberg',
+  'role'     : 'Wirtschaftsredaktor'
+ }, 
+  
+             'gr' : {
+  'linkUrl'  : 'mailto:gregory.remez@luzernerzeitung.ch?subject=Newsletter Wirtschaft am Freitag',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/e2b90128-cb21-4daa-9ef8-3fbdec0df866.png',
+  'name'     : 'Gregory Remez',
+  'role'     : 'Wirtschaftsredaktor'
+ }, 
+  
+          'ca' : {
+  'linkUrl'  : 'mailto:cyril.aregger@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/1b16b6ba-b514-45e3-b3f7-779714b6e1f8.png',
+  'name'     : 'Cyril Aregger',
+  'role'     : 'Leiter Sport'
+ },
+  
+            'dw' : {
+  'linkUrl'  : 'mailto:daniel.wyrsch@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/fac4c916-6d42-422f-9624-4b2d6abad110.png',
+  'name'     : 'Daniel Wyrsch',
+  'role'     : 'Sportredaktor'
+ },
+  
+              'rg' : {
+  'linkUrl'  : 'mailto:raphael.gutzwiller@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/35e70436-15c0-4f09-ab55-a17ebe26e167.png',
+  'name'     : 'Raphael Gutzwiller',
+  'role'     : 'Sportredaktor'
+ },
+  
+                'ars' : {
+  'linkUrl'  : 'mailto:sven.aregger@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/10486119-7e52-4bf2-9f93-1e0178227d63.png',
+  'name'     : 'Sven Aregger', 
+  'role'     : 'Sportredaktor'
+ },
+  
+                'spe' : {
+  'linkUrl'  : 'mailto:sandra.peter@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/b2cdb3d1-c6d4-4872-bbed-0503add07fc4.png',
+  'name'     : 'Sandra Peter', 
+  'role'     : 'Redaktorin Online'
+ },
+  
+                  'zfo' : {
+  'linkUrl'  : 'mailto:zeline.odermatt@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/a6307d71-6cd4-4be3-84f1-fcd23a2f1a48.png',
+  'name'     : 'Zéline Odermatt', 
+  'role'     : 'Redaktorin Online'
+ },
+  
+                    'jwe' : {
+  'linkUrl'  : 'mailto:janick.wetterwald@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/f6738592-a6e0-4be9-b5e8-5c297570d5a2.png', 
+  'name'     : 'Janick Wetterwald', 
+  'role'     : 'redaktioneller Mitarbeiter Online'
+ },
+  
+                      'dvm' : {
+  'linkUrl'  : 'mailto:david.vonmoos@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/37d5f251-c789-4dd3-8a47-c172d7cf59c7.png',
+  'name'     : 'David von Moos', 
+  'role'     : 'Redaktor Online'
+ }, 
+  
+                      'stg' : {
+  'linkUrl'  : 'mailto:stefanie.geske@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/20564970-8e16-4feb-b8ec-ef45e3e05988.png', 
+  'name'     : 'Stefanie Geske', 
+  'role'     : 'Redaktorin Online'
+ }, 
+  
+                        'zim' : {
+  'linkUrl'  : 'mailto:ernst.zimmerli@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/de23fa17-ae3c-4863-9499-cc3811a74cae.png',
+  'name'     : 'Ernst Zimmerli', 
+  'role'     : 'Redaktor Online'
+ }, 
+  
+                       'fmü' : {
+  'linkUrl'  : 'mailto:fabienne.muehlemann@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/e42c0973-816d-4f5b-bc11-a22b65712dfe.png',
+  'name'     : 'Fabienne Mühlemann', 
+  'role'     : 'Volontärin Online'
+ }, 
+  
+                          'chi' : {
+  'linkUrl'  : 'mailto:chiara.staeheli@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/4028ba15-1e72-4bc6-bd05-f1f7efdd1612.png',
+  'name'     : 'Chiara Stäheli', 
+  'role'     : 'Mitarbeiterin Online'
+ }, 
+  
+                         'nus' : {
+  'linkUrl'  : 'mailto:lukas.nussbaumer@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/1096933e-a379-4063-8952-a553667c58a7.png',
+  'name'     : 'Lukas Nussbaumer', 
+  'role'     : 'stv. Leiter regionale Ressorts und Politreporter'
+ }, 
+  
+                        'avd' : {
+  'linkUrl'  : 'mailto:alexander.vondaeniken@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/d0985dbf-c4db-47e7-8449-d63376c2ad4d.png',
+  'name'     : 'Alexander von Däniken', 
+  'role'     : 'Leiter Ressort Kanton Luzern'
+ }, 
+  
+                       'io' : {
+  'linkUrl'  : 'mailto:ismail.osman@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/cb03e48d-1fcc-4134-b3da-34e119a6c522.png',
+  'name'     : 'Ismail Osman', 
+  'role'     : 'stv. Leiter Ressort Kanton Luzern'
+ }, 
+  
+                       'rk' : {
+  'linkUrl'  : 'mailto:robert.knobel@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/26ab3369-6b9f-47d6-8ec8-d1520f5ca840.png',
+  'name'     : 'Robert Knobel', 
+  'role'     : 'Leiter Ressort Stadt/Region Luzern'
+ }, 
+  
+                       'sd' : {
+  'linkUrl'  : 'mailto:stefan.daehler@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/3d98e908-738e-4ef1-ac09-7d22008d39ac.png',
+  'name'     : 'Stefan Dähler', 
+  'role'     : 'stv. Leiter Ressort Stadt/Region Luzern'
+ }, 
+  
+                       'hor' : {
+  'linkUrl'  : 'mailto:roman.hodel@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/96d23cdd-a8ce-4ca4-a7a4-82c696e1fa5d.png',
+  'name'     : 'Roman Hodel', 
+  'role'     : 'Redaktor Ressort Stadt/Region Luzern'
+ }, 
+  
+                       'kuy' : {
+  'linkUrl'  : 'mailto:yasmin.kunz@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/bce4f7b0-51bd-4a1e-928a-e41a73212e26.png', 
+  'name'     : 'Yasmin Kunz', 
+  'role'     : 'Reporterin'
+ }, 
+  
+                       'fi' : {
+  'linkUrl'  : 'mailto:evelyne.fischer@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/26e75c21-d32c-4450-bd9a-8ff13cc98e46.png',
+  'name'     : 'Evelyne Fischer', 
+  'role'     : 'Reporterin'
+ }, 
+  
+                     'rgr' : {
+  'linkUrl'  : 'mailto:roger.rueegger@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/affa250c-238a-4b45-b089-e30c569d6589.png',
+  'name'     : 'Roger Rüegger', 
+  'role'     : 'Reporter'
+ }, 
+  
+                       'cgl' : {
+  'linkUrl'  : 'mailto:christian.glaus@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/434ccd01-11ee-4965-93fd-e237110440df.png',
+  'name'     : 'Christian Glaus', 
+  'role'     : 'Reporter'
+ }, 
+    
+                       'zf' : {
+  'linkUrl'  : 'mailto:florian.arnold@urnerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/56aa9331-2ea5-4dbe-8072-b436e118671e.png',
+  'name'     : 'Florian Arnold', 
+  'role'     : 'Leiter Redaktion Uri'
+ }, 
+  
+                         'pz' : {
+  'linkUrl'  : 'mailto:philipp.zurfluh@urnerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/1c83329e-cf75-4caa-a3fe-a77c09e36127.png',
+  'name'     : 'Philipp Zurfluh', 
+  'role'     : 'Redaktor Uri'
+ }, 
+
+                         'eca' : {
+  'linkUrl'  : 'mailto:carmen.epp@urnerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/b552956c-57a6-4fa1-ad33-74fa70874ccb.png',
+  'name'     : 'Carmen Epp', 
+  'role'     : 'Redaktorin Uri'
+ }, 
+
+                         'MZ' : {
+  'linkUrl'  : 'mailto:markus.zwyssig@urnerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/51f57bc2-4d75-4bfb-9d97-a5b243e00908.png',
+  'name'     : 'Markus Zwyssig', 
+  'role'     : 'Redaktor Uri'
+ }, 
+  
+                        'lur' : {
+  'linkUrl'  : 'mailto:lucien.rahm@luzernerzeitung.ch?subject=Newsletter Luzerner Zeitung',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/33d0663b-1335-433e-9897-01452396a484.png', 
+  'name'     : 'Lucien Rahm', 
+  'role'     : 'Redaktioneller Mitarbeiter Uri'
+ },
+  
+     'mos' : {
+  'linkUrl'  : 'mailto:martin.oswald@tagblatt.ch?subject=Newsletter Tagblatt',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/100d128d-9530-433d-9a50-64e3cb52eef8.png', 
+  'name'     : 'Martin Oswald', 
+  'role'     : 'Leiter Online-Redaktion'
+ },
+  
+       'mos' : {
+  'linkUrl'  : 'mailto:martin.oswald@tagblatt.ch?subject=Newsletter Tagblatt',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/100d128d-9530-433d-9a50-64e3cb52eef8.png', 
+  'name'     : 'Martin Oswald', 
+  'role'     : 'Leiter Online-Redaktion'
+ },
+  
+       'lim' : {
+  'linkUrl'  : 'mailto:linda.muentener@tagblatt.ch?subject=Newsletter Tagblatt',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/2bd84062-cf5d-4866-ba56-ab12a1df621f.png',
+  'name'     : 'Linda Müntener', 
+  'role'     : 'Redaktorin Online'
+ },
+  
+       'dwa' : {
+  'linkUrl'  : 'mailto:daniel.walt@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/454e54d5-5b8c-45b5-b03f-a1c86bc9b52a.png',
+  'name'     : 'Daniel Walt', 
+  'role'     : 'Redaktor Online'
+ },
+  
+         'ghi' : {
+  'linkUrl'  : 'mailto:luca.ghiselli@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/012fa941-c572-4069-96d2-af0add6f9594.png',
+  'name'     : 'Luca Ghiselli', 
+  'role'     : 'Redaktor Online'
+ },
+  
+       'stm' : {
+  'linkUrl'  : 'mailto:stephanie.martina@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/379516df-b058-4cd9-9fdc-507a45e510f6.png',
+  'name'     : 'Stephanie Martina', 
+  'role'     : 'Redaktorin Online'
+ },
+  
+         'lex' : {
+  'linkUrl'  : 'mailto:alexandra.pavlovic@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/bc9c0b26-32b5-49d8-bab0-fd35af4d2088.png',
+  'name'     : 'Alexandra Pavlovic', 
+  'role'     : 'Redaktorin Online'
+ },
+  
+           'tn' : {
+  'linkUrl'  : 'mailto:tim.naef@tagblatt.ch?subject=Newsletter Tagblatt',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/322a281a-7046-4869-b773-1cc65d10bb13.png',
+  'name'     : 'Tim Naef', 
+  'role'     : 'Redaktor Online'
+ },
+  
+             'chs' : {
+  'linkUrl'  : 'mailto:christa.kamm@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/93a97c81-c248-401f-9a0e-e658c0cd7d62.png',
+  'name'     : 'Christa Kamm', 
+  'role'     : 'Redaktorin Online'
+ },
+  
+               'rar' : {
+  'linkUrl'  : 'mailto:raphael.rohner@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/605f4883-9d83-4057-9667-36c392105fde.png',
+  'name'     : 'Raphael Rohner', 
+  'role'     : 'Web-Videojournalist'
+ },
+  
+                 'oh' : {
+  'linkUrl'  : 'mailto:odilia.hiller@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/1dcb60da-82f9-4a5c-af7d-f83ba032c181.png',
+  'name'     : 'Odilia Hiller', 
+  'role'     : 'Regionalleiterin /<br>Stv. Chefredaktorin, St.Galler Tagblatt'
+ },
+  
+                   'ssm' : {
+  'linkUrl'  : 'mailto:stefan.schmid@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/d6a236f4-1d1d-423d-bdd2-547662645e6f.png',
+  'name'     : 'Stefan Schmid', 
+  'role'     : 'Chefredaktor'
+ },
+  
+                     'ar' : {
+  'linkUrl'  : 'mailto:andri.rostetter@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/fd9037e7-e94c-4d01-b121-b8ab0e2a1e2a.png',
+  'name'     : 'Andri Rostetter', 
+  'role'     : 'Stv. Chefredaktor /<br>Lt. Ressort Ostschweiz, Regionale Ressorts'
+ },
+  
+                       'ja' : {
+  'linkUrl'  : 'mailto:juerg.ackermann@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/9cda1750-d4f7-42a0-adb5-b5e69effae01.png',
+  'name'     : 'Jürg Ackermann', 
+  'role'     : 'Stv. Chefredaktor /<br>Lt. Überreg. Ressorts, Überregionale Ressorts'
+ },
+  
+                       'pho' : {
+  'linkUrl'  : 'mailto:pascal.hollenstein@nzz.ch?subject=Newsletter', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/c7e2808c-acd3-449f-8a52-427ec2244520.png',
+  'name'     : 'Pascal Hollenstein', 
+  'role'     : 'Leiter Publizistik'
+ },
+  
+                    'cz' : {
+  'linkUrl'  : 'mailto:christoph.zweili@tagblatt.ch?subject=Newsletter', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/5f8a3c27-5681-43c8-88d3-350528970992.png',
+  'name'     : 'Christoph Zweili', 
+  'role'     : 'Redaktor Ressort Ostschweiz'
+ },
+  
+                  'kbr' : {
+  'linkUrl'  : 'mailto:katharina.brenner@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/135e4f6b-ea21-40e4-b7cc-5fbe3d9c6ead.png',
+  'name'     : 'Katharina Brenner', 
+  'role'     : 'Redaktorin Ressort Ostschweiz'
+ },
+  
+                    'rw' : {
+  'linkUrl'  : 'mailto:regula.weik@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/3252b0d6-edb3-4819-97c4-c32922d23c90.png',
+  'name'     : 'Regula Weik', 
+  'role'     : 'Redaktorin Ressort Ostschweiz'
+ },
+  
+                      'mel' : {
+  'linkUrl'  : 'mailto:marcel.elsener@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/eb32cc37-d986-44f7-8045-b63f42de2bbe.png',
+  'name'     : 'Marcel Elsener', 
+  'role'     : 'Redaktor Ressort Ostschweiz'
+ },
+  
+                     'nh' : {
+  'linkUrl'  : 'mailto:noemi.heule@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/88f640a5-3e80-46a6-948c-c3bf203c0a52.png',
+  'name'     : 'Noemi Heule', 
+  'role'     : 'Redaktorin Ressort Ostschweiz'
+ },
+  
+                       'av' : {
+  'linkUrl'  : 'mailto:adrian.voegele@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/b176e5c4-56eb-4ef5-9b0b-0ddf2185ffc1.png', 
+  'name'     : 'Adrian Vögele', 
+  'role'     : 'Redaktor Ressort Ostschweiz'
+ },
+  
+                   'jan' : {
+  'linkUrl'  : 'mailto:janina.gehrig@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/cd0f2455-3311-4be3-93a5-88c092a44501.png',
+  'name'     : 'Janina Gehrig', 
+  'role'     : 'Redaktorin Ressort Ostschweiz'
+ },
+  
+                     'al' : {
+  'linkUrl'  : 'mailto:adrian.lemmenmeier@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/69c3f334-f60d-465b-8053-6a4fc45fa3ca.png',
+  'name'     : 'Adrian Lemmenmeier', 
+  'role'     : 'Redaktor Ressort Ostschweiz'
+ },
+  
+                       'mge' : {
+  'linkUrl'  : 'mailto:michael.genova@tagblatt.ch?subject=Newsletter Tagblatt', 
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/ea55a660-cc1b-4dbc-b842-c46365075434.png',
+  'name'     : 'Michael Genova', 
+  'role'     : 'Stv. Ressortleiter Ostschweiz'
+ }  
+  
+
+
+}
+
+var risklevelUrl = [
+ 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/2/risklevel1.png',
+ 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/2/risklevel2.png',
+ 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/2/risklevel3.png'
+];
+
+var response, feedData, html = '';
+
+// Utility Functions
+
+function debug(text) {
+ Write(text + "<br/>\n");
+}
+
+String.prototype.replaceAll = function(search, replace) {
+ if (!replace) replace = '';
+ return this.split(search).join(replace);
+}
+
+// Get and validate HTTP parameters
+
+var documentId = Request.GetQueryStringParameter("documentId");
+
+var type = Request.GetQueryStringParameter("type");
+var mode = Request.GetQueryStringParameter("mode");
+var allowedModes = [ 'dev', 'stag', 'prod' ];
+
+// Get JSON Feed from Living Docs
+
+if (documentId) {
+
+// http://content.nzz.ch/import-regio-dev?documentId=xxx
+// https://delivery-livingdocs-test.nzz-tech.ch/nzz/api/v1/documents/681041/latestPublication/renditions?rendition_name=newsletter-content-builder
+
+//  Write('CloudPage: ' + Platform.Request.RequestURL + '<br/>');
+
+  var mode = Platform.Request.RequestURL.substring(35,39);
+
+  switch (mode) {
+   case 'prod': var feedURL = 'https://delivery-livingdocs-gallus.nzz-tech.ch'; break;
+   case 'stag': var feedURL = 'https://delivery-livingdocs-gallus-stage.nzz-tech.ch'; break;
+   case 'dev?': var feedURL = 'https://delivery-livingdocs-gallus-test.nzz-tech.ch'; mode = 'dev'; break;
+  }
+
+  debug('Mode detected: ' + mode);
+
+  feedURL += '/nzz/api/v1/documents/' + documentId + '/latestPublication/renditions?rendition_name=newsletter-content-builder';
+
+//  debug('GETing JSON from: ' + feedURL);
+
+  try {
+   response = HTTP.Get(feedURL,["authorization"],["Basic ZmFjdG9yeTQyOkhQNXE3N3lSNlMxZDRDYmI5WDk4"]);
+//   debug("Response:<br/><br/>" + response.Content);
+   feedData = Platform.Function.ParseJSON(response.Content);
+   feedData = feedData.channels["newsletter-content-builder"].content;
+//   debug("Received JSON data");
+//   debug("JSON Feed: " + Stringify(feedData));
+  } catch(error) {
+   debug("Error GETing JSON Feed:<br/><br/>" + error.description);
+  }
+
+  var type = newsletterTemplate[feedData.template];
+
+  Write('Type detected: ' + type + '<br/>');
+
+} else if (newsletterConfig[type] && (newsletterConfig[type].structure || (newsletterConfig[type].layout && allowedModes.join().indexOf(mode) !== -1))) {
+
+ if (newsletterConfig[type].layout) {
+
+  switch (mode) {
+   case 'prod': var feedURL = ''; break;
+   case 'stag': var feedURL = ''; break;
+   case 'dev':  var feedURL = 'http://api-livingdocs-regio-test.nzz-tech.ch'; break;
+  }
+
+  feedURL += '/nzz/api/v1/documentByLayout/latestPublication';
+  feedURL += '?channel_id=2&rendition_name=newsletter-content-builder&layout=' + newsletterConfig[type].layout;
+
+  try {
+   response = HTTP.Get(feedURL,["authorization"],["Basic ZmFjdG9yeTQyOkhQNXE3N3lSNlMxZDRDYmI5WDk4"]);
+//   debug("Response: " + Stringify(response));
+   feedData = Platform.Function.ParseJSON(response.Content);
+   feedData = feedData.channels["newsletter-content-builder"].content;
+//   debug("JSON Feed: " + Stringify(feedData));
+//   debug("Received JSON data");
+  } catch(error) {
+   debug("Error GETing JSON Feed:<br/><br/>" + error.description + "<br/>" );
+  }
+
+ } else if (newsletterConfig[type].structure) {
+  feedData = newsletterConfig[type].structure;
+ }
+
+}
+
+if (feedData) {
+
+ Write("<center><h1>Universal Living Docs Import</h1><h2>" + newsletterConfig[type].name + "</h2></center>");
+ debug("Execution started at " + DateTime.SystemDateToLocalDate(Now()) + "<br/>");
+
+// Refresh Feeds
+
+ if (newsletterConfig[type].refresh) {
+  for (var i in newsletterConfig[type].refresh) {
+
+   try {
+    response = HTTP.Get(newsletterConfig[type].refresh[i].url);
+    debug(newsletterConfig[type].refresh[i].name + " refreshed");
+   } catch(error) {
+    debug("Error while refreshing Feed (" + newsletterConfig[type].refresh[i].url + ") :<br/><br/>" + error.description + "<br/>" );
+   }
+
+  }
+  debug("");
+ }
+
+// Process Feed
+
+  debug("Processing JSON data");
+
+  var content = '';
+  var temp;
+  var ad = 0;
+
+  for (var i in feedData.items) {
+   var item = feedData.items[i];
+   var assetId = item.assetId;
+
+   debug("Processing item " + i + ": " + assetId);
+
+   if (assetId == 'image' || assetId == 'image-linked') {
+    if (item.html) {
+     if (item.link) {
+      assetId = 'image-linked';
+     } else {
+      assetId = 'image';     
+     }
+    } else {
+     if (item.link) {
+      assetId = 'image-only-linked';
+     } else { 
+      assetId = 'image-only';     
+     }
+    }
+   }
+
+   if (assetId == 'image-portrait') {
+    if (item.html) {
+     if (item.link) {
+      assetId = 'image-portrait-linked';
+     } else {
+      assetId = 'image-portrait';     
+     }
+    } else {
+     if (item.link) {
+      assetId = 'image-portrait-only-linked';
+     } else { 
+      assetId = 'image-portrait-only';     
+     }
+    }
+   }
+
+   if (assetId == 'advertising-block') {
+
+    if (newsletterConfig[type].adurl[ad]) {
+
+     try {
+      var url = newsletterConfig[type].adurl[ad] + (new Date()).getTime();
+      response = HTTP.Get(url);
+      temp = response.Content;
+//      debug("URL: " + url);
+//      debug("Response: " + Stringify(response));
+     } catch(error) {
+      debug("Error GETing HTML from AdServer:<br/><br/>" + error.description );
+      temp = '';
+     }
+     ad++;
+
+    } else {
+     debug("Error: no URL for advertising-block " + ad + " defined");
+     temp = '';
+    }
+
+   } else {
+
+    try {
+     var caId = newsletterConfig[type].assets[assetId];
+     if (!caId) caId = newsletterConfig['default'].assets[assetId];
+     temp = ContentArea(caId);
+    } catch(error) {
+     debug("Error: unable to resolve assetId " + assetId);
+//     debug("ERROR:<br/>" + error.description);
+     temp = '';
+    }
+
+   }
+
+   if (temp.indexOf('%%item_loop%%') != -1) {
+
+    var parts = temp.split('%%item_loop%%');
+    var list = '';
+    for (var i in item.items) {
+     temp = parts[1];
+     temp = temp.replaceAll("%%number%%", Number(i)+1);   // obsolete
+     temp = temp.replaceAll("%%html%%", item.items[i].html);
+     list += temp;
+    }
+    temp = parts[0] + list + parts[2];
+
+   } else {
+    if (assetId == 'logo') {
+
+     temp = temp.replaceAll("%%color%%", newsletterConfig[type].header.color);
+     temp = temp.replaceAll("%%logoUrl%%", newsletterConfig[type].header.logoUrl);
+     temp = temp.replaceAll("%%logoWidth%%", newsletterConfig[type].header.logoWidth);
+     temp = temp.replaceAll("%%logoHeight%%", newsletterConfig[type].header.logoHeight);
+     temp = temp.replaceAll("%%heroUrl%%", newsletterConfig[type].header.heroUrl);
+     temp = temp.replaceAll("%%heroWidth%%", newsletterConfig[type].header.heroWidth);
+     temp = temp.replaceAll("%%heroHeight%%", newsletterConfig[type].header.heroHeight);
+     temp = temp.replaceAll("%%title%%", newsletterConfig[type].header.title);
+
+     if (newsletterConfig[type].header.link) {
+      temp = temp.replaceAll("%%link%%", newsletterConfig[type].header.link);
+     } else {
+      temp = temp.replaceAll("%%link%%", 'https://www.nzz.ch');
+     }
+
+
+
+    } else if (assetId == 'nps-survey') {
+
+     temp = temp.replaceAll("%%code%%", newsletterConfig[type].nps.code);
+     temp = temp.replaceAll("%%title%%", newsletterConfig[type].nps.title);
+
+    } else if (assetId == 'footer-links' || assetId == 'footer-links-bellevue') {
+
+     temp = temp.replaceAll("%%nlId%%", newsletterConfig[type].footer.nlId);
+
+    } else if (assetId == 'author-byline' || assetId == 'author-byline-small') {
+
+     var name = item.name.toLowerCase().replaceAll(' ','');
+     if (authorConfig[name]) {
+      temp = temp.replaceAll("%%linkUrl%%", authorConfig[name].linkUrl);
+      temp = temp.replaceAll("%%imageUrl%%", authorConfig[name].imageUrl);
+      temp = temp.replaceAll("%%name%%", authorConfig[name].name);
+      temp = temp.replaceAll("%%role%%", authorConfig[name].role);
+     } else {
+      temp = '';
+     }
+
+    } else if (assetId == 'risklevel' || assetId == 'scenario') {
+
+     temp = temp.replaceAll("%%title%%", item.title);
+     temp = temp.replaceAll("%%imageUrl%%", risklevelUrl[Number(item.probability)-1]);
+
+    } else {
+
+     temp = temp.replaceAll("%%title%%", item.title);
+     temp = temp.replaceAll("%%name%%", item.name);
+     temp = temp.replaceAll("%%html%%", item.html);
+     temp = temp.replaceAll("%%url%%", item.url);
+     temp = temp.replaceAll("%%link%%", item.link);
+
+    }
+   }
+
+   temp = temp.replaceAll("#0000ee;", "#272ca9;");
+   temp = temp.replaceAll("%!%", "%%");
+   content += temp + "\n\n";
+  }
+
+  debug("All items processed");
+
+// Load template and build final HTML
+
+  try {
+
+   var caId = newsletterConfig[type].assets.template;
+   if (!caId) caId = newsletterConfig['default'].assets.template;
+   html = ContentArea(caId);
+
+   content += '<custom name="opencounter" type="tracking">';
+   html = html.replaceAll("%%content%%", content);
+
+   debug("Final HTML built<br/>");
+//   debug("<br/>" + html + "<br/>");
+
+  } catch(error) {
+   debug("Unable to build final HTML<br/>ERROR:<br/><br/>" + error.description);
+  }
+
+ if (html) {
+
+  var assetName = 'JSON Import ' + (new Date()).getTime();
+  var subject = '';
+  var preheader = '';
+
+  var attr1 = newsletterConfig[type].attributes[0];
+  var attr2 = newsletterConfig[type].attributes[1];
+
+  var now = DateTime.SystemDateToLocalDate(Now());
+  var nowDate = (now.getDate()<10?'0':'') + now.getDate() + (now.getMonth()<9?'.0':'.') + (now.getMonth()+1) + '.' + now.getFullYear();
+  var nowTime = (now.getHours()<10?'0':'') + now.getHours() + (now.getMinutes()<10?'.0':'.') + now.getMinutes();
+  var nowDateattr2 = (now.getDate()<10?'':'') + now.getFullYear() + '-' + (now.getMonth()<9?'0':'-') + (now.getMonth()+1) + '-' + (now.getDate()<10?'0':'') + now.getDate(); 
+
+// Get API AccessToken
+
+  var request = new Script.Util.HttpRequest('https://auth.exacttargetapis.com/v1/requestToken');
+  request.method = "POST";
+  request.contentType = 'application/json';
+  request.postData = '{ "clientId": "khqgejjeilg6zxyh0za5yk0l", "clientSecret": "WXHEksaqdo4xx05gWEcVISuK" }'; // MC Org: NZZ BU: Redaktion
+
+  try {
+      response = request.send();
+//   debug("Response:<br/>" + Stringify(response.content));
+  } catch(error) {
+   debug("ERROR:<br/><br/>" + error.description);
+  }
+
+  var json = Platform.Function.ParseJSON(''+response.content);
+//  debug("JSON: " + Stringify(json));
+
+  if (!json.accessToken) {
+
+   debug("No AccessToken");
+
+  } else {
+
+   var accessToken = json.accessToken;
+
+   debug("Received AccessToken");
+
+//   html = html.replaceAll('\\','\\\\');
+   html = html.replaceAll(String.fromCharCode(92),String.fromCharCode(92,92));
+
+   html = html.replaceAll('"','\\"');
+   html = html.replaceAll('\r\n','\\n');
+   html = html.replaceAll('\n','\\n');
+   html = html.replaceAll('\t','\\t');
+
+   if (newsletterConfig[type].layout) {
+
+// Newsletter imported from Living Docs
+
+    if (feedData.name) assetName = newsletterConfig[type].name + ' - ' + nowDate + ' ' + nowTime + ' - ' + feedData.name;
+    if (mode == 'dev') assetName = assetName + ' - DEV'
+    if (mode == 'stag') assetName = assetName + ' - STAG'
+
+    if (feedData.subject) subject = feedData.subject;
+    if (feedData.preheader) preheader = feedData.preheader;
+
+    subject = subject.replaceAll('"','\\"');
+    preheader = preheader.replaceAll('"','\\"');
+
+// Check if eMail containing LD "name" already exists
+
+    json = false;
+
+    if (feedData.name) {
+
+     var data = '{ "query": { "property": "name", "simpleOperator": "contains", "value": "' + feedData.name + '" }, "page": { "page": 1, "pageSize": 100 }, "fields": [ "id", "name" ] }';
+
+        var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/query?access_token=' + accessToken);
+        request.method = "POST";
+        request.contentType = 'application/json; charset=utf-8';
+     request.postData = data;
+
+     try {
+         response = request.send();
+      json = Platform.Function.ParseJSON(''+response.content);
+//      debug("JSON: " + Stringify(json));
+     } catch(error) {
+      debug("ERROR:<br/><br/>" + error.description);
+      debug("DATA:<br/><br/>" + data);
+     }
+
+    }
+
+    if (json && json.count) {
+
+// Update existing HTML Paste eMail if it does
+
+     var assetId = json.items[0].id;
+
+     var jsonPayload = '{ "name": "' + assetName + '", "views": { "subjectline": { "content": "' + subject + '" }, "preheader": { "content": "' + preheader + '" },  "html": { "content": "' + html + '" } } }';
+
+        var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId + '?access_token=' + accessToken);
+        request.method = "PATCH";
+        request.contentType = 'application/json; charset=utf-8';
+     request.postData = jsonPayload;
+
+     try {
+         response = request.send();
+//      var json = Platform.Function.ParseJSON(''+response.content);
+//      debug("Response:<br/><br/>" + Stringify(json) + "<br/>");
+      debug("Updated HTML eMail with id " + assetId + " / name '" + assetName + "'");
+     } catch(error) {
+      debug("ERROR:<br/><br/>" + error.description);
+      debug("JSON:<br/><br/>" + jsonPayload);
+     }
+
+    } else {
+
+// Create new HTML Paste eMail if not
+
+     var categoryId = newsletterConfig[type].folder[mode];
+
+     var jsonPayload = '{ "name": "' + assetName + '", "channels": { "email": true, "web": false }, "assetType": { "id": 208 }, "category": { "id": ' + categoryId + ' }, "views": { "subjectline": { "content": "' + subject + '" }, "preheader": { "content": "' + preheader + '" }, "html": { "content": "' + html + '" } }, "data": { "email": { "options" : { "characterEncoding" : "utf-8", "generateFrom" : null }, "attributes": [ { "name": "__AdditionalEmailAttribute1", "value": "' + attr1 + '", "order": 1, "channel": "email", "attributeType": "AdditionalEmailAttribute" }, { "name": "__AdditionalEmailAttribute2", "value": "' + attr2 + '_' + nowDateattr2 +'", "order": 2, "channel": "email", "attributeType": "AdditionalEmailAttribute" } ] } } }';
+
+        var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets?access_token=' + accessToken);
+        request.method = "POST";
+        request.contentType = 'application/json; charset=utf-8';
+     request.postData = jsonPayload;
+
+     try {
+         response = request.send();
+//      var json = Platform.Function.ParseJSON(''+response.content);
+//      debug("Response:<br/><br/>" + Stringify(json) + "<br/>");
+      debug("Created HTML eMail in folder " + categoryId + " / name '" + assetName + "'");
+     } catch(error) {
+      debug("ERROR:<br/><br/>" + error.description);
+      debug("JSON:<br/><br/>" + jsonPayload);
+     }
+     
+    }
+
+   } else {
+
+// Automatic newsletter
+
+    assetName = newsletterConfig[type].name + ' - ' + nowDate + ' ' + nowTime;
+
+    if (newsletterConfig[type].subject) {
+     if (typeof newsletterConfig[type].subject === 'number') {
+      try {
+       subject = ContentArea(newsletterConfig[type].subject);
+      } catch(error) {
+       debug("Error loading subject from CA:<br/><br/>" + error.description);
+      }
+     }  else {
+      subject = newsletterConfig[type].subject.replaceAll('"','\\"');
+     }
+    } 
+
+// Update existing HTML Paste eMail if asset provided
+
+    if (newsletterConfig[type].asset) {
+
+     var assetId = newsletterConfig[type].asset;
+
+     var jsonPayload = '{ "name": "' + assetName + '", "views": { "subjectline": { "content": "' + subject + '" }, "preheader": { "content": "' + preheader + '" },  "html": { "content": "' + html + '" } } }';
+
+        var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId + '?access_token=' + accessToken);
+        request.method = "PATCH";
+        request.contentType = 'application/json; charset=utf-8';
+     request.postData = jsonPayload;
+
+     try {
+         response = request.send();
+//      var json = Platform.Function.ParseJSON(''+response.content);
+//      debug("Response:<br/><br/>" + Stringify(json) + "<br/>");
+      debug("Updated HTML eMail with id " + assetId);
+     } catch(error) {
+      debug("ERROR:<br/><br/>" + error.description);
+      debug("JSON:<br/><br/>" + jsonPayload);
+     }
+
+    }
+
+// Create new HTML Paste eMail if folder provided
+
+    if (newsletterConfig[type].folder) {
+
+     var categoryId = newsletterConfig[type].folder;
+
+     var jsonPayload = '{ "name": "' + assetName + '", "channels": { "email": true, "web": false }, "assetType": { "id": 208 }, "category": { "id": ' + categoryId + ' }, "views": { "subjectline": { "content": "' + subject + '" }, "preheader": { "content": "' + preheader + '" }, "html": { "content": "' + html + '" } }, "data": { "email": { "options" : { "characterEncoding" : "utf-8", "generateFrom" : null }, "attributes": [ { "name": "__AdditionalEmailAttribute1", "value": "' + attr1 + '", "order": 1, "channel": "email", "attributeType": "AdditionalEmailAttribute" }, { "name": "__AdditionalEmailAttribute2", "value": "' + attr2 +  '_' + nowDateattr2 +'", "order": 2, "channel": "email", "attributeType": "AdditionalEmailAttribute" } ] } } }';
+
+        var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets?access_token=' + accessToken);
+        request.method = "POST";
+        request.contentType = 'application/json; charset=utf-8';
+     request.postData = jsonPayload;
+
+     try {
+         response = request.send();
+//      var json = Platform.Function.ParseJSON(''+response.content);
+//      debug("Response:<br/><br/>" + Stringify(json) + "<br/>");
+      debug("Created HTML eMail in folder " + categoryId + " / name '" + assetName + "'");
+     } catch(error) {
+      debug("ERROR:<br/><br/>" + error.description);
+      debug("JSON:<br/><br/>" + jsonPayload);
+     }
+     
+    }
+
+   }
+
+  }
+
+ }
+
+ debug("<br/>\nExecution finished at " + DateTime.SystemDateToLocalDate(Now()));
+
+} else {
+ Write("<center><h1>Bad Request</h1></center>");
+}
+</script>
+</div>
+</body>
+</html>
