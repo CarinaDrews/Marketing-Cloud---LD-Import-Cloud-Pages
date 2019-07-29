@@ -1,0 +1,866 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Feed Import</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+<link href="http://content.nzz.ch/base.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="page">
+<div id="version">19-07-11-15-25</div>
+<script runat=server language=javascript>
+Platform.Load("core", "1");
+
+/*
+
+Test URLs:
+
+Alle Tagblatt NL (Top 10 Artikel from Top Container STG): http://content.nzz.ch/importfeedregio?type=mostread-stg-top
+Alle Tagblatt NL (Artikelliste manuell TBM): http://content.nzz.ch/importfeedregio?type=manuell-tbm
+                                              http://content.nzz.ch/importfeedregio?type=feed-manuell-tbm-new
+                                              http://content.nzz.ch/importfeedregio?type=feed-manuell-tbm-new-2
+
+Alle Luzern NL (Top 10 Artikel from Top Container LUZ): http://content.nzz.ch/importfeedregio?type=mostread-lzm-top
+                                                        http://content.nzz.ch/importfeedregio?type=feed-ZS01-mostread-regio-new
+Alle Nuzern NL (Artikelliste manuell LZM): http://content.nzz.ch/importfeedregio?type=manuell-lzm
+                                           http://content.nzz.ch/importfeedregio?type=feed-manuell-lzm-new
+
+
+St. Gallen am Abend: http://content.nzz.ch/importfeedregio?type=OS01-mostread-regio
+                     http://content.nzz.ch/importfeedregio?type=feed-OS01-mostread-regio-new
+
+Thurgau am Abend: 
+http://content.nzz.ch/importfeedregio?type=OS02-mostread-fra-regio
+http://content.nzz.ch/importfeedregio?type=OS02-mostread-arb-regio
+
+Appenzellerland am Abend: http://content.nzz.ch/importfeedregio?type=OS03-mostread-app-regio
+Wil am Abend: http://content.nzz.ch/importfeedregio?type=OS04-mostread-wil-regio
+Toggenburg am Abend: http://content.nzz.ch/importfeedregio?type=OS05-mostread-tog-regio
+Werdenberg & Obertoggenburg: http://content.nzz.ch/importfeedregio?type=OS06-mostread-wer-regio
+Rheintal am Abend: http://content.nzz.ch/importfeedregio?type=OS07-mostread-rhe-regio
+Ostschweiz am Sonntag: http://content.nzz.ch/importfeedregio?type=OS08-mostread-feed-today
+Ostschweiz am Sonntag: http://content.nzz.ch/importfeedregio?type=OS08-mostread-stg-top
+Ostschweiz am Wochenende: http://content.nzz.ch/importfeedregio?type=feed-tbm-weekend1list-new
+                          http://content.nzz.ch/importfeedregio?type=feed-tbm-weekend2list-new
+                          http://content.nzz.ch/importfeedregio?type=feed-tbm-manuellweekend-new
+
+Ostschweizer Wirtschaftswoche:http://content.nzz.ch/importfeedregio?type=feed-OS09-mostread-regio-new
+Ostschweiz am Morgen: http://content.nzz.ch/importfeedregio?type=feed-OS10-mostread-regio-new
+                      http://content.nzz.ch/importfeedregio?type=feed-OS10-2-mostread-regio-new
+                      http://content.nzz.ch/importfeedregio?type=feed-OS10-manuell-new
+
+
+Luzern am Abend: http://content.nzz.ch/importfeedregio?type=ZS01-mostread-regio
+                 http://content.nzz.ch/importfeedregio?type=feed-manuell-lzm-new-2         
+Zug am Abend: http://content.nzz.ch/importfeedregio?type=ZS02-mostread-zug-regio
+Uri am Abend: http://content.nzz.ch/importfeedregio?type=ZS03-mostread-uri-regio
+Nidwalden am Abend: http://content.nzz.ch/importfeedregio?type=ZS04-mostread-nid-regio
+Obwalden am Abend: http://content.nzz.ch/importfeedregio?type=ZS05-mostread-obw-regio
+Zentralschweiz am Sonntag: http://content.nzz.ch/importfeedregio?type=ZS06-mostread-luz-top
+Zentralschweiz am Wochenende: http://content.nzz.ch/importfeedregio?type=feed-lzm-weekend1list-new
+                              http://content.nzz.ch/importfeedregio?type=feed-lzm-weekend2list-new
+                              http://content.nzz.ch/importfeedregio?type=feed-lzm-manuellweekend-new
+
+LZ-Wirtschaftwoche: http://content.nzz.ch/importfeedregio?type=ZS07-mostread-wirtschaft
+Schwyz am Abend: http://content.nzz.ch/importfeedregio?type=ZS08-mostread-sch-regio
+FC Luzern: http://content.nzz.ch/importfeedregio?type=ZS09-feed-manuell-fcl
+           http://content.nzz.ch/importfeedregio?type=feed-manuell-fcl-2
+EV Zug: http://content.nzz.ch/importfeedregio?type=ZS10-feed-manuell-evz
+        http://content.nzz.ch/importfeedregio?type=feed-manuell-evz-2
+        
+Zentralschweiz am Morgen: http://content.nzz.ch/importfeedregio?type=feed-ZS11-mostread-regio-new
+                          http://content.nzz.ch/importfeedregio?type=feed-feed-ZS11-2-mostread-regio-new
+                          http://content.nzz.ch/importfeedregio?type=feed-ZS11-manuell-new
+*/
+
+var feedConfig = {
+  
+  //Tagblatt 
+  
+  'mostread-stg-top' : {
+  'name' : 'Most Read STG Top',
+  'url' : 'https://enrico.nzz-tech.ch/v1/cb-mostread?product=tagblatt&limit=10&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1522927680415' // 747797
+
+ },
+  
+  'manuell-tbm' : {
+  'name' : 'Artikelliste manuell TBM',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=45&limit=10&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1523259128023' // 749606
+
+ },
+  
+    'feed-manuell-tbm-new' : {
+  'name' : 'St Gallen am Abend - manuell - new',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=45&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561385230206' // 994640
+ },
+  
+      'feed-manuell-tbm-new-2' : {
+  'name' : 'St Gallen am Abend - manuell 2 - new',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=192&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561385228795' // 994639 
+ },
+  
+ 'OS01-mostread-regio' : {
+  'name' : 'St. Gallen am Abend - Most Read Regio',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=27&limit=5&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1522074276626' // 741032
+ },
+  
+   'feed-OS01-mostread-regio-new' : {
+  'name' : 'St Gallen am Abend - mostread - new',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=27&limit=5&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561385233928' // 994641
+ },
+  
+   'OS02-mostread-fra-regio' : {
+  'name' : 'Thurgau am Abend - Most Read FRA Regio',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=28&limit=3&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1522922505127' // 747764
+ },
+ 'OS02-mostread-arb-regio' : {
+  'name' : 'Thurgau am Abend - Most Read ARB Regio',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=29&limit=3&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1522922511737' // 747765
+ },
+  
+   'OS03-mostread-app-regio' : {
+  'name' : 'Appenzellerland am Abend - Most Read APP Regio',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=30&limit=5&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1522927646927' // 747796
+ },
+  
+  'OS04-mostread-wil-regio' : {
+  'name' : 'Wil am Abend - Most Read WIL Regio',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=32&limit=5&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1523268448631' // 749742
+ },
+  
+    'OS05-mostread-tog-regio' : {
+  'name' : 'Toggenburg am Abend - Most Read TOG Regio',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=31&limit=5&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1523270281021' // 749817
+ },
+  
+  'OS06-mostread-wer-regio' : {
+  'name' : 'Werdenberg & Obertoggenburg am Abend - Most Read WER Regio',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=33&limit=5&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1523279884600' // 749940
+ },
+  
+   'OS07-mostread-rhe-regio' : {
+  'name' : 'Rheintal am Abend - Most Read RHE Regio',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=34&limit=3&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1523280931853' // 749959
+ },
+  
+   'OS08-mostread-feed-today' : {
+  'name' : 'Ostschweiz am Sonntag - 5 Artikel der LD-Liste',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=83&limit=5&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1527587243243' // 801567
+ },
+  
+  'OS08-mostread-stg-top' : {
+  'name' : 'Ostschweiz am Sonntag - Most Read STG Top ',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=49&limit=10&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1523365493169' // 757564
+ },
+  
+    'feed-tbm-weekend1list-new' : {
+  'name' : 'Ostschweiz am Wochenende - Liste 1 new',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=188&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561385588114' // 994644
+ },
+  
+      'feed-tbm-weekend2list-new' : {
+  'name' : 'Ostschweiz am Wochenende - Liste 2 new',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=189&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561385581062' // 994643
+ },
+  
+        'feed-lzm-manuellweekend-new-2' : {
+  'name' : 'Ostschweiz am Wochenende - Manuell new',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=190&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561385578695' // 994642
+ },
+    
+  
+    'feed-OS09-mostread-regio-new' : {
+  'name' : 'Ostschweizer Wirtschaftswoche - mostread',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=184&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561380376628' // 994632
+ },
+  
+    
+    'feed-OS10-mostread-regio-new' : {
+  'name' : 'Ostschweiz am Morgen - Liste 1',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=181&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1563367340318' // 996033
+ },
+  
+      'feed-OS10-2-mostread-regio-new' : {
+  'name' : 'Ostschweiz am Morgen - Liste 2',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=182&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561379282665' // 994630
+ },
+  
+      'feed-OS10-manuell-new' : {
+  'name' : 'Ostschweiz am Morgen - Manuell',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=183&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561379292387' // 994631
+ },
+
+
+  
+  //Luzern
+  
+  'mostread-lzm-top' : {
+  'name' : 'Most Read LZM Top',
+  'url' : 'https://enrico.nzz-tech.ch/v1/cb-mostread?product=luzernerzeitung&limit=10&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1522150211881' // 742120
+
+ },
+  'manuell-lzm' : {
+  'name' : 'Artikelliste manuell LZM',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=46&limit=10&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1523263688375' // 749657
+
+ },
+  
+    'feed-manuell-lzm-new' : {
+  'name' : 'Luzern am Abend - manuell- new',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=46&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561380387871' // 994634
+
+ },
+  
+  'ZS01-mostread-regio' : {
+  'name' : 'Luzern am Abend - Most Read Regio',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=150&limit=5&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1522150201379' // 742119
+    
+ },
+  
+    'feed-ZS01-mostread-regio-new' : {
+  'name' : 'Luzern am Abend - mostread - new',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=150&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561384338652' // 994635  
+ },
+  
+
+  
+      'feed-manuell-lzm-new-2' : {
+  'name' : 'Luzern am Abend - manuell- 2 - new',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=191&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561380377683' // 994633
+ }, 
+    
+  
+  'ZS02-mostread-zug-regio' : {
+  'name' : 'Zug am Abend - Most Read ZUG Regio',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=151&limit=5&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1523347776786' // 754725
+ },
+  
+  'ZS03-mostread-uri-regio' : {
+  'name' : 'Uri am Abend - Most Read URI Regio',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=154&limit=5&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1523350743527' // 755022
+ },
+  
+  'ZS04-mostread-nid-regio' : {
+  'name' : 'Nidwalden am Abend - Most Read NID Regio',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=152&limit=5&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1523351655631' // 756955
+ },
+  
+  'ZS05-mostread-obw-regio' : {
+  'name' : 'Obwalden am Abend - Most Read OBW Regio',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=153&limit=5&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1523352615214' // 756988
+ },
+  'ZS06-mostread-luz-today' : {
+  'name' : 'Zentralschweiz am Sonntag - Most Read LUZ Today',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=84&limit=5&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1527752787663' // 803170
+  },
+  
+  'ZS06-mostread-luz-top' : {
+  'name' : 'Zentralschweiz am Sonntag - Most Read LUZ Top',
+  'url' : ' https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=53&limit=10&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1523363887316' // 757439
+ },
+  
+    'feed-lzm-weekend1list-new' : {
+  'name' : 'Zentralschweiz am Wochenende - Liste 1 new',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=185&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561384687303' // 994638 
+ },
+  
+      'feed-lzm-weekend2list-new' : {
+  'name' : 'Zentralschweiz am Wochenende - Liste 2 new',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=186&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561384683398' // 994637 
+ },
+  
+        'feed-lzm-manuellweekend-new' : {
+  'name' : 'Zentralschweiz am Wochenende - Manuell new',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=187&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561384680952' // 994636 
+ },
+  
+
+ 
+  'ZS07-mostread-wirtschaft' : {
+  'name' : 'LZ-Wirtschaftswoche - Most Read Wirtschaft',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=15&limit=10&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1522929424199' // 747829
+ },
+  
+  'ZS08-mostread-sch-regio' : {
+  'name' : 'Schwyz am Abend - Most Read SCH Regio',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=155&limit=5&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1523353561631' // 757078
+ }, 
+  
+    'ZS09-feed-manuell-fcl' : {
+  'name' : 'FC Luzern - Artikelliste manuell',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=120&limit=10&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1533023366101' // 875678
+    
+ }, 
+  
+      'feed-manuell-fcl-2' : {
+  'name' : 'FC Luzern - Artikelliste manuell 2',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=124&limit=10&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1533023452166' // 875679
+    
+ }, 
+  
+      'ZS10-feed-manuell-evz' : {
+  'name' : 'EV Zug - Artikelliste manuell',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=121&limit=10&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1535366468656' // 890282
+    
+ }, 
+  
+      'feed-manuell-evz-2' : {
+  'name' : 'EV Zug - Artikelliste manuell 2',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=125&limit=10&ts=',
+  'type' : 'teaser',
+  'template' : 603396,
+  'fallback' : 603400,
+  'target' : 'Automatic_1535366470647' // 890283
+    
+ }, 
+  
+     'feed-ZS11-mostread-regio-new' : {
+  'name' : 'Zentralschweiz am Morgen - Liste 1',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=178&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561377826868' // 994626 
+    
+ },
+  
+       'feed-ZS11-2-mostread-regio-new' : {
+  'name' : 'Zentralschweiz am Morgen - Liste 2',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=179&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561377832645' // 994627
+    
+ },
+  
+   'feed-ZS11-manuell-new' : {
+  'name' : 'Zentralschweiz am Morgen - Manuell',
+  'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=180&limit=10&ts=',
+  'type' : 'teaser-new',
+  'template' : 994931,
+  'fallback' : 993982,
+  'target' : 'Automatic_1561377837461' // 994628
+    
+ }
+  
+  
+  
+  }
+  
+  
+  
+
+var resizePrefix = 'https://img.nzz.ch/S=W500/O=75/';
+
+// Get and validate HTTP parameters
+
+var type = Request.GetQueryStringParameter("type");
+
+if (feedConfig[type]) {
+
+ Write("<center><h1>Feed Import</h1><h2>" + feedConfig[type].name + "</h2></center>");
+
+// Utility Functions
+
+ function debug(text) {
+  Write(text + "<br/>\n");
+ }
+
+ String.prototype.replaceAll = function(search, replace) {
+  return this.split(search).join(replace);
+ }
+
+ debug("Execution started at " + DateTime.SystemDateToLocalDate(Now()) + "<br/>");
+
+// Get JSON Feed from Living Docs
+
+ var response, feedData;
+
+ try {
+  response = HTTP.Get(feedConfig[type].url + (new Date()).getTime());
+  debug("HTTP URL GET" + feedConfig[type].url + (new Date()).getTime());
+  //debug("Response: " + Stringify(response));
+  feedData = Platform.Function.ParseJSON(response.Content);
+  //debug("JSON Feed:<br/><br/>" + Stringify(feedData) + "<br/>");
+  debug("Received JSON data");
+ } catch(error) {
+  debug("Error GETing JSON Feed:<br/><br/>" + error.description + "<br/>");
+ }
+
+ if (feedData) {
+
+// Process Feed
+
+  debug("Processing JSON data");
+
+  if (feedConfig[type].type == 'mostread' || feedConfig[type].type == 'teaser' || feedConfig[type].type == 'teaser-new') {
+   if (feedData[0].metadata.teaserImage.originalUrl) {
+    var temp = ContentArea(feedConfig[type].template);
+   } else {
+    var temp = ContentArea(feedConfig[type].fallback);
+   }
+  } else {
+   var temp = ContentArea(feedConfig[type].template);
+  }
+
+  var parts = temp.split('%%item_loop%%\r\n');
+   
+    if (feedConfig[type].type == 'teaser-new') {
+   if (feedData[0].metadata.teaserImage.originalUrl) {
+    var temp = ContentArea(feedConfig[type].template);
+   } else {
+    var temp = ContentArea(feedConfig[type].fallback);
+   }
+      }
+
+  var parts = temp.split('%%item_loop%%\r\n'); 
+   
+   
+  if (feedConfig[type].type == 'kulinarik') {
+
+   if (feedConfig[type].subject) {
+    var caSubject = ContentAreaObj.Init(feedConfig[type].subject);
+    var status = caSubject.Update({ "Content" : feedData[0].metadata.title });
+   }
+
+   var content = parts[0];
+
+   for (var i in feedData) {
+    var item = feedData[i].metadata;
+
+    debug("Processing item " + i);
+
+    var imageUrl = '';
+    if (i%2 == 0) {
+     temp = parts[1] + parts[3];
+     for (var j in item.teaserImage.crops) {
+      if (item.teaserImage.crops[j].name == "3:4") {
+       imageUrl = item.teaserImage.crops[j].url.replaceAll("img.nzz.ch/", "img.nzz.ch/S=W220/");
+       break;
+      }
+     }
+    } else {
+     temp = parts[2] + parts[3];
+     for (var j in item.teaserImage.crops) {
+      if (item.teaserImage.crops[j].name == "16:9") {
+       imageUrl = item.teaserImage.crops[j].url.replaceAll("img.nzz.ch/", "img.nzz.ch/S=W500/");
+       break;
+      }
+     }
+    }
+
+    temp = temp.replaceAll("%%link%%", item.url);
+    temp = temp.replaceAll("%%url%%", imageUrl);
+
+    temp = temp.replaceAll("%%title%%", item.title);
+    temp = temp.replaceAll("%%text%%", item.leadText);
+
+    if (item.author) {
+     temp = temp.replaceAll("%%author%%", 'von ' + item.author);
+    } else {
+     temp = temp.replaceAll("%%author%%", 'Zusammengestellt: Redaktion NZZ Bellevue');
+    }
+
+    temp = temp.replaceAll("%!%", "%%");
+    content += temp + "\r\n";
+   }
+
+   content += parts[4];
+
+  }
+
+  if (feedConfig[type].type == 'briefing') {
+
+   var content = parts[0];
+
+   for (var i in feedData.body) {
+    var item = feedData.body[i];
+
+    debug("Processing item " + i);
+
+    if (item.style == 'h4') {
+     temp = '<div style="margin: 0 0 20px; font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; line-height: 25px; text-align: left; color: #000000;">\r\n' + item.text + '\r\n</div>';
+    } else {
+     temp = parts[1];
+     temp = temp.replaceAll("%%html%%", item.text);
+     temp = temp.replaceAll("#0000ee;", "#272ca9;");
+    }
+
+    temp = temp.replaceAll("%!%", "%%");
+    content += temp + "\r\n";
+   }
+
+   content += parts[2];
+
+  }
+
+  if (feedConfig[type].type == 'mostread') {
+
+   var content = '<div style="margin: 0 0 20px; font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; line-height: 25px; text-align: left; color: #000000;">\r\nUnsere Leser empfehlen\r\n</div>';
+
+   var item = feedData[0].metadata;
+   var imageUrl = resizePrefix + item.teaserImage.originalUrl;
+   for (var j in item.teaserImage.crops) {
+    if (item.teaserImage.crops[j].name == "16:9") {
+     imageUrl = item.teaserImage.crops[j].url.replaceAll("img.nzz.ch/", "img.nzz.ch/S=W500/");
+     break;
+    }
+   }
+
+   content += parts[0];
+   content = content.replaceAll("%%link%%", item.url);
+   content = content.replaceAll("%%url%%", imageUrl);
+
+   for (var i in feedData) {
+    var item = feedData[i].metadata;
+
+    debug("Processing item " + i + ": " + item.title);
+
+    temp = parts[1];
+    temp = temp.replaceAll("%%link%%", item.url);
+    temp = temp.replaceAll("%%title%%", item.title);
+    temp = temp.replaceAll("%%text%%", item.leadText);
+
+    temp = temp.replaceAll("%!%", "%%");
+    content += temp + "\r\n\r\n";
+   }
+
+   content += parts[2];
+
+  }
+   
+   if (feedConfig[type].type == 'teaser-new') {
+
+   var item = feedData[0].metadata;
+   var imageUrl = resizePrefix + item.teaserImage.originalUrl;
+   for (var j in item.teaserImage.crops) {
+    if (item.teaserImage.crops[j].name == "16:9") {
+     imageUrl = item.teaserImage.crops[j].url.replaceAll("img.nzz.ch/", "img.nzz.ch/S=W500/");
+     break;
+    }
+   }
+
+   var content = parts[0];
+   content = content.replaceAll("%%link%%", item.url);
+   content = content.replaceAll("%%url%%", imageUrl);
+   content = content.replaceAll("%%title%%", item.title);
+   content = content.replaceAll("%%text%%", item.leadText);
+   if (item.author) {
+     content = content.replaceAll("%%author%%", item.author);
+    } else {
+     content = content.replaceAll("%%author%%", '');
+    }
+     
+      debug("Valor de FLAG " + ":" + item.flag + ":");
+ if (item.flag){
+ content = content.replaceAll("%%flag%%", item.flag);
+ content = content.replaceAll("%%displayflag%%", "inline");
+ 
+ } else {
+ content = content.replaceAll("%%flag%%", item.flag);
+ content = content.replaceAll("%%displayflag%%", "none"); 
+ 
+ }
+     
+ var theDate = item.publicationDate;
+ theDate = theDate.replaceAll("Z","")
+ var d = new Date(theDate);
+ 
+ theMonth = d.getMonth() +1;
+ var newdate = d.getDate() + "." + theMonth + "." + d.getFullYear() + ", " + d.getHours() + "." + (d.getMinutes()<10?'0':'') + d.getMinutes()  + " " + "Uhr";
+    content = content.replaceAll("%%publicationDate%%", newdate);
+ 
+
+   if (feedConfig[type].subject) {
+    var caSubject = ContentAreaObj.Init(feedConfig[type].subject);
+    var status = caSubject.Update({ "Content" : feedData[0].metadata.title });
+   }
+
+   for (var i in feedData) {
+   
+   if (i > 0)
+  
+  {
+    var item = feedData[i].metadata;
+
+    debug("Processing item " + i + ": " + item.title);
+    
+    temp = parts[1];
+    temp = temp.replaceAll("%%link%%", item.url);
+    temp = temp.replaceAll("%%url%%", item.teaserImage.crops[1].url); 
+    temp = temp.replaceAll("%%title%%", item.title);
+    temp = temp.replaceAll("%%text%%", item.leadText);
+ 
+ debug("Valor de FLAG " + ":" + item.flag + ":");
+ if (item.flag){
+ temp = temp.replaceAll("%%flag%%", item.flag);
+ temp = temp.replaceAll("%%displayflag%%", "inline");
+ 
+ } else {
+ temp = temp.replaceAll("%%flag%%", item.flag);
+ temp = temp.replaceAll("%%displayflag%%", "none"); 
+ 
+ }
+
+      if (item.author) {
+     temp = temp.replaceAll("%%author%%", item.author);
+    } else {
+     temp = temp.replaceAll("%%author%%", '');
+    }
+     
+ var theDate = item.publicationDate;
+ theDate = theDate.replaceAll("Z","")
+ var d = new Date(theDate);
+ 
+ theMonth = d.getMonth() +1;
+ var newdate = d.getDate() + "." + theMonth + "." + d.getFullYear() + ", " + d.getHours() + "." + (d.getMinutes()<10?'0':'') + d.getMinutes() + " " + "Uhr";
+    content = content.replaceAll("%%publicationDate%%", newdate);
+     
+    temp = temp.replaceAll("%!%", "%%");
+    content += temp + "\r\n\r\n";
+   }
+  }
+      
+
+   content += parts[2];
+  }  
+
+  if (feedConfig[type].type == 'teaser') {
+
+   var item = feedData[0].metadata;
+   var imageUrl = resizePrefix + item.teaserImage.originalUrl;
+   for (var j in item.teaserImage.crops) {
+    if (item.teaserImage.crops[j].name == "16:9") {
+     imageUrl = item.teaserImage.crops[j].url.replaceAll("img.nzz.ch/", "img.nzz.ch/S=W500/");
+     break;
+    }
+   }
+
+   var content = parts[0];
+   content = content.replaceAll("%%link%%", item.url);
+   content = content.replaceAll("%%url%%", imageUrl);
+
+   if (feedConfig[type].subject) {
+    var caSubject = ContentAreaObj.Init(feedConfig[type].subject);
+    var status = caSubject.Update({ "Content" : feedData[0].metadata.title });
+   }
+
+   for (var i in feedData) {
+    var item = feedData[i].metadata;
+
+    debug("Processing item " + i + ": " + item.title);
+
+    temp = parts[1];
+    temp = temp.replaceAll("%%link%%", item.url);
+    temp = temp.replaceAll("%%title%%", item.title);
+    temp = temp.replaceAll("%%text%%", item.leadText);
+
+    temp = temp.replaceAll("%!%", "%%");
+    content += temp + "\r\n\r\n";
+   }
+
+   content += parts[2];
+
+  }
+  debug("All items processed");
+
+//  debug("<br/>");
+//  debug(content);
+
+ }
+
+// Update ContentArea
+
+ debug("Updating ContentArea");
+
+ try {
+
+  var ca = ContentAreaObj.Init(feedConfig[type].target);
+  var status = ca.Update({ "Content" : content });
+
+  debug(status);
+
+ } catch(error) {
+  debug("Error updating ContentArea:<br/><br/>" + error.description + "<br/>");
+ }
+
+ debug("<br/>\nExecution finished at " + DateTime.SystemDateToLocalDate(Now()));
+
+} else {
+ Write("<center><h1>Bad Request</h1></center>");
+}
+</script>
+</div>
+</body>
+</html>
