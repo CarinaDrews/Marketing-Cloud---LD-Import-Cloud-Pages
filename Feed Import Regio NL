@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="page">
-<div id="version">19-07-11-15-25</div>
+<div id="version">19-07-30-14-30</div>
 <script runat=server language=javascript>
 Platform.Load("core", "1");
 
@@ -102,7 +102,7 @@ var feedConfig = {
     'feed-manuell-tbm-new' : {
   'name' : 'St Gallen am Abend - manuell - new',
   'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=45&limit=10&ts=',
-  'type' : 'teaser-new',
+  'type' : 'teaser-new',    
   'template' : 994931,
   'fallback' : 993982,
   'target' : 'Automatic_1561385230206' // 994640
@@ -129,7 +129,7 @@ var feedConfig = {
    'feed-OS01-mostread-regio-new' : {
   'name' : 'St Gallen am Abend - mostread - new',
   'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=27&limit=5&ts=',
-  'type' : 'teaser-new',
+  'type' : 'teaser-new',   
   'template' : 994931,
   'fallback' : 993982,
   'target' : 'Automatic_1561385233928' // 994641
@@ -247,8 +247,8 @@ var feedConfig = {
   'name' : 'Ostschweizer Wirtschaftswoche - mostread',
   'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=184&limit=10&ts=',
   'type' : 'teaser-new',
-  'template' : 994931,
-  'fallback' : 993982,
+  'template' : 996449,
+  'fallback' : 996449,
   'target' : 'Automatic_1561380376628' // 994632
  },
   
@@ -257,8 +257,8 @@ var feedConfig = {
   'name' : 'Ostschweiz am Morgen - Liste 1',
   'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=181&limit=10&ts=',
   'type' : 'teaser-new',
-  'template' : 994931,
-  'fallback' : 993982,
+  'template' : 996449,
+  'fallback' : 996449,
   'target' : 'Automatic_1563367340318' // 996033
  },
   
@@ -266,8 +266,8 @@ var feedConfig = {
   'name' : 'Ostschweiz am Morgen - Liste 2',
   'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=182&limit=10&ts=',
   'type' : 'teaser-new',
-  'template' : 994931,
-  'fallback' : 993982,
+  'template' : 996449,
+  'fallback' : 996449,
   'target' : 'Automatic_1561379282665' // 994630
  },
   
@@ -275,8 +275,8 @@ var feedConfig = {
   'name' : 'Ostschweiz am Morgen - Manuell',
   'url' : 'https://enrico.nzz-tech.ch/v1/list?product=tagblatt&listid=183&limit=10&ts=',
   'type' : 'teaser-new',
-  'template' : 994931,
-  'fallback' : 993982,
+  'template' : 996449,
+  'fallback' : 996449,
   'target' : 'Automatic_1561379292387' // 994631
  },
 
@@ -488,8 +488,8 @@ var feedConfig = {
   'name' : 'Zentralschweiz am Morgen - Liste 1',
   'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=178&limit=10&ts=',
   'type' : 'teaser-new',
-  'template' : 994931,
-  'fallback' : 993982,
+  'template' : 996449,
+  'fallback' : 996449,
   'target' : 'Automatic_1561377826868' // 994626 
     
  },
@@ -498,8 +498,8 @@ var feedConfig = {
   'name' : 'Zentralschweiz am Morgen - Liste 2',
   'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=179&limit=10&ts=',
   'type' : 'teaser-new',
-  'template' : 994931,
-  'fallback' : 993982,
+  'template' : 996449,
+  'fallback' : 996449,
   'target' : 'Automatic_1561377832645' // 994627
     
  },
@@ -508,8 +508,8 @@ var feedConfig = {
   'name' : 'Zentralschweiz am Morgen - Manuell',
   'url' : 'https://enrico.nzz-tech.ch/v1/list?product=luzernerzeitung&listid=180&limit=10&ts=',
   'type' : 'teaser-new',
-  'template' : 994931,
-  'fallback' : 993982,
+  'template' : 996449,
+  'fallback' : 996449,
   'target' : 'Automatic_1561377837461' // 994628
     
  }
