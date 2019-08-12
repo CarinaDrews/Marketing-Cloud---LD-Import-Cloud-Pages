@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="page">
-<div id="version">19-07-18-11-29</div>
+<div id="version">19-08-12-10-46</div>
 <script runat=server language=javascript>
 Platform.Load("core", "1");
 /*
@@ -532,7 +532,8 @@ var newsletterConfig = {
   'logo-jenni-thier' : 965641, 
   'logo-birgit-schmid' : 965660, 
   'logo-christina-neuhaus' : 965661,
-  'logo-claudia-maeder' : 965662, 
+  'logo-claudia-maeder' : 965662,
+  'logo-angelika-hardegger' : 997086, 
   'footer-links' : 965667
   }
  },
@@ -2319,7 +2320,7 @@ if (feedData) {
     temp = parts[0] + list + parts[2];
 
    } else {
-    if (assetId == 'logo' || assetId == 'logo-schweiz' || assetId == 'logo-jenni-thier' || assetId == 'logo-birgit-schmid' || assetId == 'logo-christina-neuhaus' || assetId == 'logo-claudia-maeder') {
+    if (assetId == 'logo' || assetId == 'logo-schweiz' || assetId == 'logo-jenni-thier' || assetId == 'logo-birgit-schmid' || assetId == 'logo-christina-neuhaus' || assetId == 'logo-claudia-maeder' || assetId == 'logo-angelika-hardegger') {
 
      temp = temp.replaceAll("%%color%%", newsletterConfig[type].header.color);
      temp = temp.replaceAll("%%logoUrl%%", newsletterConfig[type].header.logoUrl);
