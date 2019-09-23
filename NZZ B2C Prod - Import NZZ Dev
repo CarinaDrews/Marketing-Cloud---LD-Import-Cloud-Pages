@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="page">
-<div id="version">19-07-18-11-37</div>
+<div id="version">10-09-11-14-26</div>
 <script runat=server language=javascript>
 Platform.Load("core", "1");
 /*
@@ -32,7 +32,8 @@ var newsletterTemplate = {
  'global-risk' : 'glo',
  'bellevue' : 'bel',
  'schweiz': 'swi', 
- 'nzz-persoenlich': 'pes'
+ 'nzz-persoenlich': 'pes',
+ 'nzz-asien': 'asi' 
   
 }
 
@@ -431,9 +432,6 @@ var newsletterConfig = {
    'stag' : 139314,
    'prod' : 163581
   },
-    'adurl' : [
-'http://adserver.adtech.de/?adrawdata/3.0/1135.1/6654713/0/5492/header=yes;noperf=1;cookie=yes;adct=204;misc='
-],
     
   'header' : {
    'color' : '#13175f',
@@ -458,7 +456,41 @@ var newsletterConfig = {
    'logo-birgit-schmid' : 176536, 
    'logo-christina-neuhaus' : 176537,  
    'logo-claudia-maeder' : 176538,
+   'logo-angelika-hardegger' : 229314,  
    'footer-links' : 176539
+  }
+ },
+  
+    'asi' : {
+  'name' : 'NZZ Asien',
+  'layout' : 'nzz-asien',
+  'attributes' : [ 'nled', 161, '' ],
+  'folder' : {
+   'dev' : 139314,
+   'stag' : 139314,
+   'prod' : 182840
+  },
+    
+  'header' : {
+   'color' : '#13175f',
+   'link' : 'https://www.nzz.ch/nzz-asien',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'heroUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/ce5021b3-15ab-4b9c-bb7d-46c1a7741a1c.png',
+   'heroWidth' : 500,
+   'heroHeight' : 318,
+   'title' : 'NZZ Asien'
+  },
+  'nps' : {
+   'title' : '&laquo;NZZ Asien&raquo;',
+   'code' : 'ba5182b'
+  },
+  'footer' : {
+   'nlId' : 'NA01'
+  },
+  'assets' : {
+   'logo-nzz-asien' : 242468
   }
  },
  
@@ -638,6 +670,7 @@ var newsletterConfig = {
    'logo' : 97728,
    'feed-teaser' : 97978
   }
+ 
  },
 
  'int' : {
@@ -1331,7 +1364,7 @@ var newsletterConfig = {
    'nps-survey' : 97741,
    'scenario' : 97743,
    'footer-links' : 97379, 
-    'newsletter-suggestion-Top-NewsamAbend': 198994,
+   'newsletter-suggestion-Top-NewsamAbend': 198994,
    'newsletter-suggestion-week': 198996,
    'newsletter-suggestion-NZZaS-Aktuell': 198997,
    'newsletter-suggestion-NZZ-Buecher': 198999,
@@ -2183,7 +2216,7 @@ if (feedData) {
     temp = parts[0] + list + parts[2];
 
    } else {
-    if (assetId == 'logo' || assetId == 'logo-schweiz'|| assetId == 'logo-jenni-thier'|| assetId == 'logo-birgit-schmid'|| assetId == 'logo-christina-neuhaus'|| assetId == 'logo-claudia-maeder') {
+    if (assetId == 'logo' || assetId == 'logo-schweiz'|| assetId == 'logo-jenni-thier'|| assetId == 'logo-birgit-schmid'|| assetId == 'logo-christina-neuhaus'|| assetId == 'logo-claudia-maeder' || assetId == 'logo-angelika-hardegger' || assetId == 'logo-nzz-asien') {
 
      temp = temp.replaceAll("%%color%%", newsletterConfig[type].header.color);
      temp = temp.replaceAll("%%logoUrl%%", newsletterConfig[type].header.logoUrl);
@@ -2305,6 +2338,7 @@ if (feedData) {
    var accessToken = json.accessToken;
 
    debug("Received AccessToken");
+   debug("The access token is:" + accessToken);
 
    html = html.replaceAll(String.fromCharCode(92),String.fromCharCode(92,92));
 
@@ -2342,10 +2376,13 @@ if (feedData) {
 
      var data = '{ "query": { "property": "name", "simpleOperator": "contains", "value": "' + feedData.name + '" }, "page": { "page": 1, "pageSize": 100 }, "fields": [ "id", "name" ] }';
 
-        var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/query?access_token=' + accessToken);
+        //var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/query?access_token=' + accessToken);
+        var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/query');
+      
         request.method = "POST";
         request.contentType = 'application/json; charset=utf-8';
-     request.postData = data;
+        request.setHeader("Authorization", "Bearer " + accessToken);
+        request.postData = data;
 
      try {
          response = request.send();
@@ -2366,10 +2403,13 @@ if (feedData) {
 
      var jsonPayload = '{ "name": "' + assetName + '", "views": { "subjectline": { "content": "' + subject + '" }, "preheader": { "content": "' + preheader + '" },  "html": { "content": "' + html + '" } } }';
 
-        var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId + '?access_token=' + accessToken);
+        //var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId + '?access_token=' + accessToken);
+        var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId);
+      
         request.method = "PATCH";
         request.contentType = 'application/json; charset=utf-8';
-     request.postData = jsonPayload;
+        request.setHeader("Authorization", "Bearer " + accessToken);
+        request.postData = jsonPayload;
 
      try {
          response = request.send();
@@ -2389,10 +2429,13 @@ if (feedData) {
 
      var jsonPayload = '{ "name": "' + assetName + '", "channels": { "email": true, "web": false }, "assetType": { "id": 208 }, "category": { "id": ' + categoryId + ' }, "views": { "subjectline": { "content": "' + subject + '" }, "preheader": { "content": "' + preheader + '" }, "html": { "content": "' + html + '" } }, "data": { "email": { "options" : { "characterEncoding" : "utf-8", "generateFrom" : null }, "attributes": [ { "name": "__AdditionalEmailAttribute1", "value": "' + attr1 + '", "order": 1, "channel": "email", "attributeType": "AdditionalEmailAttribute" }, { "name": "__AdditionalEmailAttribute2", "value": "' + attr2 + '_' + nowDateattr2  +'", "order": 2, "channel": "email", "attributeType": "AdditionalEmailAttribute" }, { "name": "__AdditionalEmailAttribute3", "value": "' + attr3 + '", "order": 3, "channel": "email", "attributeType": "AdditionalEmailAttribute" } ] } } }';
 
-        var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets?access_token=' + accessToken);
+        //var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets?access_token=' + accessToken);
+        var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets');
+      
         request.method = "POST";
         request.contentType = 'application/json; charset=utf-8';
-     request.postData = jsonPayload;
+        request.setHeader("Authorization", "Bearer " + accessToken);
+        request.postData = jsonPayload;
 
      try {
          response = request.send();
@@ -2433,9 +2476,13 @@ if (feedData) {
 
      var jsonPayload = '{ "name": "' + assetName + '", "views": { "subjectline": { "content": "' + subject + '" }, "preheader": { "content": "' + preheader + '" },  "html": { "content": "' + html + '" } } }';
 
-     var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId + '?access_token=' + accessToken);
+     //var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId + '?access_token=' + accessToken);
+     
+     var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId);
+      
      request.method = "PATCH";
      request.contentType = 'application/json; charset=utf-8';
+     request.setHeader("Authorization", "Bearer " + accessToken);
      request.postData = jsonPayload;
 
      try {
@@ -2458,9 +2505,14 @@ if (feedData) {
 
      var jsonPayload = '{ "name": "' + assetCBName + '", "content": "' + content + '" }';
 
-     var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId + '?access_token=' + accessToken);
+     //var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId + '?access_token=' + accessToken);
+      
+     var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId);
+      
+     
      request.method = "PATCH";
      request.contentType = 'application/json; charset=utf-8';
+     request.setHeader("Authorization", "Bearer " + accessToken);
      request.postData = jsonPayload;
 
      try {
@@ -2483,9 +2535,14 @@ if (feedData) {
 
      var jsonPayload = '{ "name": "' + assetName + '", "channels": { "email": true, "web": false }, "assetType": { "id": 208 }, "category": { "id": ' + categoryId + ' }, "views": { "subjectline": { "content": "' + subject + '" }, "preheader": { "content": "' + preheader + '" }, "html": { "content": "' + html + '" } }, "data": { "email": { "options" : { "characterEncoding" : "utf-8", "generateFrom" : null }, "attributes": [ { "name": "__AdditionalEmailAttribute1", "value": "' + attr1 + '", "order": 1, "channel": "email", "attributeType": "AdditionalEmailAttribute" }, { "name": "__AdditionalEmailAttribute2", "value": "' + attr2 +  '_' + nowDateattr2  +'", "order": 2, "channel": "email", "attributeType": "AdditionalEmailAttribute" }, { "name": "__AdditionalEmailAttribute3", "value": "' + attr3 + '", "order": 3, "channel": "email", "attributeType": "AdditionalEmailAttribute" } ] } } }';
 
-     var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets?access_token=' + accessToken);
+     //var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets?access_token=' + accessToken);
+      
+      var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets');
+      
+      
      request.method = "POST";
      request.contentType = 'application/json; charset=utf-8';
+     request.setHeader("Authorization", "Bearer " + accessToken);
      request.postData = jsonPayload;
 
      try {
