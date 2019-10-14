@@ -1,0 +1,560 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Feed Import</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+<link href="http://content.nzz.ch/base.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="page">
+<div id="version">20-10-04-09-17</div>
+<script runat=server language=javascript>
+Platform.Load("core", "1");
+
+/*
+
+Test URLs:
+
+http://content.nzz.ch/feedimport?type=kul-feed
+http://content.nzz.ch/feedimport?type=rei-feed
+
+http://content.nzz.ch/feedimport?type=buc-teaser
+http://content.nzz.ch/feedimport?type=buc-mostread
+http://content.nzz.ch/feedimport?type=dig-teaser
+http://content.nzz.ch/feedimport?type=int-teaser
+http://content.nzz.ch/feedimport?type=per-teaser
+http://content.nzz.ch/feedimport?type=per-teaser2
+http://content.nzz.ch/feedimport?type=spo-teaser
+http://content.nzz.ch/feedimport?type=wei-teaser
+http://content.nzz.ch/feedimport?type=suk-feed
+http://content.nzz.ch/feedimport?type=quz-teaser
+http://content.nzz.ch/feedimport?type=nasa-teaser
+
+http://content.nzz.ch/feedimport?type=nam-briefing
+http://content.nzz.ch/feedimport?type=nam-mostread
+http://content.nzz.ch/feedimport?type=naa-briefing
+
+*/
+
+var feedConfig = {
+ 'nam-briefing' : {
+  'name' : 'NZZ am Morgen - Briefing',
+  'url' : 'https://enrico.nzz-tech.ch/v1/briefing/newsletter?product=nzz&ts=',
+  'type' : 'briefing',
+  'template' : 97370,
+  'target' : 97983
+ },
+ 'nam-mostread' : {
+  'name' : 'NZZ am Morgen - Most Read',
+  'url' : 'https://enrico.nzz-tech.ch/v1/spark?product=nzz&algorithm=nzz-newsletter&sourceid=nzz&limit=3&ts=',
+  'type' : 'mostread',
+  'template' : 97374,
+  'fallback' : 97369,
+  'target' : 97984
+ },
+ 'naa-briefing' : {
+  'name' : 'NZZ am Abend - Briefing',
+  'url' : 'https://enrico.nzz-tech.ch/v1/briefing/newsletter?product=nzz&ts=',
+  'type' : 'briefing',
+  'template' : 97370,
+  'target' : 97982
+ },
+ 'buc-teaser' : {
+  'name' : 'Bücher - Teaser',
+  'url' : 'https://enrico.nzz-tech.ch/v1/spark?product=nzz&algorithm=newsletter_FeuilletonBuch&sourceid=nzz&limit=8&ts=',
+  'type' : 'teaser',
+  'template' : 97374,
+  'fallback' : 97369,
+  'subject' : 97994,
+  'target' : 97975
+ },
+ 'buc-mostread' : {
+  'name' : 'Bücher Feuilleton - Most Read',
+  'url' : 'https://enrico.nzz-tech.ch/v1/spark?product=nzz&algorithm=newsletter_Feuilleton_144&sourceid=nzz&limit=3&ts=',
+  'type' : 'teaser',
+  'template' : 97377,
+  'fallback' : 97372,
+  'target' : 97974
+ },
+ 'dig-teaser' : {
+  'name' : 'Digital - Teaser',
+  'url' : 'https://enrico.nzz-tech.ch/v1/spark?product=nzz&algorithm=newsletter_DigitalListe_24&sourceid=nzz&limit=3&ts=',
+  'type' : 'teaser',
+  'template' : 97374,
+  'fallback' : 97369,
+  'subject' : 97977,
+  'target' : 97978
+ },
+ 'int-teaser' : {
+  'name' : 'International - Teaser',
+  'url' : 'https://enrico.nzz-tech.ch/v1/spark?product=nzz&algorithm=newsletter_International_24&sourceid=nzz&limit=10&ts=',
+  'type' : 'teaser',
+  'template' : 97374,
+  'fallback' : 97369,
+  'subject' : 97980,
+  'target' : 97981
+ },
+ 'per-teaser' : {
+  'name' : 'Perspektive - Teaser',
+  'url' : 'https://enrico.nzz-tech.ch/v1/spark?product=nzz&algorithm=nzz-de-newsletter&sourceid=nzz.de&limit=7&ts=',
+  'type' : 'teaser',
+  'template' : 97374,
+  'fallback' : 97369,
+  'subject' : 97985,
+  'target' : 97986
+ },
+ 'per-teaser2' : {
+  'name' : 'Perspektive - Teaser (strict order)',
+  'url' : 'https://enrico.nzz-tech.ch/v1/spark?product=nzz&algorithm=nzz-de-newsletter-strict-order-test&sourceid=nzz.de&limit=7&ts=',
+  'type' : 'teaser',
+  'template' : 97374,
+  'fallback' : 97369,
+  'subject' : 97987,
+  'target' : 97988
+ },
+ 'spo-teaser' : {
+  'name' : 'Sport - Teaser',
+  'url' : 'https://enrico.nzz-tech.ch/v1/spark?product=nzz&algorithm=newsletter_Sport_24&sourceid=nzz&limit=7&ts=',
+  'type' : 'teaser',
+  'template' : 97374,
+  'fallback' : 97369,
+  'subject' : 97990,
+  'target' : 97991
+ },
+ 'wei-teaser' : {
+  'name' : 'Weinkeller - Teaser',
+  'url' : 'https://enrico.nzz-tech.ch/v1/spark?product=bellevue&algorithm=bellevue-weinkeller&sourceid=bellevue.nzz.ch&limit=5&ts=',
+  'type' : 'weinkeller',
+  'template' : 125022,
+  'subject' : 97992,
+  'target' : 97993
+ },
+ 'kul-feed' : {
+  'name' : 'Kulinarik - Feed',
+  'url' : 'https://enrico.nzz-tech.ch/v1/spark?product=bellevue&algorithm=bellevue-kulinarik&sourceid=bellevue.nzz.ch&limit=7&ts=',
+  'type' : 'bellevue',
+  'template' : 97378,
+  'subject' : 97973,
+  'target' : 97972
+ },
+ 'rei-feed' : {
+  'name' : 'Reisen und Entdecken  - Feed',
+  'url' : 'https://enrico.nzz-tech.ch/v1/spark?product=bellevue&algorithm=newsletter_Reisen%20%26%20Entdecken&sourceid=bellevue.nzz.ch&limit=7&ts=',
+  'type' : 'bellevue',
+  'template' : 97378,
+  'subject' : 99505,
+  'target' : 97989
+ },
+ 'suk-feed' : {
+  'name' : 'Studium und Karriere  - Feed',
+  'url' : 'https://enrico.nzz-tech.ch/v1/spark?product=nzz&algorithm=nzz-studium-karriere&sourceid=nzz&limit=7&ts=',
+  'type' : 'teaser',
+  'template' : 97374,
+  'fallback' : 97369,
+  'subject' : 101652,
+  'target' : 101651
+ }, 
+   'quz-teaser' : {
+  'name' : 'Quiz - Teaser',
+  'url' : 'https://enrico.nzz-tech.ch/v1/spark-multi-product?source=nzz-nzzas-quiz-newsletter&sourceid=newsletter&limit=3&ts=',
+  'type' : 'teaser',
+  'template' : 125026,
+  'fallback' : 124498,
+  'subject' : 125025,
+  'target' : 125024
+ }, 
+  
+   'nasa-teaser' : {
+  'name' : 'NZZ am Sonntag Aktuell Teaser',
+  'url' : 'https://enrico.nzz-tech.ch/v1/spark?product=nzzas&algorithm=nzzas-sunday-newsletter&sourceid=nzzas.ch&limit=10&ts=',
+  'type' : 'nzzas',
+  'template' : 128772,
+  'target' : 125039
+ }
+}
+
+var resizePrefix = 'https://img.nzz.ch/S=W500/O=75/';
+
+// Get and validate HTTP parameters
+
+var type = Request.GetQueryStringParameter("type");
+
+if (feedConfig[type]) {
+
+ Write("<center><h1>Feed Import</h1><h2>" + feedConfig[type].name + "</h2></center>");
+
+// Utility Functions
+
+ function debug(text) {
+  Write(text + "<br/>\n");
+ }
+
+ String.prototype.replaceAll = function(search, replace) {
+  if (!replace) replace = '';
+  return this.split(search).join(replace);
+ }
+
+ debug("Execution started at " + DateTime.SystemDateToLocalDate(Now()) + "<br/>");
+
+// Get JSON Feed from Living Docs
+
+ var response, feedData;
+
+ try {
+  response = HTTP.Get(feedConfig[type].url + (new Date()).getTime());
+//  debug("Response: " + Stringify(response));
+  feedData = Platform.Function.ParseJSON(response.Content);
+//  debug("JSON Feed:<br/><br/>" + Stringify(feedData) + "<br/>");
+  debug("Received JSON data");
+ } catch(error) {
+  debug("Error GETing JSON Feed:<br/><br/>" + error.description + "<br/>");
+ }
+
+ if (feedData) {
+
+// Process Feed
+
+  debug("Processing JSON data");
+
+  if (feedConfig[type].type == 'mostread' || feedConfig[type].type == 'teaser') {
+   if (feedData[0].metadata.teaserImage.originalUrl) {
+    var temp = Platform.Function.ContentBlockByID(feedConfig[type].template);
+   } else {
+    var temp = Platform.Function.ContentBlockByID(feedConfig[type].fallback);
+   }
+  } else {
+   var temp = Platform.Function.ContentBlockByID(feedConfig[type].template);
+  }
+
+  var parts = temp.split('%%item_loop%%\r\n');
+   
+     if (feedConfig[type].type == 'weinkeller') {
+
+
+   var content = parts[0];
+
+   for (var i in feedData) {
+    var item = feedData[i].metadata;
+
+    debug("Processing item " + i);
+
+    temp = parts[1];
+
+    var imageUrl = '';
+    for (var j in item.teaserImage.crops) {
+     if (item.teaserImage.crops[j].name == "3:4") {
+      imageUrl = item.teaserImage.crops[j].url.replaceAll("img.nzz.ch/", "img.nzz.ch/S=W220/");
+      break;
+     }
+    }
+
+    temp = temp.replaceAll("%%link%%", item.url);
+    temp = temp.replaceAll("%%url%%", imageUrl);
+
+    temp = temp.replaceAll("%%title%%", item.title);
+    temp = temp.replaceAll("%%text%%", item.leadText);
+
+    temp = temp.replaceAll("%!%", "%%");
+    content += temp + "\r\n";
+   }
+
+   content += parts[2];
+
+  }
+
+  if (feedConfig[type].type == 'bellevue') {
+
+   var content = parts[0];
+
+   for (var i in feedData) {
+    var item = feedData[i].metadata;
+
+    debug("Processing item " + i);
+
+    var imageUrl = '';
+    if (i%2 == 0) {
+     temp = parts[1] + parts[3];
+     for (var j in item.teaserImage.crops) {
+      if (item.teaserImage.crops[j].name == "3:4") {
+       imageUrl = item.teaserImage.crops[j].url.replaceAll("img.nzz.ch/", "img.nzz.ch/S=W220/");
+       break;
+      }
+     }
+    } else {
+     temp = parts[2] + parts[3];
+     for (var j in item.teaserImage.crops) {
+      if (item.teaserImage.crops[j].name == "16:9") {
+       imageUrl = item.teaserImage.crops[j].url.replaceAll("img.nzz.ch/", "img.nzz.ch/S=W500/");
+       break;
+      }
+     }
+    }
+
+    temp = temp.replaceAll("%%link%%", item.url);
+    temp = temp.replaceAll("%%url%%", imageUrl);
+
+    temp = temp.replaceAll("%%title%%", item.title);
+    temp = temp.replaceAll("%%text%%", item.leadText);
+
+    if (item.author) {
+     temp = temp.replaceAll("%%author%%", 'von ' + item.author);
+    } else {
+     temp = temp.replaceAll("%%author%%", 'Zusammengestellt: Redaktion NZZ Bellevue');
+    }
+
+    temp = temp.replaceAll("%!%", "%%");
+    content += temp + "\r\n";
+   }
+
+   content += parts[4];
+
+  }
+   
+    if (feedConfig[type].type == 'nzzas') {
+
+   var content = parts[0];
+
+   for (var i in feedData) {
+    var item = feedData[i].metadata;
+
+    debug("Processing item " + i);
+
+    var imageUrl = '';
+    if (i%2 == 0) {
+     temp = parts[1] + parts[3];
+     for (var j in item.teaserImage.crops) {
+      if (item.teaserImage.crops[j].name == "16:9") {
+       imageUrl = item.teaserImage.crops[j].url.replaceAll("img.nzz.ch/", "img.nzz.ch/S=W220/");
+       break;
+      }
+     }
+    } else {
+     temp = parts[2] + parts[3];
+     for (var j in item.teaserImage.crops) {
+      if (item.teaserImage.crops[j].name == "16:9") {
+       imageUrl = item.teaserImage.crops[j].url.replaceAll("img.nzz.ch/", "img.nzz.ch/S=W500/");
+       break;
+      }
+     }
+    }
+
+    temp = temp.replaceAll("%%link%%", item.url);
+    temp = temp.replaceAll("%%url%%", imageUrl);
+
+    temp = temp.replaceAll("%%title%%", item.title);
+    temp = temp.replaceAll("%%text%%", item.leadText);
+
+    if (item.author) {
+     temp = temp.replaceAll("%%author%%", 'von ' + item.author);
+    } else {
+     temp = temp.replaceAll("%%author%%", 'Zusammengestellt: Redaktion NZZ Bellevue');
+    }
+
+    temp = temp.replaceAll("%!%", "%%");
+    content += temp + "\r\n";
+   }
+
+   content += parts[4];
+
+  }
+
+
+  if (feedConfig[type].type == 'briefing') {
+
+   var content = parts[0];
+
+   for (var i in feedData.body) {
+    var item = feedData.body[i];
+
+    debug("Processing item " + i);
+
+    if (item.style == 'h4') {
+     temp = '<div style="margin: 0 0 20px; font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; line-height: 25px; text-align: left; color: #000000;">\r\n' + item.text + '\r\n</div>';
+    } else {
+     temp = parts[1];
+     temp = temp.replaceAll("%%html%%", item.text);
+     temp = temp.replaceAll("#0000ee;", "#272ca9;");
+    }
+
+    temp = temp.replaceAll("%!%", "%%");
+    content += temp + "\r\n";
+   }
+
+   content += parts[2];
+
+  }
+
+  if (feedConfig[type].type == 'mostread') {
+
+   var content = '<div style="margin: 0 0 20px; font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; line-height: 25px; text-align: left; color: #000000;">\r\nUnsere Leser empfehlen\r\n</div>';
+
+   var item = feedData[0].metadata;
+   var imageUrl = resizePrefix + item.teaserImage.originalUrl;
+   for (var j in item.teaserImage.crops) {
+    if (item.teaserImage.crops[j].name == "16:9") {
+     imageUrl = item.teaserImage.crops[j].url.replaceAll("img.nzz.ch/", "img.nzz.ch/S=W500/");
+     break;
+    }
+   }
+
+   content += parts[0];
+   content = content.replaceAll("%%link%%", item.url);
+   content = content.replaceAll("%%url%%", imageUrl);
+
+   for (var i in feedData) {
+    var item = feedData[i].metadata;
+
+    debug("Processing item " + i + ": " + item.title);
+
+    temp = parts[1];
+    temp = temp.replaceAll("%%link%%", item.url);
+    temp = temp.replaceAll("%%title%%", item.title);
+    temp = temp.replaceAll("%%text%%", item.leadText);
+
+    temp = temp.replaceAll("%!%", "%%");
+    content += temp + "\r\n\r\n";
+   }
+
+   content += parts[2];
+
+  }
+
+  if (feedConfig[type].type == 'teaser') {
+
+   var item = feedData[0].metadata;
+   var imageUrl = resizePrefix + item.teaserImage.originalUrl;
+   for (var j in item.teaserImage.crops) {
+    if (item.teaserImage.crops[j].name == "16:9") {
+     imageUrl = item.teaserImage.crops[j].url.replaceAll("img.nzz.ch/", "img.nzz.ch/S=W500/");
+     break;
+    }
+   }
+
+   var content = parts[0];
+   content = content.replaceAll("%%link%%", item.url);
+   content = content.replaceAll("%%url%%", imageUrl);
+
+   for (var i in feedData) {
+    var item = feedData[i].metadata;
+
+    debug("Processing item " + i + ": " + item.title);
+
+    temp = parts[1];
+    temp = temp.replaceAll("%%link%%", item.url);
+    temp = temp.replaceAll("%%title%%", item.title);
+    temp = temp.replaceAll("%%text%%", item.leadText);
+
+    temp = temp.replaceAll("%!%", "%%");
+    content += temp + "\r\n\r\n";
+   }
+
+   content += parts[2];
+
+  }
+  debug("All items processed");
+
+//  debug("<br/>");
+//  debug(content);
+
+ }
+
+// Get API AccessToken
+
+ var request = new Script.Util.HttpRequest('https://auth.exacttargetapis.com/v1/requestToken');
+ request.method = "POST";
+ request.contentType = 'application/json';
+ request.postData = '{ "clientId": "94dloe3nsiedthjvdvn58dj8", "clientSecret": "RkSw8H95vYkTGMh8PpKMekTr" }'; // MC Org: NZZ BU: Sandbox
+
+ try {
+  response = request.send();
+ } catch(error) {
+  debug("ERROR:<br/><br/>" + error.description);
+ }
+
+ var json = Platform.Function.ParseJSON(''+response.content);
+
+ if (!json.accessToken) {
+
+  debug("No AccessToken");
+
+ } else {
+
+  var accessToken = json.accessToken;
+
+  debug("Received AccessToken");
+
+  debug("Updating Feed");
+
+  content = content.replaceAll(String.fromCharCode(92),String.fromCharCode(92,92));
+
+  content = content.replaceAll('"','\\"');
+  content = content.replaceAll('\r\n','\\n');
+  content = content.replaceAll('\n','\\n');
+  content = content.replaceAll('\t','\\t');
+
+  var assetId = feedConfig[type].target;
+
+  var jsonPayload = '{ "content": "' + content + '" }';
+
+  //var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId + '?access_token=' + accessToken);
+  var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId);
+  request.method = "PATCH";
+  request.contentType = 'application/json; charset=utf-8';
+  request.setHeader("Authorization", "Bearer " + accessToken); 
+  request.postData = jsonPayload;
+
+  try {
+   response = request.send();
+   debug("Updated Content Block with Id " + assetId);
+  } catch(error) {
+   debug("ERROR:<br/><br/>" + error.description);
+   debug("JSON:<br/><br/>" + jsonPayload);
+  }
+
+  if (feedConfig[type].subject) {
+
+   debug("Updating Subject");
+
+   var subject = feedData[0].metadata.title;
+
+   subject = subject.replaceAll(String.fromCharCode(92),String.fromCharCode(92,92));
+
+   subject = subject.replaceAll('"','\\"');
+   subject = subject.replaceAll('\r\n','\\n');
+   subject = subject.replaceAll('\n','\\n');
+   subject = subject.replaceAll('\t','\\t');
+
+   var assetId = feedConfig[type].subject;
+
+   var jsonPayload = '{ "content": "' + subject + '" }';
+
+   //var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId + '?access_token=' + accessToken);
+   var request = new Script.Util.HttpRequest('https://www.exacttargetapis.com/asset/v1/content/assets/' + assetId);
+   request.method = "PATCH";
+   request.contentType = 'application/json; charset=utf-8';
+   request.setHeader("Authorization", "Bearer " + accessToken); 
+   request.postData = jsonPayload;
+
+   try {
+    response = request.send();
+    debug("Updated Content Block with Id " + assetId);
+   } catch(error) {
+    debug("ERROR:<br/><br/>" + error.description);
+    debug("JSON:<br/><br/>" + jsonPayload);
+   }
+
+  }
+
+ }
+
+ debug("<br/>\nExecution finished at " + DateTime.SystemDateToLocalDate(Now()));
+
+} else {
+ Write("<center><h1>Bad Request</h1></center>");
+}
+</script>
+</div>
+</body>
+</html>
