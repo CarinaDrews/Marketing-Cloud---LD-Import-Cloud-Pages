@@ -29,7 +29,6 @@ http://content.nzz.ch/feedimport?type=per-teaser2
 http://content.nzz.ch/feedimport?type=spo-teaser
 http://content.nzz.ch/feedimport?type=wei-teaser
 http://content.nzz.ch/feedimport?type=suk-feed
-http://content.nzz.ch/feedimport?type=quz-teaser
 http://content.nzz.ch/feedimport?type=nasa-teaser
 
 http://content.nzz.ch/feedimport?type=nam-briefing
@@ -155,15 +154,6 @@ var feedConfig = {
   'fallback' : 97369,
   'subject' : 101652,
   'target' : 101651
- }, 
-   'quz-teaser' : {
-  'name' : 'Quiz - Teaser',
-  'url' : 'https://enrico.nzz-tech.ch/v1/spark-multi-product?source=nzz-nzzas-quiz-newsletter&sourceid=newsletter&limit=3&ts=',
-  'type' : 'teaser',
-  'template' : 125026,
-  'fallback' : 124498,
-  'subject' : 125025,
-  'target' : 125024
  }, 
   
    'nasa-teaser' : {
