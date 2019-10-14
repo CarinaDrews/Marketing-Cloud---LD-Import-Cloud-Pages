@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="page">
-<div id="version">10-09-11-14-26</div>
+<div id="version">19-10-10-13-17</div>
 <script runat=server language=javascript>
 Platform.Load("core", "1");
 /*
@@ -33,7 +33,8 @@ var newsletterTemplate = {
  'bellevue' : 'bel',
  'schweiz': 'swi', 
  'nzz-persoenlich': 'pes',
- 'nzz-asien': 'asi' 
+ 'nzz-asien': 'asi',
+ 'mobilitaet': 'mob' 
   
 }
 
@@ -491,6 +492,39 @@ var newsletterConfig = {
   },
   'assets' : {
    'logo-nzz-asien' : 242468
+  }
+ },
+  
+    'mob' : {
+  'name' : 'Mobilität',
+  'layout' : 'mobilitaet',
+  'attributes' : [ 'nled', 162, '' ],
+  'folder' : {
+   'dev' : 139314,
+   'stag' : 139314,
+   'prod' : 184637
+  },
+    
+  'header' : {
+   'color' : '#13175f',
+   'link' : 'https://www.nzz.ch/mobilitaet',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'heroUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/ce5021b3-15ab-4b9c-bb7d-46c1a7741a1c.png',
+   'heroWidth' : 500,
+   'heroHeight' : 318,
+   'title' : 'Mobilität'
+  },
+  'nps' : {
+   'title' : '&laquo;Mobilität&raquo;',
+   'code' : 'bb7884c'
+  },
+  'footer' : {
+   'nlId' : 'MO01'
+  },
+  'assets' : {
+   'logo' : 97728
   }
  },
  
@@ -1337,6 +1371,61 @@ var newsletterConfig = {
    'feed-teaser' : 125039
   }
  },
+   
+      'nasa2' : {
+  'name' : 'NZZ am Sonntag Aktuell - Proaktive',
+  'structure' : {
+   'items': [
+    {
+     'assetId': 'logo'
+    },
+    {
+     'assetId': 'greeting'
+    },
+         {
+     'assetId': 'optinproaktive'
+    },
+         {
+     'assetId': 'divider'
+    }, 
+    {
+     'assetId': 'feed-teaser'
+    },
+    {
+     'assetId': 'footer-links'
+    }
+   ]
+  },
+  'attributes' : [ 'nled', 149, 'nl149' ],
+  'folder' :  183668,
+  'asset' : 246359,
+  'refresh' : [ {
+   'name' : 'NZZaS Aktuell Teaser',
+   'url' : 'http://content.nzz.ch/feedimport?type=nasa-teaser'
+  } ],
+  
+  'header' : {
+   'color' : '#7bc8cc',
+   'link' : 'http://nzzas.nzz.ch/',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d7a04cf4-aa55-4d9b-b153-cc98a56d6b7c.png',
+   'logoWidth' : 250,
+   'logoHeight' : 55,
+   'heroUrl' : 'http://placehold.it/500x250',
+   'heroWidth' : 500,
+   'heroHeight' : 250,
+   'title' : '<div style="color: #4a4d3b;">Das Beste aus der aktuellen Ausgabe</div>'
+  },
+      
+  'footer' : {
+   'nlId' : 'NZZaS-Aktuell-02'
+  },
+  'assets' : {
+   'optinproaktive' : 246363, 
+   'logo' : 97728,
+   'footer-links' : 97382,
+   'feed-teaser' : 125039
+  }
+ },  
 
 // Defaults  
 
@@ -1386,12 +1475,19 @@ var newsletterConfig = {
 }
 
 var authorConfig = {
+  
+ 'thj.' : {
+  'linkUrl'  : 'https://www.nzz.ch/impressum/jenni-thier-thj-ld.1352524',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/4f49cde3-e734-4fc4-9e9e-0ebbee619fd9.png', 
+  'name'     : 'Jenni Thier',
+  'role'     : 'Tagesleiterin Newsroom'
+ },  
 
  'asü.' : {
   'linkUrl'  : 'https://www.nzz.ch/impressum/andreas-schuerer-ld.1086093',
   'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/e4c013cf-a070-45db-b8ae-254414b4358e.png',
   'name'     : 'Andreas Schürer',
-  'role'     : 'Tagesleiter Newsroom'
+  'role'     : 'Stv. Chefredaktor und Leiter Newsroom'
  },
 
 'bem.' : {
@@ -1414,35 +1510,43 @@ var authorConfig = {
   'linkUrl'  : 'http://folio.nzz.ch/daniel-weber',
   'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/2e0ec9f8-7df8-4b39-980e-dca6b4bd54d4.png',
   'name'     : 'Daniel Weber',
-  'role'     : 'Chefredaktor NZZ-Folio'
+  'role'     : 'Chefredaktor NZZ Folio'
  },
-  
+
+   'cn.' : {
+  'linkUrl'  : 'http://folio.nzz.ch/',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/89ba9572-6b8f-47ed-8bb8-c32981d4c679.png',
+  'name'     : 'Christina Neuhaus',
+  'role'     : 'Redaktionsleiterin NZZ Folio'
+ },
+
+ 
    'awa' : {
   'linkUrl'  : 'http://folio.nzz.ch/',
   'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/3e2ccd16-61f2-4268-a563-d29550a9f721.png',
   'name'     : 'Aline Wanner',
-  'role'     : 'Redaktorin NZZ-Folio'
+  'role'     : 'Redaktorin NZZ Folio'
  },
   
      'bak' : {
   'linkUrl'  : 'http://folio.nzz.ch/',
   'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/eefaa170-1588-4b5f-8b55-8089e360eb8e.png',
   'name'     : 'Barbara Klingbacher',
-  'role'     : 'Redaktorin NZZ-Folio'
+  'role'     : 'Redaktorin NZZ Folio'
  },
   
        'pam' : {
   'linkUrl'  : 'http://folio.nzz.ch/',
   'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/82ac7af0-ed4b-4d6f-bd7d-aff51b822d81.png',
   'name'     : 'Patric Marino',
-  'role'     : 'Redaktor NZZ-Folio'
+  'role'     : 'Redaktor NZZ Folio'
  },
 
          'res' : {
   'linkUrl'  : 'http://folio.nzz.ch/',
   'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/6268ec29-118f-42a0-bcc1-514574efacc6.png',
   'name'     : 'Reto U. Schneider',
-  'role'     : 'Redaktor NZZ-Folio'
+  'role'     : 'Redaktor NZZ Folio'
  },
  
 
@@ -1655,6 +1759,27 @@ var authorConfig = {
   'name'     : 'Thomas Fuster',
   'role'     : 'Redaktor NZZ Wirtschaft'
  },
+  
+   'stt.' : {
+  'linkUrl'  : 'https://www.nzz.ch/',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/3922cff6-5464-4350-8595-3e650173b019.png',
+  'name'     : 'Michael Settelen',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+  
+     'prh.' : {
+  'linkUrl'  : 'https://www.nzz.ch/',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/52559481-61d6-417a-bad0-c086a14b05df.png',
+  'name'     : 'Patrick Herger',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
+  
+    'hat.' : {
+  'linkUrl'  : 'https://www.nzz.ch/impressum/stefan-haeberli-hat-ld.1442859',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/2fa8a3eb-a2be-4978-a9bf-13e24b2d90a7.png',
+  'name'     : 'Stefan Häberli',
+  'role'     : 'Redaktor NZZ Wirtschaft'
+ },
 
  'jmu.' : {
   'linkUrl'  : 'https://www.nzz.ch/impressum/juerg-mueller-ld.1085453',
@@ -1773,7 +1898,7 @@ var authorConfig = {
   'linkUrl'  : 'https://www.nzz.ch/marco-kauffmann-bossart-ld.154623',
   'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/60f7a5b1-bfa3-4e37-9a86-37d5ed0782e4.png',
   'name'     : 'Marco Kauffmann Bossart',
-  'role'     : 'NZZ-Korrespondent in Istanbul'
+  'role'     : 'NZZ-Korrespondent in Mumbai'
  },
 
  'ahn.' : {
@@ -1794,7 +1919,7 @@ var authorConfig = {
   'linkUrl'  : 'https://www.nzz.ch/rene-hoeltschi-ld.154633',
   'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/43df9a77-287d-4811-a53f-697bbba364b9.png',
   'name'     : 'René Höltschi',
-  'role'     : 'NZZ-Korrespondent in Brüssel'
+  'role'     : 'Redaktor NZZ Wirtschaft'
  },
 
  'jro.' : {
@@ -1857,7 +1982,7 @@ var authorConfig = {
   'linkUrl'  : 'https://www.nzz.ch/volker-pabst-ld.154617',
   'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/bf37c65b-b320-41d5-925f-12fd08aed702.png',
   'name'     : 'Volker Pabst',
-  'role'     : 'NZZ-Korrespondent in Delhi'
+  'role'     : 'NZZ-Korrespondent in Istanbul'
  },
 
  'win.' : {
@@ -1904,7 +2029,7 @@ var authorConfig = {
 
  'cf.' : {
   'linkUrl'  : 'https://www.nzz.ch/christoph-fisch-ld.155112',
-  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/7cc11f2b-c4ae-4ce5-b296-41a12eb99925.png',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/ac77f3d7-09ee-4981-ad05-717cee8a981a.png',
   'name'     : 'Christoph Fisch',
   'role'     : 'Tagesleiter / Ressortleiter Produktion'
  },
