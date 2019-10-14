@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="page">
-<div id="version">19-08-12-10-46</div>
+<div id="version">19-09-19-10-28</div>
 <script runat=server language=javascript>
 Platform.Load("core", "1");
 /*
@@ -35,7 +35,8 @@ var newsletterTemplate = {
  'bellevue' : 'bel', 
  'studies-career': 'trust',
  'schweiz': 'swi', 
- 'nzz-persoenlich': 'pes'
+ 'nzz-persoenlich': 'pes',
+ 'nzz-asien': 'asi'
   
   
 }
@@ -537,6 +538,40 @@ var newsletterConfig = {
   'footer-links' : 965667
   }
  },
+  
+     'asi' : {
+  'name' : 'NZZ Asien',
+  'layout' : 'nzz-asien',
+  'campaign' : 4774,
+  'attributes' : [ 'nled', 161, '' ],
+  'folder' : {
+   'dev' : 182830,
+   'stag' : 182830,
+   'prod' : 182829
+  },
+  'header' : {
+   'color' : '#13175f',
+   'link' : 'https://www.nzz.ch/nzz-asien',
+   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/2/40bf2a1e-666d-4765-89ef-000ac7cb66f0.png',
+   'logoWidth' : 250,
+   'logoHeight' : 41,
+   'heroUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/9c928ba4-c08d-4028-b1d2-4f4edae38c71.png',
+   'heroWidth' : 500,
+   'heroHeight' : 318,
+   'title' : 'NZZ Asien'
+  },
+  'nps' : {
+   'title' : '&laquo;NZZ Asien&raquo;',
+   'code' : 'ba5182b'
+  },
+  'footer' : {
+   'nlId' : 55
+  },
+  'assets' : {
+  'logo-nzz-asien' : 998213
+  }
+ },
+  
   
 
 
@@ -1498,39 +1533,39 @@ var authorConfig = {
   'role'     : ''
  },
 
- 'dlw.' : {
-  'linkUrl'  : 'http://folio.nzz.ch/daniel-weber',
-  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/2/01683bf9-8e18-4796-8d69-1fe3219313cd.png',
-  'name'     : 'Daniel Weber',
-  'role'     : 'Chefredaktor NZZ-Folio'
+ 'cn.' : {
+  'linkUrl'  : 'http://folio.nzz.ch/',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/577c796d-d9bb-4f2e-8f08-c87f82abdbdd.png',
+  'name'     : 'Christina Neuhaus',
+  'role'     : 'Redaktionsleiterin NZZ Folio'
  },
   
    'awa' : {
   'linkUrl'  : 'http://folio.nzz.ch/',
   'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/f18728a9-bb43-425a-910c-37bfced1ff51.png',
   'name'     : 'Aline Wanner',
-  'role'     : 'Redaktorin NZZ-Folio'
+  'role'     : 'Redaktorin NZZ Folio'
  },
   
      'bak' : {
   'linkUrl'  : 'http://folio.nzz.ch/',
   'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/5e98dade-992f-4e37-a8e9-fa3ef1540ae9.png',
   'name'     : 'Barbara Klingbacher',
-  'role'     : 'Redaktorin NZZ-Folio'
+  'role'     : 'Redaktorin NZZ Folio'
  },
   
        'pam' : {
   'linkUrl'  : 'http://folio.nzz.ch/',
   'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/8f65d4ed-7f19-457c-b72e-2628d3eea34f.png',
   'name'     : 'Patric Marino',
-  'role'     : 'Redaktor NZZ-Folio'
+  'role'     : 'Redaktor NZZ Folio'
  },
 
          'res' : {
   'linkUrl'  : 'http://folio.nzz.ch/',
   'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/ac4b88c5-e43a-4961-9d32-738e2a3d0a45.png',
   'name'     : 'Reto U. Schneider',
-  'role'     : 'Redaktor NZZ-Folio'
+  'role'     : 'Redaktor NZZ Folio'
  },
   
 
@@ -1751,10 +1786,10 @@ var authorConfig = {
   'role'     : 'Redaktor NZZ Wirtschaft'
  },
 
- 'jmu.' : {
-  'linkUrl'  : 'https://www.nzz.ch/impressum/juerg-mueller-ld.1085453',
-  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/2/c19d4719-e5cc-4540-9bf5-fd970eacedf0.png',
-  'name'     : 'Jürg Müller',
+ 'stt.' : {
+  'linkUrl'  : 'https://www.nzz.ch/',
+  'imageUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/3/296d938f-d95e-4ad1-a708-b034a3349e9f.png',
+  'name'     : 'Michael Settelen',
   'role'     : 'Redaktor NZZ Wirtschaft'
  },
   
@@ -2320,7 +2355,7 @@ if (feedData) {
     temp = parts[0] + list + parts[2];
 
    } else {
-    if (assetId == 'logo' || assetId == 'logo-schweiz' || assetId == 'logo-jenni-thier' || assetId == 'logo-birgit-schmid' || assetId == 'logo-christina-neuhaus' || assetId == 'logo-claudia-maeder' || assetId == 'logo-angelika-hardegger') {
+    if (assetId == 'logo' || assetId == 'logo-schweiz' || assetId == 'logo-jenni-thier' || assetId == 'logo-birgit-schmid' || assetId == 'logo-christina-neuhaus' || assetId == 'logo-claudia-maeder' || assetId == 'logo-angelika-hardegger' || assetId == 'logo-nzz-asien') {
 
      temp = temp.replaceAll("%%color%%", newsletterConfig[type].header.color);
      temp = temp.replaceAll("%%logoUrl%%", newsletterConfig[type].header.logoUrl);
