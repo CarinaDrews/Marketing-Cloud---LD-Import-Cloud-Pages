@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="page">
-<div id="version">19-09-19-10-28</div>
+<div id="version">19-10-19-11-50</div>
 <script runat=server language=javascript>
 Platform.Load("core", "1");
 /*
@@ -1293,74 +1293,6 @@ var newsletterConfig = {
   }
  },
   
-    'quz' : {
-  'name' : 'Quiz',
-  'structure' : {
-   'items': [
-    {
-     'assetId': 'logo'
-    },
-             {
-     'assetId':'nps-survey'
-    },
-    {
-     'assetId': 'greeting'
-    },
-         {
-     'assetId': 'text',
-     'html' : 'Hier sind die populärsten Quiz der Woche.'
-    },
-         {
-     'assetId': 'divider'
-    }, 
-    {
-     'assetId': 'feed-teaser'
-    },
-    {
-     'assetId': 'divider'
-    },     
-     
-    {
-     'assetId': 'text',
-     'html': '<b> Freunde herausfordern: </b> Laden Sie Ihre Freunde zum Quiz-Newsletter ein. <a href="mailto:?subject=Teste dein Wissen&body=Die «Neue Zürcher Zeitung» hat einen neuen Quiz-Newsletter.   Hier kostenlos abonnieren: http://bit.ly/NZZQuiz" style="color: #272ca9; text-decoration: underline;">Hier klicken für eine vorgefertigte Nachricht.</a>'
-    },
-    {
-     'assetId': 'divider'
-    },
-    {
-     'assetId': 'footer-links'
-    }
-   ]
-  },
-  'attributes' : [ 'nled', 125, 'nl125'],
-  'folder' :  150946,
-  'asset' : 122086,
-  'refresh' : [ {
-   'name' : 'Quiz Teaser',
-   'url' : 'http://content.nzz.ch/feed-import?type=quz-teaser'
-  } ],
-  
-  'header' : {
-   'color' : '#13175f',
-   'link' : 'https://www.nzz.ch/spiele/quiz/',
-   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8f1372766d057474/m/2/40bf2a1e-666d-4765-89ef-000ac7cb66f0.png',
-   'logoWidth' : 250,
-   'logoHeight' : 41,
-   'title' : 'NZZ-Quiz'
-  },
-            'nps' : {
-   'title' : '&laquo;NZZ-Quiz&raquo;',
-   'code' : 'nzzquiz'
-  },
-      
-  'footer' : {
-   'nlId' : 17
-  },
-  'assets' : {
-   'logo' : 603383,
-   'feed-teaser' : 892035
-  }
- },
   
    'nasa' : {
   'name' : 'NZZ am Sonntag Aktuell',
