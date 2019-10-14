@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="page">
-<div id="version">19-10-10-13-17</div>
+<div id="version">10-09-11-14-26</div>
 <script runat=server language=javascript>
 Platform.Load("core", "1");
 /*
@@ -33,8 +33,7 @@ var newsletterTemplate = {
  'bellevue' : 'bel',
  'schweiz': 'swi', 
  'nzz-persoenlich': 'pes',
- 'nzz-asien': 'asi',
- 'mobilitaet': 'mob' 
+ 'nzz-asien': 'asi' 
   
 }
 
@@ -492,39 +491,6 @@ var newsletterConfig = {
   },
   'assets' : {
    'logo-nzz-asien' : 242468
-  }
- },
-  
-    'mob' : {
-  'name' : 'Mobilität',
-  'layout' : 'mobilitaet',
-  'attributes' : [ 'nled', 162, '' ],
-  'folder' : {
-   'dev' : 139314,
-   'stag' : 139314,
-   'prod' : 184637
-  },
-    
-  'header' : {
-   'color' : '#13175f',
-   'link' : 'https://www.nzz.ch/mobilitaet',
-   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
-   'logoWidth' : 250,
-   'logoHeight' : 41,
-   'heroUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/ce5021b3-15ab-4b9c-bb7d-46c1a7741a1c.png',
-   'heroWidth' : 500,
-   'heroHeight' : 318,
-   'title' : 'Mobilität'
-  },
-  'nps' : {
-   'title' : '&laquo;Mobilität&raquo;',
-   'code' : 'bb7884c'
-  },
-  'footer' : {
-   'nlId' : 'MO01'
-  },
-  'assets' : {
-   'logo' : 97728
   }
  },
  
@@ -1250,72 +1216,6 @@ var newsletterConfig = {
   }
  },
   
-   'quz' : {
-  'name' : 'Quiz',
-  'structure' : {
-   'items': [
-    {
-     'assetId': 'logo'
-    },
-                  {
-     'assetId':'nps-survey'
-    },
-    {
-     'assetId': 'greeting'
-    },
-    {
-     'assetId': 'text',
-     'html' : 'Hier sind die populärsten Quiz der Woche.'
-    },
-    {
-     'assetId': 'divider'
-    },
-    {
-     'assetId': 'feed-teaser'
-    },
-    {
-     'assetId': 'divider'
-    },
-    {
-     'assetId': 'text',
-     'html': '<b> Freunde herausfordern: </b> Laden Sie Ihre Freunde zum Quiz-Newsletter ein. <a href="mailto:?subject=Teste dein Wissen&body=Die «Neue Zürcher Zeitung» hat einen neuen Quiz-Newsletter.   Hier kostenlos abonnieren: http://bit.ly/NZZQuiz" style="color: #272ca9; text-decoration: underline;">Hier klicken für eine vorgefertigte Nachricht.</a>'
-    },
-    {
-     'assetId': 'divider'
-    },
-    {
-     'assetId': 'footer-links'
-    }
-   ]
-  },
-  'attributes' : [ 'nled',  125, 'nl125' ],
-  'folder' : 152502 ,
-  'asset' : 125033,
-  'refresh' : [ {
-   'name' : 'Quiz Teaser',
-   'url' : 'http://content.nzz.ch/feedimport?type=quz-teaser'
-  } ],
-  
-  'header' : {
-   'color' : '#13175f',
-   'link' : 'https://www.nzz.ch/spiele/quiz/',
-   'logoUrl' : 'https://image.s7.exacttarget.com/lib/fe8813727261007470/m/1/d9e5df72-b12a-4ffc-910f-64d7388348db.png',
-   'logoWidth' : 250,
-   'logoHeight' : 41,
-   'title' : 'NZZ-Quiz'
-  },
-                'nps' : {
-   'title' : '&laquo;NZZ-Quiz&raquo;',
-   'code' : 'nzzquiz'
-  },
-  'footer' : {
-   'nlId' : 'NZZ-Quiz'
-  },
-  'assets' : {
-   'logo' : 97728,
-   'feed-teaser' : 125024
-  }
- },
   
      'nasa' : {
   'name' : 'NZZ am Sonntag Aktuell',
