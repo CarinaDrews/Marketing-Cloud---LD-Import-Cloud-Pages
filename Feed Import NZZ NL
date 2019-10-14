@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="page">
-<div id="version">19-03-11-09-16</div>
+<div id="version">19-10-14-11-55</div>
 <script runat=server language=javascript>
 Platform.Load("core", "1");
 
@@ -29,7 +29,6 @@ http://content.nzz.ch/feed-import?type=per-teaser2
 http://content.nzz.ch/feed-import?type=spo-teaser
 http://content.nzz.ch/feed-import?type=wei-teaser
 http://content.nzz.ch/feed-import?type=suk-feed
-http://content.nzz.ch/feed-import?type=quz-teaser
 http://content.nzz.ch/feed-import?type=nasa-teaser
 
 http://content.nzz.ch/feed-import?type=nam-briefing
@@ -182,15 +181,6 @@ var feedConfig = {
   'target' : 'Automatic_1530525366149' // 858499
 }, 
   
-   'quz-teaser' : {
-  'name' : 'Quiz - Teaser',
-  'url' : 'https://enrico.nzz-tech.ch/v1/spark-multi-product?source=nzz-nzzas-quiz-newsletter&sourceid=newsletter&limit=3&ts=',
-  'type' : 'teaser',
-  'template' : 899598,
-  'fallback' : 898155,
-  'subject' : 'Automatic_1535622859465', // 892036
-  'target' : 'Automatic_1535622789101' // 892035
- }, 
   
      'nasa-teaser' : {
   'name' : 'NZZ am Sonntag Aktuell - Teaser',
